@@ -1,0 +1,38 @@
+
+@import './colors.scss';
+@import './buttons.scss';
+@import './input.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#App {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 32px;
+
+      p {
+        font-size: 32px;
+        font-weight: 700;
+      }
+    }
+}
+
+
+
+#items {
+    display: flex;
+    flex-flow: column;
+    padding: 8px;
+    width: 100%;
+}
+

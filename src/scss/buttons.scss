@@ -1,0 +1,53 @@
+
+.primary-button {
+  background-color: $primary-button-bg;
+  color: $primary-button-fg;
+  padding: 8px 16px;
+
+  border: 0px;
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.secondary-button {
+  background-color: $secondary-button-bg;
+  color: $secondary-button-fg;
+  padding: 8px 16px;
+
+  border: 0px;
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.secondary-button-full {
+  background-color: $secondary-button-bg;
+  color: $secondary-button-fg;
+  padding: 8px 16px;
+  width: 100%;
+
+  border: 0px;
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.danger-button {
+  background-color: $danger-color;
+  color: $primary-button-fg;
+  padding: 8px 16px;
+
+  border: 0px;
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}

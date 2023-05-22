@@ -1,0 +1,35 @@
+@import 'colors.scss';
+
+#sidebar{
+
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+  
+  height: 100%;
+  padding: 8px 24px;
+  // background-color: lighten($primary-button-bg, 15%);
+  background-color: $secondary-button-bg;
+  margin-right: 8px;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      margin: 8px;
+    }
+  }
+
+  .active {
+    background-color: $secondary-color;
+  }
+
+  .inactive {
+    background-color: darken($secondary-button-bg, 5%);
+    opacity: 0.9;
+  }
+
+  button[type=button] {
+    width: 120px;
+  }
+}
