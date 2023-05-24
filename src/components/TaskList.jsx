@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 
 import '/src/scss/ItemList.scss';
 import { ACTIONS } from '/src/actions.js';
@@ -24,7 +27,7 @@ function Task({ task, idx, dispatch }) {
     });
   };
 
-  const markButtonText = "Mark as " + ((task.isComplete) ? "Incomplete" : "Complete");
+  const markIcon = (task.isComplete) ? faXmark : faCheck;
   const taskClass = "list-item" + ((task.isComplete) ? " completed-task" : "");
   // console.log(task.name, taskClass);
 
@@ -32,8 +35,12 @@ function Task({ task, idx, dispatch }) {
     <li className={taskClass}>
       <h4>{task.name}</h4>
       <div>
-        <button onClick={markTask} className="primary-button" type="button">{markButtonText}</button>
-        <button onClick={deleteTask} className="danger-button" type="button">Delete Task</button>
+        <button onClick={markTask} className="primary-button" type="button">
+          <FontAwesomeIcon icon={markIcon} size="lg" style={{color: "#ffffff",}} />
+        </button>
+        <button onClick={deleteTask} className="danger-button" type="button">
+          <FontAwesomeIcon icon={faTrashCan} size="lg" style={{color: "#ffffff",}} />
+        </button>
       </div>
     </li>
   </>

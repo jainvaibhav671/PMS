@@ -1,4 +1,6 @@
 import { useReducer } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './scss/App.scss'
 import data from '/src/data.json'
@@ -119,6 +121,7 @@ export default function App() {
   }
 
   let tasks = state.currentList.length == 0 ? [] : state.data[state.currentList].tasks;
+  console.log(import.meta.env.VITE_SUPABASE_URL);
 
   return <>
     <div id="App">
@@ -132,7 +135,9 @@ export default function App() {
           <p>{state.currentList}</p>
           <button 
             className="primary-button" 
-            onClick={addTask}>+ New Item</button>
+            onClick={addTask}>
+              <FontAwesomeIcon icon={faPlus} size="lg" style={{color: "#ffffff",}} />
+            </button>
         </div>
         <TaskList dispatch={dispatch} tasks={tasks} />
       </div>
