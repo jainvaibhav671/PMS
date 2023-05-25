@@ -4,22 +4,15 @@ import '/src/scss/sidebar.scss';
 
 export default function SideBar({ state, changeList, createList }) {
 
-  let lists = [];
-  for (let l in state.data) {
-    if (!l || l.length == 0) {
-      continue;
-    }
-    lists.push(l);
-    // console.log(l);
-  }
+  let lists = state.lists;
 
   return <>
     <div id="sidebar">
       <ul>
-        {lists.map((x,y) => <ToDoList 
+        {lists.map((x) => <ToDoList 
           changeList={changeList} 
-          key={y} 
-          list_data={state.data[x]} 
+          key={x.idx} 
+          list_data={x} 
         />)}
       </ul>
       <button 

@@ -6,6 +6,7 @@ import '/src/scss/ItemList.scss';
 import { ACTIONS } from '/src/actions.js';
 
 function Task({ task, idx, dispatch }) {
+  // console.log(task)
 
   const markTask = () => {
     // console.log(task);
@@ -29,7 +30,6 @@ function Task({ task, idx, dispatch }) {
 
   const markIcon = (task.isComplete) ? faXmark : faCheck;
   const taskClass = "list-item" + ((task.isComplete) ? " completed-task" : "");
-  // console.log(task.name, taskClass);
 
   return <>
     <li className={taskClass}>
@@ -47,6 +47,10 @@ function Task({ task, idx, dispatch }) {
 }
 
 export default function TaskList({ tasks, dispatch }) {
-  const listItems = tasks.map((task, idx) => <Task key={task.id} idx={idx} task={task} dispatch={dispatch} />);
+  const listItems = tasks.map((task, idx) => <Task 
+              key={idx} 
+              idx={idx} 
+              task={task} 
+              dispatch={dispatch} />);
   return <ul id="task-list">{listItems}</ul>
 }
