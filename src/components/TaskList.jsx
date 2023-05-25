@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
+import PropTypes from 'prop-types';
+
 
 import '/src/scss/ItemList.scss';
 import { ACTIONS } from '/src/actions.js';
@@ -53,4 +55,14 @@ export default function TaskList({ tasks, dispatch }) {
               task={task} 
               dispatch={dispatch} />);
   return <ul id="task-list">{listItems}</ul>
+}
+
+Task.propTypes = {
+  task: PropTypes.object,
+  dispatch: PropTypes.function
+}
+
+TaskList.propTypes = {
+  tasks: PropTypes.array,
+  dispatch: PropTypes.function
 }

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 
 import ToDoList from '/src/components/Lists.jsx';
 import '/src/scss/sidebar.scss';
@@ -23,4 +24,10 @@ export default function SideBar({ state, changeList, createList }) {
       </button>
     </div>
   </>
+}
+
+SideBar.propTypes = {
+  state: PropTypes.object,
+  changeList: PropTypes.function,
+  createList: PropTypes.function
 }
