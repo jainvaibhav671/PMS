@@ -5,15 +5,15 @@ import { faCheck, faXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import '/src/scss/ItemList.scss';
 import { ACTIONS } from '/src/actions.js';
 
-function Task({ task, idx, dispatch }) {
-  // console.log(task)
+function Task({ task, dispatch }) {
+  console.log(task)
 
   const markTask = () => {
     // console.log(task);
     dispatch({
       type: ACTIONS.TOGGLE_TASK,
       payload: {
-        task_idx: idx
+        task_idx: task.idx
       }
     });
   };
@@ -23,17 +23,18 @@ function Task({ task, idx, dispatch }) {
     dispatch({
       type: ACTIONS.DELETE_TASK,
       payload: {
-        task_idx: idx
+        task_id: task.id,
+        idx: task.idx
       }
     });
   };
 
-  const markIcon = (task.isComplete) ? faXmark : faCheck;
-  const taskClass = "list-item" + ((task.isComplete) ? " completed-task" : "");
+  const markIcon = (task.isCompleted) ? faXmark : faCheck;
+  const taskClass = "list-item" + ((task.isCompleted) ? " completed-task" : "");
 
   return <>
     <li className={taskClass}>
-      <h4>{task.name}</h4>
+      <h4>{task.task_name}</h4>
       <div>
         <button onClick={markTask} className="primary-button" type="button">
           <FontAwesomeIcon icon={markIcon} size="lg" style={{color: "#ffffff",}} />
@@ -49,7 +50,6 @@ function Task({ task, idx, dispatch }) {
 export default function TaskList({ tasks, dispatch }) {
   const listItems = tasks.map((task, idx) => <Task 
               key={idx} 
-              idx={idx} 
               task={task} 
               dispatch={dispatch} />);
   return <ul id="task-list">{listItems}</ul>

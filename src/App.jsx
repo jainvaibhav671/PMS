@@ -6,7 +6,7 @@ import './scss/App.scss'
 import { ACTIONS } from '/src/actions.js'
 import reducer from '/src/reducer.js'
 
-import { getLists, addList } from '/src/Database.js'
+import { getLists, addList, createTask, getTasks } from '/src/Database.js'
 import SideBar from './components/Sidebar.jsx'
 import TaskList from '/src/components/TaskList.jsx';
 
@@ -14,18 +14,20 @@ export default function App() {
 
   const [ state, dispatch ] = useReducer(reducer, {
     lists: [],
-    currentList: 0
+    currentList: 0,
+    tasks: []
   });
 
   useEffect(() => {
+
     async function getTaskLists() {
       let li = await getLists();
-      li = li.map((l, idx) => { return { ...l,
+      li = li.map((l, idx) => { return { 
+          ...l,
           isActive: false,
-          idx: idx,
-          tasks: []
-        }
-      });
+        idx: idx,
+        tasks: []
+      }});
 
       li[0].isActive = true;
       dispatch({
@@ -37,13 +39,44 @@ export default function App() {
     }
 
     getTaskLists();
+    
   }, []);
 
-  let addTask = () => {
-    let task = prompt("What is the task");
-    if (!task || task.length == 0) {
-      return;
+  useEffect(() => {
+
+    async function getTasks_() {
+      let tasks = await getTasks({ list_id: state.lists[state.currentList].id });
+      tasks = tasks.map( (task, idx) => {
+        return {
+          ...task,
+          idx: idx
+        }
+      });
+
+      dispatch({
+        type: ACTIONS.UPDATE_TASKS,
+        payload: {
+          tasks: tasks
+        }
+      });
     }
+
+    if (state.lists.length > 0) {
+      getTasks_();
+    }
+
+  }, [state.currentList, state.lists]);
+
+  let addTask = async () => {
+    let task_name = prompt("What is the task");
+    let task = (await createTask({
+      task: { 
+        task_name: task_name,
+        list_id: state.lists[state.currentList].id,
+        isCompleted: false
+      }
+    }));
+
     dispatch({
       type: ACTIONS.ADD_ITEM,
       payload: { task: task }
@@ -53,7 +86,6 @@ export default function App() {
   let createList = async () => {
     let list_name = prompt("Enter List Name");
     let li = (await addList({ list_name: list_name }))[0];
-    console.log(li)
     dispatch({
       type: ACTIONS.CREATE_LIST,
       payload: { data: li }
@@ -67,9 +99,9 @@ export default function App() {
     })
   }
 
-  let tasks = (state.lists.length == 0 || state.lists[state.currentList].tasks.length == 0) ? [] : state.lists[state.currentList].tasks;
-  // let list_name = (lists.length == 0) ? "no lists" : state.lists[state.currentList].list_name;
   let list_name = "";
+
+  console.log(state);
   
   return <>
     <div id="App">
@@ -87,7 +119,7 @@ export default function App() {
               <FontAwesomeIcon icon={faPlus} size="lg" style={{color: "#ffffff",}} />
             </button>
         </div>
-        <TaskList dispatch={dispatch} tasks={tasks} />
+        <TaskList dispatch={dispatch} tasks={state.tasks} />
       </div>
     </div>
   </>

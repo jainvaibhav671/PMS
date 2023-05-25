@@ -1,31 +1,22 @@
 
 import { ACTIONS } from '/src/actions.js'
-
-function createTask({ task }) {
-  return {
-    name: task,
-    isComplete: false
-  };
-}
+import { deleteTask } from '/src/Database.js'
 
 export default function reducer(state, action) {
     let new_lists = [];
     let idx = undefined;
     let tasks = [];
-    let isComplete = undefined;
+    let isCompleted = undefined;
 
     switch (action.type) {
       case ACTIONS.ADD_ITEM:
         tasks = [
-          ...state.lists[state.currentList].tasks,
-          createTask({ task: action.payload.task })
+          ...state.tasks,
+          action.payload.task
         ];
-        new_lists = state.lists;
-        new_lists[state.currentList].tasks = tasks;
-
         return {
           ...state,
-          lists: new_lists 
+          tasks: tasks
         }
 
       case ACTIONS.CHANGE_LIST:
@@ -60,24 +51,26 @@ export default function reducer(state, action) {
 
       case ACTIONS.TOGGLE_TASK:
         idx = action.payload.task_idx;
-        new_lists = state.lists;
+        tasks = state.tasks;
 
-        isComplete = new_lists[state.currentList].tasks[idx].isComplete;
-        new_lists[state.currentList].tasks[idx].isComplete = !isComplete;
+        isCompleted = tasks[idx].isCompleted;
+        tasks[idx].isCompleted = !isCompleted;
 
         return {
           ...state,
-          lists: new_lists
+          tasks: tasks
         }
 
       case ACTIONS.DELETE_TASK:
         idx = action.payload.idx;
-        new_lists = state.lists;
-        new_lists[state.currentList].tasks.splice(idx, 1)
+        tasks = state.tasks;
+        tasks.splice(idx, 1);
+
+        deleteTask({ task_id: action.payload.task_id });
 
         return {
           ...state,
-          lists: new_lists
+          tasks: tasks
         }
 
       case ACTIONS.UPDATE_LISTS:
@@ -85,6 +78,13 @@ export default function reducer(state, action) {
           ...state,
           lists: action.payload.lists
         }
+      
+      case ACTIONS.UPDATE_TASKS:
+        return {
+          ...state,
+          tasks: action.payload.tasks
+        }
+
 
       default: 
         return state;

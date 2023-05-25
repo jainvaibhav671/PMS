@@ -33,19 +33,47 @@ export async function addList({ list_name }) {
   return data;
 }
 
-export async function createTask({ task_name }) {
-    const { data, error } = await supabase
-    .from('Lists')
-    .insert([
-        { task_name: `${task_name}` },
-    ])
-    .select()
+export async function getTasks({ list_id }) {
+  let { data: tasks, error } = await supabase
+    .from('Tasks')
+    .select("*")
+    .eq("list_id", list_id);
 
-    if (error) {
-        console.log(error);
-    }
+  if (error) {
+    console.log(error);
+  }
 
-  return data;
+  console.log("Tasks: ", tasks);
+  return tasks;
+}
+
+export async function createTask({ task }) {
+  console.log("Task: ", task)
+  const { data, error } = await supabase
+  .from('Tasks')
+  .insert([task])
+  .select()
+
+  if (error) {
+      console.log(error);
+  }
+  console.log("Task: ", data);
+  return data[0];
+}
+
+export async function deleteTask({ task_id }) {
+
+  const { error } = await supabase
+    .from('Tasks')
+    .delete()
+    .eq('id', task_id);
+
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Deleted", task_id);
+  }
+
 }
 
 export default supabase;
