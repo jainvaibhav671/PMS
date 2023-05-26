@@ -43,12 +43,12 @@ export async function getTasks({ list_id }) {
     console.log(error);
   }
 
-  console.log("Tasks: ", tasks);
+  // console.log("Tasks: ", tasks);
   return tasks;
 }
 
 export async function createTask({ task }) {
-  console.log("Task: ", task)
+  // console.log("Task: ", task)
   const { data, error } = await supabase
   .from('Tasks')
   .insert([task])
@@ -57,7 +57,7 @@ export async function createTask({ task }) {
   if (error) {
       console.log(error);
   }
-  console.log("Task: ", data);
+  // console.log("Task: ", data);
   return data[0];
 }
 

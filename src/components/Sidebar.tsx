@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import ToDoList from '/src/components/Lists.jsx';
+import ToDoList from '/src/components/Lists.tsx';
 import '/src/scss/sidebar.scss';
 
 export default function SideBar({ state, changeList, createList }) {
@@ -28,6 +28,6 @@ export default function SideBar({ state, changeList, createList }) {
 
 SideBar.propTypes = {
   state: PropTypes.object,
-  changeList: PropTypes.function,
-  createList: PropTypes.function
+  changeList: PropTypes.func,
+  createList: PropTypes.func
 }

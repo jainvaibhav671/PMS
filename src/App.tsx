@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './scss/App.scss'
-import { ACTIONS } from '/src/actions.js'
-import reducer from '/src/reducer.js'
+import { ACTIONS } from '/src/actions.ts'
+import reducer from '/src/reducer.ts'
 
-import { getLists, addList, createTask, getTasks } from '/src/Database.js'
-import SideBar from './components/Sidebar.jsx'
-import TaskList from '/src/components/TaskList.jsx';
+import { getLists, addList, createTask, getTasks } from '/src/Database.ts'
+import SideBar from '/src/components/Sidebar.tsx'
+import TaskList from '/src/components/TaskList.tsx';
 
 export default function App() {
 
@@ -101,7 +101,7 @@ export default function App() {
 
   let list_name = "";
 
-  console.log(state);
+  // console.log(state);
   
   return <>
     <div id="App">

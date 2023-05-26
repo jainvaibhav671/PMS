@@ -18,5 +18,5 @@ export default function ToDoList({ list_data, changeList }) {
 
 ToDoList.propTypes = {
   list_data: PropTypes.object,
-  changeList: PropTypes.function
+  changeList: PropTypes.func
 }

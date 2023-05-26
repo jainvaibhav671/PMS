@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 
 import '/src/scss/ItemList.scss';
-import { ACTIONS } from '/src/actions.js';
+import { ACTIONS } from '/src/actions.ts';
 
 function Task({ task, dispatch }) {
-  console.log(task)
+  // console.log(task)
 
   const markTask = () => {
     // console.log(task);
@@ -59,10 +59,10 @@ export default function TaskList({ tasks, dispatch }) {
 
 Task.propTypes = {
   task: PropTypes.object,
-  dispatch: PropTypes.function
+  dispatch: PropTypes.func
 }
 
 TaskList.propTypes = {
   tasks: PropTypes.array,
-  dispatch: PropTypes.function
+  dispatch: PropTypes.func
 }
