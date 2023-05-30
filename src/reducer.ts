@@ -1,12 +1,36 @@
 
-import { ACTIONS } from '/src/actions.js'
-import { deleteTask } from '/src/Database.js'
+import { ACTIONS } from './actions.ts'
+import { deleteTask } from './Database.ts'
+import ListInterface from './interfaces/List.ts';
+import TaskInterface from './interfaces/Task.ts';
 
-export default function reducer(state, action) {
+interface StateInterface {
+  lists: Array<ListInterface>,
+  currentList: number,
+  tasks: Array<TaskInterface>
+}
+
+interface ActionInterface {
+  type: String,
+  payload: {
+    task?: TaskInterface,
+    list_name: String,
+    data?: {
+      id?: number,
+      created_at?: Date,
+      list_name: String
+    },
+    task_idx?: number
+  }
+}
+
+export default function reducer(
+  state: StateInterface,
+  action: ActionInterface 
+) {
   let new_lists = [];
   let idx = undefined;
   let tasks = [];
-  let isCompleted = undefined;
 
   switch (action.type) {
     case ACTIONS.ADD_ITEM:
@@ -20,8 +44,7 @@ export default function reducer(state, action) {
       }
 
     case ACTIONS.CHANGE_LIST:
-
-      idx =  state.lists.filter(l => l.list_name == action.payload.list_name)[0].idx
+      idx =  state.lists.filter((l: ListInterface) => l.list_name == action.payload.list_name)[0].idx
 
       new_lists = state.lists;
       new_lists[state.currentList].isActive = false;
@@ -34,15 +57,15 @@ export default function reducer(state, action) {
       }
 
     case ACTIONS.CREATE_LIST:
+      if (!action.payload.data) {
+        return state;
+      }
       new_lists = state.lists;
       new_lists.push({
         ...action.payload.data,
         isActive: false,
         idx: new_lists.length,
-        tasks: []
       });
-
-      console.log(new_lists);
       
       return {
         ...state,
@@ -50,11 +73,14 @@ export default function reducer(state, action) {
       }
 
     case ACTIONS.TOGGLE_TASK:
+      if (!action.payload.task_idx) {
+        return state;
+      }
       idx = action.payload.task_idx;
       tasks = state.tasks;
 
-      isCompleted = tasks[idx].isCompleted;
-      tasks[idx].isCompleted = !isCompleted;
+      console.log(tasks[idx])
+      tasks[idx].isCompleted = !tasks[idx].isCompleted;
 
       return {
         ...state,
@@ -62,7 +88,7 @@ export default function reducer(state, action) {
       }
 
     case ACTIONS.DELETE_TASK:
-      idx = action.payload.idx;
+      idx = action.payload.task_idx;
       tasks = state.tasks;
       tasks.splice(idx, 1);
 
@@ -84,7 +110,6 @@ export default function reducer(state, action) {
         ...state,
         tasks: action.payload.tasks
       }
-
 
     default: 
       return state;

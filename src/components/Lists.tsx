@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 
-export default function ToDoList({ list_data, changeList }) {
-  // console.log("list data", list_data);
+import ListInterface from '../interfaces/List';
+
+export default function ToDoList({
+  list_data,
+  changeList
+}: {
+  list_data: ListInterface,
+  changeList: Function
+}) {
+  console.log("list data", list_data);
   let onClick = (e) => {
     changeList(e.target.textContent);
   }

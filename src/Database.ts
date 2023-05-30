@@ -1,5 +1,6 @@
 // Supabase
 import { createClient } from '@supabase/supabase-js';
+import TaskInterface from './interfaces/Task';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -17,7 +18,11 @@ export async function getLists() {
   return lists
 }
 
-export async function addList({ list_name }) {
+export async function addList({
+  list_name
+}: {
+  list_name: String
+}) {
 
   const { data, error } = await supabase
   .from('Lists')
@@ -33,7 +38,11 @@ export async function addList({ list_name }) {
   return data;
 }
 
-export async function getTasks({ list_id }) {
+export async function getTasks({
+  list_id
+}: {
+  list_id: Number
+}) {
   let { data: tasks, error } = await supabase
     .from('Tasks')
     .select("*")
@@ -43,12 +52,14 @@ export async function getTasks({ list_id }) {
     console.log(error);
   }
 
-  // console.log("Tasks: ", tasks);
   return tasks;
 }
 
-export async function createTask({ task }) {
-  // console.log("Task: ", task)
+export async function createTask({
+  task
+}: {
+  task: TaskInterface
+}) {
   const { data, error } = await supabase
   .from('Tasks')
   .insert([task])
@@ -57,11 +68,17 @@ export async function createTask({ task }) {
   if (error) {
       console.log(error);
   }
-  // console.log("Task: ", data);
+  if (data === null || data === undefined) {
+    return {};
+  }
   return data[0];
 }
 
-export async function deleteTask({ task_id }) {
+export async function deleteTask({
+  task_id
+}: {
+  task_id: Number
+}) {
 
   const { error } = await supabase
     .from('Tasks')
@@ -73,7 +90,6 @@ export async function deleteTask({ task_id }) {
   } else {
     console.log("Deleted", task_id);
   }
-
 }
 
 export default supabase;

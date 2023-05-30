@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './scss/App.scss'
-import { ACTIONS } from '/src/actions.ts'
-import reducer from '/src/reducer.ts'
+import { ACTIONS } from './actions';
+import reducer from './reducer';
 
-import { getLists, addList, createTask, getTasks } from '/src/Database.ts'
-import SideBar from '/src/components/Sidebar.tsx'
-import TaskList from '/src/components/TaskList.tsx';
+import { getLists, addList, createTask, getTasks } from './Database';
+import SideBar from './components/Sidebar';
+import TaskList from './components/TaskList';
 
 export default function App() {
 
@@ -26,7 +26,6 @@ export default function App() {
           ...l,
           isActive: false,
         idx: idx,
-        tasks: []
       }});
 
       li[0].isActive = true;
@@ -92,17 +91,15 @@ export default function App() {
     })
   }
 
-  function changeList(list_name) {
+  function changeList(list_name: String) {
     dispatch({
       type: ACTIONS.CHANGE_LIST,
       payload: { list_name: list_name }
     })
   }
 
-  let list_name = "";
+  let list_name = (state.lists.length > 0) ? state.lists[state.currentList].list_name : "";
 
-  // console.log(state);
-  
   return <>
     <div id="App">
       <SideBar 

@@ -3,22 +3,26 @@ import { faCheck, faXmark, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 import PropTypes from 'prop-types';
 
+import TaskInterface from  '../interfaces/Task.ts';
+import '../scss/ItemList.scss';
+import { ACTIONS } from '../actions.ts';
 
-import '/src/scss/ItemList.scss';
-import { ACTIONS } from '/src/actions.ts';
-
-function Task({ task, dispatch }) {
-  // console.log(task)
+function Task({
+  task,
+  dispatch
+}: {
+  task: TaskInterface,
+  dispatch: Function
+}) {
 
   const markTask = () => {
-    // console.log(task);
     dispatch({
       type: ACTIONS.TOGGLE_TASK,
       payload: {
         task_idx: task.idx
       }
     });
-  };
+  }
 
   const deleteTask = () => {
     console.log(task, "Deleting");
@@ -26,7 +30,7 @@ function Task({ task, dispatch }) {
       type: ACTIONS.DELETE_TASK,
       payload: {
         task_id: task.id,
-        idx: task.idx
+        task_idx: task.idx
       }
     });
   };
@@ -49,7 +53,13 @@ function Task({ task, dispatch }) {
   </>
 }
 
-export default function TaskList({ tasks, dispatch }) {
+export default function TaskList({
+  tasks,
+  dispatch
+}: {
+  tasks: Array<TaskInterface>,
+  dispatch: Function
+}) {
   const listItems = tasks.map((task, idx) => <Task 
               key={idx} 
               task={task} 

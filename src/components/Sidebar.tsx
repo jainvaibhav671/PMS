@@ -1,16 +1,26 @@
 import PropTypes from 'prop-types';
 
-import ToDoList from '/src/components/Lists.tsx';
-import '/src/scss/sidebar.scss';
+import ToDoList from './Lists.tsx';
+import '../scss/sidebar.scss';
 
-export default function SideBar({ state, changeList, createList }) {
+export default function SideBar({ 
+  state,
+  changeList,
+  createList
+}: {
+  state: typeof PropTypes.object,
+  changeList: typeof PropTypes.func,
+  createList: typeof PropTypes.func,
+
+}
+  ) {
 
   let lists = state.lists;
 
   return <>
     <div id="sidebar">
       <ul>
-        {lists.map((x) => <ToDoList 
+        {lists.map((x: object) => <ToDoList 
           changeList={changeList} 
           key={x.idx} 
           list_data={x} 
