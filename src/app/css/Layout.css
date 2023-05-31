@@ -1,0 +1,25 @@
+@import "./colors.css";
+@import "./widgets/buttons.css";
+@import "./Sidebar.css";
+@import "./Header.css";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    display: flex;
+    background: var(--background);
+    width: 100vw;
+    height: 100vh;
+}
+
+#app {
+    width: 100vw;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+}

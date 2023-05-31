@@ -1,0 +1,16 @@
+
+button {
+    border: 0px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.primary-button {
+    background: var(--primary-button-bg);
+    color: var(--primary-button-fg);
+}
+
+.secondary-button {
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-fg);
+}

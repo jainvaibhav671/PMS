@@ -1,0 +1,39 @@
+:root {
+    --color1: #FAFAFA;
+    --color2: #EAEAEB;
+    --color3: #313440;
+    --color4: #262831;
+    --color5: #878A9A;
+    --color6: hsl(207, 82%, 66%);
+
+    --background: var(--color1);
+    --sidebar-bg: var(--color2);
+    --sidebar-fg: var(--color3);
+
+    --primary-button-bg: var(--color3);
+    --primary-button-fg: var(--color2);
+
+    --secondary-button-bg: var(--color6);
+    --secondary-button-fg: var(--color3);   
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color1: #FAFAFA;
+        --color2: #EAEAEB;
+        --color3: #313440;
+        --color4: #262831;
+        --color5: #878A9A;
+        --color6: hsl(207, 82%, 66%);
+
+        --background: var(--color3);
+        --sidebar-bg: var(--color4);
+        --sidebar-fg: var(--color2);
+
+        --primary-button-bg: var(--color3);
+        --primary-button-fg: var(--color2);
+
+        --secondary-button-bg: var(--color6);
+        --secondary-button-fg: var(--color3);   
+    }
+}
