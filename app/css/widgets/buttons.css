@@ -1,0 +1,61 @@
+
+a, button {
+    border: 0px;
+    border-radius: 8px;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.primary-button {
+    background: var(--primary-button-bg);
+    color: var(--primary-button-fg);
+}
+
+.secondary-button {
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-fg);
+}
+
+.sidebar-button {
+    display: block;
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-fg);
+    width: 90%;
+    padding-left: 2x;
+    margin: 0px;
+}
+.sidebar-button:hover {
+    font-size: 102%;
+    font-weight: 600;
+    /* background: var(--secondary-button-fg); */
+    /* color: var(--secondary-button-bg); */
+    animation: 2s 1 left slide-in;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+@keyframes fill-background {
+    from {
+        background: var(--secondary-button-fg);
+        color: var(--secondary-button-bg);
+        box-shadow: inset 1em 0em currentColor;
+    } to {
+        background: var(--secondary-button-bg);
+        color: var(--secondary-button-fg);
+        box-shadow: inset 10px 0em currentColor;
+    }
+}
+
+

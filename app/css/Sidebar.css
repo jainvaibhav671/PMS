@@ -1,0 +1,29 @@
+
+#sidebar {
+    display: flex;
+    flex-flow: column;
+
+    background: var(--sidebar-bg);
+    color: var(--sidebar-fg);
+    width: 20dvw;
+}
+
+#sidebar ul {
+    list-style-type: bullet;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+    width: 20dvw;
+    overflow-y: auto;
+}
+
+#sidebar li {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+#sidebar ul button {
+    color: red;
+}

@@ -8,7 +8,7 @@
     padding: 0px;
 }
 
-main {
+body {
     display: flex;
     background: var(--background);
     width: 100vw;
@@ -16,7 +16,7 @@ main {
 }
 
 #app {
-    width: 100vw;
+    width: 60vw;
     padding: 20px;
 }
 
