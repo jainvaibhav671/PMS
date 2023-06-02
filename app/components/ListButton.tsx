@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ListType } from "../interfaces/Sidebar";
+import { ListType } from "../interfaces/Lists";
 
 function ListButton({
     list_data
@@ -8,7 +8,8 @@ function ListButton({
 }) {
 
     async function deleteItem() {
-        await fetch(`/api/lists/delete/${list_data.id}`);
+        let res = await fetch(`/api/lists/delete/${list_data.id}`);
+        console.log("Res", res)
     }
 
     const href = `/${list_data.list_name}`;

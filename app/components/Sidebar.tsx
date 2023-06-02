@@ -2,42 +2,38 @@
 
 import { useEffect, useState } from "react";
 import ListButtons from "./ListButton";
-import { ListType } from "../interfaces/Sidebar";
+
+import { useAppDispatch, useAppSelector } from "../utils/hooks";
+import { createList, setLists } from "@/features/listSlice";
+import { useLazyFetchListsQuery } from "@/features/getListAPI";
+import { addList } from "../utils/Database";
 
 export default function Sidebar() {
 
-    const [ lists, setLists ] = useState<Array<ListType>>([]);
+    const listsState = useAppSelector((state) => state.lists );
+    const dispatch = useAppDispatch();
+    const [ getLists ] = useLazyFetchListsQuery();
 
     useEffect(() => {
-        async function setup() {
-            const l: Array<ListType> = await fetch("/api/lists")
-                .then( res => res.json());
+        getLists().unwrap().then(data => {
+            console.log(data);
+            dispatch(setLists(data));
+        });
+    }, [setLists, getLists])
 
-            console.log(l);
-            setLists(l);
-        }
-        setup();
-    }, [setLists]);
-
-    function createList() {
+    async function handleClick() {
         const name = prompt("Enter name");
-        // TODO: shift to server
         if (name) {
-            setLists([
-                ...lists,
-                {
-                    list_name: name,
-                    idx: lists.length
-                }
-            ])
+            let list_data = await addList({ list_name: name });
+            dispatch(createList(name));
         }
     }
 
     return (
         <>
         <div id="sidebar">
-            <button onClick={createList} className="primary-button">New List</button>
-            <ListButtons list_data={lists} />
+            <button onClick={handleClick} className="primary-button">New List</button>
+            <ListButtons list_data={listsState.lists} />
         </div>
         </>
     )

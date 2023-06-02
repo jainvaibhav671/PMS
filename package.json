@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@supabase/supabase-js": "^2.24.0",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
@@ -18,6 +19,11 @@
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.7",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13",
+    "prettier": "^2.8.8"
   }
 }
