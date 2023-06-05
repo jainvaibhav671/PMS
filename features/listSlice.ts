@@ -15,11 +15,15 @@ const listSlice = createSlice({
     name: "listActions",
     initialState,
     reducers: {
-        createList(initialState: ListState, action: PayloadAction<string>) {
-            initialState.lists.push({ list_name: action.payload })
+        createList(initialState: ListState, action: PayloadAction<ListType>) {
+            initialState.lists.push(action.payload)
         },
-        deleteList(initialState: ListState, action: PayloadAction<number>) {},
-        changeList(initialState: ListState, action: PayloadAction<number> ) {},
+        deleteList(initialState: ListState, action: PayloadAction<number>) {
+            initialState.lists = initialState.lists.filter( l => l.id != action.payload)
+        },
+        changeList(initialState: ListState, action: PayloadAction<number> ) {
+            initialState.current = action.payload;
+        },
         setLists(initialState: ListState, action: PayloadAction<ListType[]>) {
             initialState.lists = action.payload;
         }

@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
-import { count } from 'console';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -28,20 +27,20 @@ export async function getListID({ list_name }: { list_name: string }) {
     return undefined;
   }
 
-  const id: number = list_id[0];
+  const id = list_id[0];
+  console.log("id", id)
   return id;
 }
 
 export async function addList({ list_name }: { list_name: string }) {
   const { data, error } = await supabase
   .from('Lists')
-  .insert([
-      { list_name: `${list_name}` },
-  ])
+  .insert([{ list_name: list_name }])
   .select()
 
   if (error) {
       console.log(error);
+      return;
   }
 
   return data;
@@ -101,5 +100,3 @@ export async function deleteList(list_id: number) {
     console.log("Deleted", list_id);
   }
 }
-
-export default supabase;

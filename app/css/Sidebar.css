@@ -2,10 +2,32 @@
 #sidebar {
     display: flex;
     flex-flow: column;
+    align-items: center;
 
     background: var(--sidebar-bg);
     color: var(--sidebar-fg);
-    width: 20dvw;
+    width: auto;
+}
+
+#nl-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+}
+
+#nl-input input {
+    width: 100px;
+    height: 20px;
+    border-radius: 8px;
+    padding: 4px;
+    font-weight: 400;
+    border: 1px solid;
+}
+
+#nl-input button {
+    font-weight: 700;
+    padding: 8px;
 }
 
 #sidebar ul {
@@ -14,16 +36,38 @@
     display: flex;
     flex-flow: column;
     gap: 8px;
-    width: 20dvw;
     overflow-y: auto;
+    width: 100%;
+}
+
+.active-list {
+    font-weight: 700;
 }
 
 #sidebar li {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2px;
 }
 
 #sidebar ul button {
     color: red;
+}
+
+#more-options dialog {
+    margin: 50px auto;
+}
+
+#more-options ul {
+    width: 100%;
+}
+
+#more-options li {
+    border: 0px black;
+    padding: 2px;
+}
+
+#more-options li:hover {
+    background: grey;
 }

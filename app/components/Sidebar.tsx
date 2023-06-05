@@ -14,25 +14,38 @@ export default function Sidebar() {
     const dispatch = useAppDispatch();
     const [ getLists ] = useLazyFetchListsQuery();
 
+    const [ list_name, setListName ] = useState("");
+
     useEffect(() => {
         getLists().unwrap().then(data => {
-            console.log(data);
             dispatch(setLists(data));
         });
-    }, [setLists, getLists])
+    }, [setLists, getLists, dispatch])
 
     async function handleClick() {
-        const name = prompt("Enter name");
+        const name = list_name;
         if (name) {
-            await addList({ list_name: name });
-            dispatch(createList(name));
+            const data = await addList({ list_name: name });
+            if (!data) {
+                return;
+            }
+
+            dispatch(createList(data));
         }
     }
 
     return (
         <>
         <div id="sidebar">
-            <button onClick={handleClick} className="primary-button">New List</button>
+            <div id="nl-input">
+                <input 
+                    type="text" 
+                    onChange={e => setListName(e.target.value)}
+                    placeholder="Enter List Name" />
+                <button 
+                    onClick={handleClick} 
+                    className="primary-button">Add</button>
+            </div>
             <ListButtons list_data={listsState.lists} />
         </div>
         </>

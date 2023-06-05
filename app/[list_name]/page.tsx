@@ -17,9 +17,10 @@ export default function Page({
     useEffect(() => {
         async function setup() {
 
-            const r = await fetch(`/api/lists/query/${params.list_name}`).then(res => res.json());
+            const {id: id} = await fetch(`/api/lists/query/${params.list_name}`).then(res => res.json());
+            console.log(id);
 
-            let t = await fetch(`/api/tasks/${r.id}`).then(res => res.json());
+            let t = await fetch(`/api/tasks/${id}`).then(res => res.json());
             console.log(t);
             setTasks(t);
         }

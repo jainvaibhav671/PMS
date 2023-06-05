@@ -6,6 +6,6 @@ export async function GET(
     { params }: { params: { list_name: string }}
 ) {
     const id = await getListID({ list_name: params.list_name });
-
+    console.log("ID", id)
     return NextResponse.json(id);
 }
