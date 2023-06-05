@@ -19,12 +19,9 @@ const listSlice = createSlice({
             initialState.lists.push({ list_name: action.payload })
         },
         deleteList(initialState: ListState, action: PayloadAction<number>) {},
-
         changeList(initialState: ListState, action: PayloadAction<number> ) {},
         setLists(initialState: ListState, action: PayloadAction<ListType[]>) {
-            action.payload.map((list) => {
-                initialState.lists.push(list)
-            })
+            initialState.lists = action.payload;
         }
     }
 })

@@ -1,18 +1,15 @@
-import { link } from 'fs'
-import Image from 'next/image'
+import { TaskType } from "../interfaces/Task"
 
 export default function TaskList({ 
     tasks
 }: {
-    tasks: Array<React.ReactNode>
+    tasks: TaskType[]
 }) {
-
-  tasks = tasks.map( (t: any, idx: number) => <li key={idx}>{t}</li>)
 
   return (
     <>
       <ul>
-        {tasks}
+        {tasks.map( (t: any) => <li key={t.id}>{t.task_name}</li>)}
       </ul>
     </>
   )

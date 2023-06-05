@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
+import { count } from 'console';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-console.log(supabase_url)
 
 const supabase = createClient(
   supabase_url,
@@ -19,6 +19,17 @@ export async function getLists() {
   }
 
   return lists
+}
+
+export async function getListID({ list_name }: { list_name: string }) {
+  let { data: list_id , error } = await supabase.from("Lists").select("id").eq("list_name", list_name);
+
+  if (error || !list_id) {
+    return undefined;
+  }
+
+  const id: number = list_id[0];
+  return id;
 }
 
 export async function addList({ list_name }: { list_name: string }) {

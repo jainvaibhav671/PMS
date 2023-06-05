@@ -24,7 +24,7 @@ export default function Sidebar() {
     async function handleClick() {
         const name = prompt("Enter name");
         if (name) {
-            let list_data = await addList({ list_name: name });
+            await addList({ list_name: name });
             dispatch(createList(name));
         }
     }

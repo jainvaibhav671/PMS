@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getLists } from "@/app/utils/Database";
+import { getTasks } from "@/app/utils/Database";
 
 export async function GET(
     req: NextRequest, 
@@ -10,14 +10,8 @@ export async function GET(
             list_id: number
         }
     }) {
-    // const list_id: string = `${params.list_id}`;
 
-    // console.log(await getLists());
+    const tasks = await getTasks({ list_id: params.list_id });
 
-    return NextResponse.json([
-        "Task 1",
-        "Task 2",
-        "Task 3",
-        "Task 4",
-    ]);
+    return NextResponse.json(tasks);
 }

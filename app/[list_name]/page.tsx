@@ -8,7 +8,7 @@ export default function Page({
     params
 }: {
     params: {
-        list_name: number
+        list_name: string
     }
 }) {
 
@@ -16,10 +16,10 @@ export default function Page({
 
     useEffect(() => {
         async function setup() {
-            // let t = await getTasks({ list_id: params.list_name });
 
-            let t = await fetch(`/api/tasks/${params.list_name}`).then(res => res.json());
+            const r = await fetch(`/api/lists/query/${params.list_name}`).then(res => res.json());
 
+            let t = await fetch(`/api/tasks/${r.id}`).then(res => res.json());
             console.log(t);
             setTasks(t);
         }
@@ -29,7 +29,7 @@ export default function Page({
 
     return <>
     <div id="app">
-        <Header />
+        <Header list_name={params.list_name} />
         <TaskList tasks={tasks}/>
     </div>
     </>
