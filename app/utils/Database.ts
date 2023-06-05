@@ -1,9 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
 
+const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+console.log(supabase_url)
+
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_ANON_KEY!
+  supabase_url,
+  supabase_api_key
 );
 
 export async function getLists() {
