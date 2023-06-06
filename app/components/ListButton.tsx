@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ListType } from "../interfaces/Lists";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 import { changeList, deleteList } from "@/features/listSlice";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 function MoreOptions({ list_id }: { list_id: number }) {
 
