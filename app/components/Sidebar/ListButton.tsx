@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ListType } from "../interfaces/Lists";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
-import { changeList, deleteList } from "@/features/listSlice";
-import { useRef } from "react";
+import { ListType } from "@/app/interfaces/Lists";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 function MoreOptions({ list_id }: { list_id: number }) {
 
@@ -14,15 +14,13 @@ function MoreOptions({ list_id }: { list_id: number }) {
         }
     };
 
-    const dispatch = useAppDispatch();
-
     async function deleteItem() {
 
-        const { current: el } = modalRef;
+        // const { current: el } = modalRef;
 
-        await fetch(`/api/lists/delete/${list_id}`);
-        dispatch(deleteList(list_id));
-        el?.close();
+        // await fetch(`/api/lists/delete/${list_id}`);
+        // dispatch(deleteList(list_id));
+        // el?.close();
     }
 
     return (
@@ -43,41 +41,45 @@ function MoreOptions({ list_id }: { list_id: number }) {
 }
 
 function ListButton({
-    list_data
+    list_data,
+    currentActive,
+    handleClick
 }: {
-    list_data: ListType
+    list_data: ListType,
+    currentActive: number,
+    handleClick: Function
 }) {
     
-    const dispatch = useAppDispatch();
-
-    async function deleteItem() {
-        await fetch(`/api/lists/delete/${list_data.id}`);
-        dispatch(deleteList(list_data.id));
-    }
-
     const href = `/${list_data.list_name}`;
     return (
         <>
         <Link 
-            onClick={() => dispatch(changeList(list_data.id))}
+            onClick={() => handleClick(list_data.id)}
             className="sidebar-button" 
             href={href}>
             {list_data.list_name}
         </Link>
-
-        {/* <button onClick={deleteItem}>Delete</button> */}
-        <MoreOptions list_id={list_data.id} />
+        {(currentActive == list_data.id) ? <MoreOptions list_id={list_data.id} /> : ""}
         </>
     )
 }
 
 export default function ListButtons({ list_data }: { list_data: ListType[] }) {
 
-    const current = useAppSelector((state) => state.lists.current);
-    let list_buttons = list_data.map( (l: ListType) => {
-        const className = (l.id == current) ? "active-list" : "inactive-list";
+    const { isLoading, error, data, isFetching } = useQuery({
+        queryKey: ["lists"],
+        queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
+    })
+
+    const [ currentActive, setCurrentActive ] = useState(-1);
+    function changeList(id: number) {
+        setCurrentActive(id);
+    }
+
+    let list_buttons = data?.map( (l: ListType) => {
+        const className = (l.id == currentActive) ? "active-list" : "inactive-list";
         return <li className={className} key={l.id}>
-            <ListButton list_data={l} />
+            <ListButton list_data={l} currentActive={currentActive} handleClick={changeList} />
         </li>
     });
 

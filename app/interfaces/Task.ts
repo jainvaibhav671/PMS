@@ -1,7 +1,7 @@
 export type TaskType = {
-    id: number,
+    id?: number,
     task_name: string,
     list_id: number,
-    created_at: Date,
-    isCompleted: Boolean
+    created_at?: Date,
+    isCompleted: boolean
 }

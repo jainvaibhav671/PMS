@@ -1,15 +1,13 @@
 "use client";
-import { Provider } from "react-redux";
-import Sidebar from "./components/Sidebar";
-import { store } from "./utils/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Sidebar from "./components/Sidebar/Sidebar";
+import React from "react";
 
-export default function Providers({ children }:{ children: React.ReactNode }) {
-    return (
-        <>
-        <Provider store={store}>
-            <Sidebar />
-            {children}
-        </Provider>
-        </>
-    )
+const queryClient = new QueryClient();
+
+export default function Provider({ children }: { children: React.ReactNode}) {
+    return <QueryClientProvider client={queryClient} >
+          <Sidebar />
+          {children}
+        </QueryClientProvider>
 }

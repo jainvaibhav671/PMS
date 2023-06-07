@@ -12,6 +12,5 @@ export async function GET(
     }) {
 
     const tasks = await getTasks({ list_id: params.list_id });
-
     return NextResponse.json(tasks);
 }
