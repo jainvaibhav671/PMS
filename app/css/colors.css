@@ -5,6 +5,7 @@
     --color4: #262831;
     --color5: #878A9A;
     --color6: hsl(207, 82%, 66%);
+    --color7: #E06C75;
 
     --background: var(--color1);
     --sidebar-bg: var(--color2);
@@ -25,6 +26,7 @@
         --color4: #262831;
         --color5: #878A9A;
         --color6: hsl(207, 82%, 66%);
+        --color7: #E06C75;
 
         --background: var(--color3);
         --sidebar-bg: var(--color4);
