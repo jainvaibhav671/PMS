@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
+import Modal from "../Modal"
 
 export default function Prompt({
     label,

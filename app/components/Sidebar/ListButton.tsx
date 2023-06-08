@@ -31,7 +31,7 @@ function MoreOptions({ list_id }: { list_id: number }) {
     return (
         <>
         <div id="more-options">
-            <button onClick={handleClick}>:</button>
+            <button className="more-options-button" onClick={handleClick}>:</button>
             <dialog ref={modalRef}>
                 <span>Options: </span>
                 <ul>

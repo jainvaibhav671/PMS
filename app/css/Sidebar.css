@@ -44,15 +44,26 @@
     font-weight: 700;
 }
 
+#more-options {
+    display: none;
+    position: absolute;
+    left: 10px;
+}
+.more-options-button {
+    background: var(--sidebar-bg);
+    color: var(--sidebar-fg);
+    font-size: 10pt;
+    font-weight: 700;
+}
+.active-list:hover #more-options {
+    display: block;
+}
+
 #sidebar li {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2px;
-}
-
-#sidebar ul button {
-    color: red;
 }
 
 #more-options dialog {
@@ -66,8 +77,4 @@
 #more-options li {
     border: 0px black;
     padding: 2px;
-}
-
-#more-options li:hover {
-    background: grey;
 }

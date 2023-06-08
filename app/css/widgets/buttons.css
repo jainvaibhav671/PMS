@@ -19,8 +19,7 @@ a, button {
 
 .sidebar-button {
     display: block;
-    background: var(--secondary-button-bg);
-    color: var(--secondary-button-fg);
+    color: var(--primary-button-fg);
     width: 90%;
     padding-left: 2x;
     margin: 0px;
