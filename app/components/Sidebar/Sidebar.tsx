@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ListButtons from "./ListButton";
 
-import { addList } from "../../utils/Database";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { ListType } from "../../interfaces/Lists";
@@ -30,8 +29,6 @@ export default function Sidebar() {
     })
 
     // TODO: make a loading component
-    if (isLoading) return <h1>Loading</h1>;
-
     async function handleClick() {
         mutation.mutate();
     }

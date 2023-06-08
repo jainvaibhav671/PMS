@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { ListType } from "@/app/interfaces/Lists";
 import { useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import React from "react";
+import { redirect } from "next/navigation";
 
 function MoreOptions({ list_id }: { list_id: number }) {
 
-    const modalRef = useRef(null);
+    const queryClient = useQueryClient();
+    const modalRef = useRef<HTMLDialogElement>(null);
     const handleClick =  () => {
         const { current: el } = modalRef;
         if (el) {
@@ -16,11 +19,13 @@ function MoreOptions({ list_id }: { list_id: number }) {
 
     async function deleteItem() {
 
-        // const { current: el } = modalRef;
-
-        // await fetch(`/api/lists/delete/${list_id}`);
-        // dispatch(deleteList(list_id));
-        // el?.close();
+        const { current: el } = modalRef;
+        await fetch(`/api/lists/delete/${list_id}`);
+        queryClient.invalidateQueries({
+            queryKey: ["lists"]
+        })
+        // TODO: Show Modal
+        el?.close();
     }
 
     return (

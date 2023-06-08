@@ -10,7 +10,6 @@ export default function Header({
     list_id: number
 }) {
 
-    console.log(list_id)
     const queryClient = useQueryClient();
     const [ taskName, setTaskName ] = useState("");
 

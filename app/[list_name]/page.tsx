@@ -6,6 +6,7 @@ import { ListType } from "@/app/interfaces/Lists";
 import { TaskType } from "@/app/interfaces/Task";
 import Header from "@/app/components/App/Header";
 import TaskList from "@/app/components/App/TaskLists";
+import { redirect } from "next/navigation";
 
 export default function Page({
     params
@@ -14,13 +15,17 @@ export default function Page({
         list_name: string
     }
 }) {
-
     const name = params.list_name.replace("%20", " ");
-
     const query = useQuery({
         queryKey: ["lists"],
         queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
     });
+
+    // Redirect if don't exist
+    const tmp = query.data?.filter(l => l.list_name === name);
+    if (tmp?.length == 0) {
+        redirect("/")
+    }
 
     const id: number = query.data?.filter(l => l.list_name === name)[0].id!;
     const task_query = useQuery({
