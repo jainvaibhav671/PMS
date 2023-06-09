@@ -3,31 +3,11 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
+    width: 10%;
 
     background: var(--sidebar-bg);
     color: var(--sidebar-fg);
-    width: auto;
-}
-
-#nl-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 8px;
-}
-
-#nl-input input {
-    width: 100px;
-    height: 20px;
-    border-radius: 8px;
-    padding: 4px;
-    font-weight: 400;
-    border: 1px solid;
-}
-
-#nl-input button {
-    font-weight: 700;
-    padding: 8px;
 }
 
 #sidebar ul {

@@ -18,8 +18,8 @@ a, button {
 }
 
 .sidebar-button {
-    display: block;
-    color: var(--primary-button-fg);
+    color: var(--sidebar-button-fg);
+    background: var(--sidebar-button-bg);
     width: 90%;
     padding-left: 2x;
     margin: 0px;
@@ -27,33 +27,4 @@ a, button {
 .sidebar-button:hover {
     font-size: 102%;
     font-weight: 600;
-    /* background: var(--secondary-button-fg); */
-    /* color: var(--secondary-button-bg); */
-    animation: 2s 1 left slide-in;
 }
-
-@keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-}
-
-@keyframes fill-background {
-    from {
-        background: var(--secondary-button-fg);
-        color: var(--secondary-button-bg);
-        box-shadow: inset 1em 0em currentColor;
-    } to {
-        background: var(--secondary-button-bg);
-        color: var(--secondary-button-fg);
-        box-shadow: inset 10px 0em currentColor;
-    }
-}
-
-

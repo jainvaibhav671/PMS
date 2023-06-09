@@ -11,6 +11,10 @@ export async function GET(
         }
     }) {
 
+    if (params.list_id === undefined) {
+        return NextResponse.json([]);
+    }
+
     const tasks = await getTasks({ list_id: params.list_id });
     return NextResponse.json(tasks);
 }

@@ -6,46 +6,48 @@ import ListButtons from "./ListButton";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { ListType } from "../../interfaces/Lists";
+import Loading from "../Loading/Loading";
+import Modal from "../Modal/Modal";
+import Prompt from "../Prompt/Prompt";
 
 export default function Sidebar() {
 
     const queryClient = useQueryClient();
     const [ list_name, setListName ] = useState("");
+    const [ open, setOpen ] = useState(false);
 
-    const { isLoading, error, data, isFetching } = useQuery({
+    const { isLoading, data } = useQuery({
         queryKey: ["lists"],
         queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
     })
 
     const mutation = useMutation({
-        mutationFn: () => axios.post("/api/lists/create", {
-            list_name: list_name
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }),
+        mutationFn: () => axios.post(
+            "/api/lists/create", 
+            { list_name: list_name }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(res => console.log(res)),
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"]})
     })
 
     // TODO: make a loading component
-    async function handleClick() {
+    async function onSubmit() {
+        console.log(list_name)
         mutation.mutate();
     }
-
+    
     return (
         <>
         <div id="sidebar">
-            <div id="nl-input">
-                <input 
-                    type="text" 
-                    onChange={e => setListName(e.target.value)}
-                    placeholder="Enter List Name" />
-                <button 
-                    onClick={handleClick} 
-                    className="primary-button">Add</button>
-            </div>
-            <ListButtons list_data={data!} />
+            <button 
+                onClick={() => setOpen(!open)}
+                className="primary-button">Add</button>
+            <Modal title="New List" open={open} setOpen={setOpen}>
+                <Prompt label="Enter List Name" setData={setListName} onSubmit={onSubmit} />
+            </Modal>
+            {(isLoading) ? <Loading /> : <ListButtons list_data={data!} />}
         </div>
         </>
     )

@@ -16,6 +16,9 @@
 
     --secondary-button-bg: var(--color2);
     --secondary-button-fg: var(--color3);   
+
+    --sidebar-button-bg: var(--color2);
+    --sidebar-button-fg: var(--color3);
 }
 
 @media (prefers-color-scheme: dark) {

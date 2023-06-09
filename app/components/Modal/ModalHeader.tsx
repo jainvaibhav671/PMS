@@ -1,16 +1,15 @@
-import { RefObject } from "react"
+import { Dispatch, RefObject, SetStateAction } from "react"
 
 export default function ModalHeader({
     title,
-    modalRef
+    setOpen
 }: {
     title: string,
-    modalRef: RefObject<HTMLDialogElement>
+    setOpen: Dispatch<SetStateAction<boolean>>,
 }) {
 
     function closeDialog() {
-        const { current: dlg } = modalRef;
-        dlg?.close();
+        setOpen(false);
     }
 
     return (

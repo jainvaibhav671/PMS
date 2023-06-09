@@ -27,17 +27,20 @@ export default function Page({
         redirect("/")
     }
 
-    const id: number = query.data?.filter(l => l.list_name === name)[0].id!;
+    const id = query.data?.filter(l => l.list_name === name)[0].id;
     const task_query = useQuery({
         queryKey: ["tasks", `${id}`],
-        queryFn: (): Promise<TaskType[]> => axios.get(`/api/tasks/${id}`).then(res => res.data)
+        queryFn: async (): Promise<TaskType[]> => {
+            if (id === undefined) { return new Promise(() => []) }
+            return axios.get(`/api/tasks/${id}`).then(res => res.data)
+        }
     });
     if (query.isLoading || query.isFetching) return <h1>Loading</h1>;
     let tasks = (task_query.data) ? task_query.data : []
 
     return <>
     <div id="app">
-        <Header list_name={name} list_id={id} />
+        <Header list_name={name} list_id={id!} />
         {(task_query.isLoading) ? <h2>Loading</h2> :<TaskList tasks={tasks}/>}
     </div>
     </>

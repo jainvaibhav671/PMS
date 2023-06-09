@@ -1,15 +1,17 @@
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import ModalHeader from "./ModalHeader";
 
 import "./Modal.css";
 
 export default function Modal({
     open,
+    setOpen,
     children,
     title
 }: {
     open: boolean,
-    children: React.ReactNode,
+    setOpen: Dispatch<SetStateAction<boolean>>
+    children?: React.ReactNode,
     title: string
 }) {
 
@@ -28,8 +30,7 @@ export default function Modal({
     return (
         <>
             <dialog ref={modalRef}>
-            <ModalHeader title={title} modalRef={modalRef} />
-                {title}
+            <ModalHeader title={title} setOpen={setOpen} />
                 {children}
             </dialog>
         </>

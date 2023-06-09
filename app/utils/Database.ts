@@ -22,7 +22,7 @@ export async function getLists() {
 
   if (error) {
     console.log(error);
-    return [];
+    return undefined;
   }
 
   return lists
@@ -41,13 +41,12 @@ export async function getListID({ list_name }: { list_name: string }) {
 }
 
 export async function addList({ list_name }: { list_name: string }) {
-  const { data, error } = await supabase
+  const { error } = await supabase
   .from('Lists')
   .insert([{ list_name: list_name }])
-  .select()
 
   if (error) {
-      console.log(error);
+      console.log("Error from addList", error);
   }
 }
 

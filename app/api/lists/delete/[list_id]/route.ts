@@ -10,7 +10,5 @@ export async function GET(
     }) {
 
     await deleteList(params.list_id);
-
     return NextResponse.json([]);
-    
 }

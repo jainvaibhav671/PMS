@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import Modal from "../Modal/Modal";
+import Prompt from "../Prompt/Prompt";
 
 export default function Header({
     list_name,
@@ -12,6 +14,7 @@ export default function Header({
 
     const queryClient = useQueryClient();
     const [ taskName, setTaskName ] = useState("");
+    const [ open, setOpen ] = useState(false);
 
     const mutation = useMutation({
         mutationFn: () => axios.post("/api/tasks/create", {
@@ -26,19 +29,17 @@ export default function Header({
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks"]})
     })
 
-    async function handleClick() {
-        // TODO: show modal
-        const task = prompt("Enter task");
-        if (!task) return;
-
-        setTaskName(task);
+    function onSubmit() {
         mutation.mutate();
     }
 
     return (
         <div id="header">
             <h2>{list_name}</h2>
-            <button onClick={handleClick}>+ New Task</button>
+            <button onClick={() => setOpen(!open)}>+ New Task</button>
+            <Modal open={open} setOpen={setOpen} title={"Demo Modal"}>
+                <Prompt label={"Enter New Task"} setData={setTaskName} onSubmit={onSubmit} />
+            </Modal>
         </div>
     )
 }

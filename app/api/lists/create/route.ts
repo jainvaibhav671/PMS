@@ -1,10 +1,12 @@
 import { addList } from "@/app/utils/Database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
+    console.log("creating")
     const params = await req.json();
-    let data = await addList({ list_name: params.list_name });
-    if (data) {
-        return NextResponse.json(data);
+    if (params.list_name === undefined) {
+        return;
     }
+    console.log("CREATING LIST", params, req.headers);
+    await addList({ list_name: params.list_name });
 }
