@@ -11,7 +11,7 @@ export async function GET(
         }
     }) {
 
-    if (params.list_id === undefined) {
+    if (params.list_id === undefined || !req.headers) {
         return NextResponse.json([]);
     }
 

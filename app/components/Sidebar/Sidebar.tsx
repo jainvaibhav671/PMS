@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import ListButtons from "./ListButton";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -18,23 +18,32 @@ export default function Sidebar() {
 
     const { isLoading, data } = useQuery({
         queryKey: ["lists"],
-        queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
+        queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data),
+
     })
 
+    // const mutation = useMutation({
+    //     mutationFn: () => axios.post(
+    //         "/api/lists/create", { list_name: list_name }, { headers: { "Conent-type": "application/json" } })
+    //         .then(res => console.log(res.data)),
+    //     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
+    // })
+
     const mutation = useMutation({
-        mutationFn: () => axios.post(
-            "/api/lists/create", 
-            { list_name: list_name }, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(res => console.log(res)),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"]})
+        mutationFn: () => fetch("/api/lists/create", {
+            method: "POST",
+            body: JSON.stringify({ list_name: list_name }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] })
     })
 
     // TODO: make a loading component
-    async function onSubmit() {
-        console.log(list_name)
+    async function onSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        console.log("List Name", list_name)
         mutation.mutate();
     }
     

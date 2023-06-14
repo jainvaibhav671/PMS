@@ -3,7 +3,6 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
     width: 10%;
 
     background: var(--sidebar-bg);

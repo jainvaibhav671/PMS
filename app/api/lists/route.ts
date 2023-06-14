@@ -1,8 +1,13 @@
+import { ListType } from "@/app/interfaces/Lists";
 import { getLists } from "@/app/utils/Database";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest): Promise<NextResponse<ListType[]> | undefined> {
+  let lists = await getLists();
 
-    let lists = await getLists()
-    return NextResponse.json(lists);
+  if (!req.headers || !lists) {
+    return NextResponse.json([]);
+  }
+
+  return NextResponse.json(lists);
 }

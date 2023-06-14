@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
+import { ListType } from '@/app/interfaces/Lists';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -17,15 +18,14 @@ const supabase = createClient(
 );
 
 export async function getLists() {
-  let { data: lists, error } = await supabase
-    .from('Lists').select("*");
+  let { data, error } = await supabase.from('Lists').select("*");
 
   if (error) {
-    console.log(error);
-    return undefined;
+    console.log("ERROR FROM GETLIST")
+    // console.log(error);
+    return;
   }
-
-  return lists
+  return data as ListType[];
 }
 
 export async function getListID({ list_name }: { list_name: string }) {

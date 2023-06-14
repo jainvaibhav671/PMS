@@ -11,12 +11,12 @@ export default function Prompt({
     onSubmit: Function
 }) {
     return (
-        <div id="prompt">
+        <form onSubmit={(e) => onSubmit(e)} id="prompt">
             <div>
                 <label htmlFor="inp">{label}</label>
                 <input id="inp"  onChange={(e) => { setData(e.target.value) }} type="text" name="inp" autoFocus/>
             </div>
-            <button onClick={() => onSubmit()} type="submit">Submit</button>
-        </div>
+            <button type="submit">Submit</button>
+        </form>
     )
 }

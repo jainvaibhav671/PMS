@@ -12,6 +12,7 @@
     "@supabase/supabase-js": "^2.24.0",
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@tanstack/react-query": "^4.29.12",
+    "@tanstack/react-query-devtools": "^4.29.12",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
