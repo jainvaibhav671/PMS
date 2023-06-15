@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { FormEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import Prompt from "../Prompt/Prompt";
 
@@ -26,10 +26,11 @@ export default function Header({
                 'Content-Type': 'application/json'
             }
         }).then(res => res.data),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks"]})
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks", list_id]})
     })
 
     function onSubmit() {
+        console.log("Mutating")
         mutation.mutate();
     }
 
@@ -37,7 +38,7 @@ export default function Header({
         <div id="header">
             <h2>{list_name}</h2>
             <button onClick={() => setOpen(!open)}>+ New Task</button>
-            <Modal open={open} setOpen={setOpen} title={"Demo Modal"}>
+            <Modal open={open} setOpen={setOpen} title={"New Task"}>
                 <Prompt label={"Enter New Task"} setData={setTaskName} onSubmit={onSubmit} />
             </Modal>
         </div>

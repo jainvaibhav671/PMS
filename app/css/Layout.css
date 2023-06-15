@@ -10,9 +10,13 @@
 
 body {
     display: flex;
+    flex-flow: column;
     background: var(--background);
     width: 100vw;
     height: 100vh;
+}
+body > div {
+    display: flex;
 }
 
 #app {

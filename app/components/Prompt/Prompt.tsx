@@ -10,8 +10,14 @@ export default function Prompt({
     setData: Dispatch<SetStateAction<string>>,
     onSubmit: Function
 }) {
+
+    const func = () => {
+        console.log("Submitting");
+        onSubmit();
+    }
+
     return (
-        <form onSubmit={(e) => onSubmit(e)} id="prompt">
+        <form method="POST" onSubmit={func} id="prompt">
             <div>
                 <label htmlFor="inp">{label}</label>
                 <input id="inp"  onChange={(e) => { setData(e.target.value) }} type="text" name="inp" autoFocus/>

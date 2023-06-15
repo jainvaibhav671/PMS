@@ -2,6 +2,7 @@ import { TaskType } from "@/app/interfaces/Task";
 import './task.css'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import TaskCard from "./TaskCard/TaskCard";
 
 function Task({
   task
@@ -20,7 +21,7 @@ function Task({
         "headers": {
             'Content-Type': 'application/json'
         }
-      })
+      }).catch((e) => console.log("ERROR", e))
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["tasks"]})
   })
@@ -48,8 +49,8 @@ export default function TaskList({
 
   return (
     <>
-      <ul>
-        {tasks.map( (t) => <Task key={t.id} task={t} /> )}
+      <ul id="task-list">
+        {tasks.map( (t) => <TaskCard key={t.id} task={t} /> )}
       </ul>
     </>
   )

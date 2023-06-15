@@ -41,8 +41,7 @@ export default function Sidebar() {
     })
 
     // TODO: make a loading component
-    async function onSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    async function onSubmit() {
         console.log("List Name", list_name)
         mutation.mutate();
     }

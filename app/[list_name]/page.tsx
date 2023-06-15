@@ -24,15 +24,10 @@ export default function Page({
     queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
   });
 
-  // Redirect if don't exist
-  if (!query.data) {
-    redirect("/")
-  }
-
   //  get the id of the current list and query all its tasks
   const id = query.data?.filter(l => l.list_name === name)[0].id!;
   const task_query = useQuery({
-    queryKey: ["tasks", `${id}`],
+    queryKey: ["tasks", id],
     queryFn: async (): Promise<TaskType[]> => {
       if (id === undefined) { return new Promise(() => []) }
       return axios.get(`/api/tasks/${id}`).then(res => res.data)

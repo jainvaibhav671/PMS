@@ -3,11 +3,7 @@ import { createTask } from "@/app/utils/Database";
 
 export async function POST(req: NextRequest) {
 
+    if (!req?.headers) return;
     const data = await req.json();
-    let task = await createTask({ task: data });
-    if (task !== null) {
-        return NextResponse.json(task);
-    }
-
-    return NextResponse.json([]);
+    await createTask({ task: data });
 }
