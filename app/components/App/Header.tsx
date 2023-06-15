@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import Prompt from "../Prompt/Prompt";
+import CreateTask from "../Prompt/CreateTask/CreateTask";
 
 export default function Header({
     list_name,
@@ -39,7 +40,7 @@ export default function Header({
             <h2>{list_name}</h2>
             <button onClick={() => setOpen(!open)}>+ New Task</button>
             <Modal open={open} setOpen={setOpen} title={"New Task"}>
-                <Prompt label={"Enter New Task"} setData={setTaskName} onSubmit={onSubmit} />
+                <CreateTask />
             </Modal>
         </div>
     )

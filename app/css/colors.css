@@ -1,4 +1,16 @@
 :root {
+
+    --black: #282C34;
+    --red: #E06C75;
+    --green: #98C379;
+    --yellow: #E5C07B;
+    --blue: #61AFEF;
+    --pink: #C678dd;
+    --teal: #56B6C2;
+    --grey: #ABB2BF;
+    --white: #FAFAFA;
+    --accent: var(--green);
+
     --color1: #FAFAFA;
     --color2: #EAEAEB;
     --color3: #313440;
@@ -7,18 +19,18 @@
     --color6: hsl(207, 82%, 66%);
     --color7: #E06C75;
 
-    --background: var(--color1);
-    --sidebar-bg: var(--color2);
-    --sidebar-fg: var(--color3);
 
-    --primary-button-bg: var(--color3);
-    --primary-button-fg: var(--color2);
+    --background: var(--white);
+    --sidebar-bg: var(--white);
+    --sidebar-fg: var(--black);
+    --sidebar-link-bg: var(--teal);
+    --sidebar-link-fg: var(--white);
 
-    --secondary-button-bg: var(--color2);
-    --secondary-button-fg: var(--color3);   
+    --primary-button-bg: var(--blue);
+    --primary-button-fg: var(--black);
 
-    --sidebar-button-bg: var(--color2);
-    --sidebar-button-fg: var(--color3);
+    --secondary-button-bg: var(--teal);
+    --secondary-button-fg: var(--black);   
 }
 
 @media (prefers-color-scheme: dark) {

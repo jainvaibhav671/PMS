@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import { redirect } from "next/navigation";
 
 function MoreOptions({ list_id }: { list_id: number }) {
 

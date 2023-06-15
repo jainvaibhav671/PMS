@@ -1,4 +1,3 @@
-
 #sidebar {
     display: flex;
     flex-flow: column;
@@ -16,11 +15,29 @@
     flex-flow: column;
     gap: 8px;
     overflow-y: auto;
-    width: 100%;
+    height: 100%;
+    padding: 1rem;
 }
 
+#sidebar a {
+    font-size: 500;
+    color: unset;
+}
+.inactive-list {
+    color: var(--black);
+}
 .active-list {
     font-weight: 700;
+    background-color: var(--sidebar-link-bg);
+    color: var(--sidebar-link-fg);
+    border-radius: 8px;
+}
+
+#sidebar li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
 }
 
 #more-options {
@@ -34,15 +51,9 @@
     font-size: 10pt;
     font-weight: 700;
 }
+
 .active-list:hover #more-options {
     display: block;
-}
-
-#sidebar li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2px;
 }
 
 #more-options dialog {
