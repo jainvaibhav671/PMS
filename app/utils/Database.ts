@@ -16,6 +16,7 @@ const supabase = createClient(
   supabase_api_key,
   options
 );
+export default supabase;
 
 export async function getLists() {
   let { data, error } = await supabase.from('Lists').select("*");
