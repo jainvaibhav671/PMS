@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import TagList from "../../App/TagList/TagList";
 import "./CreateTask.css";
 
-export default function CreateTask(){
+export default function CreateTask({
+    controller,
+    onSubmit
+}: {
+    controller: Dispatch<SetStateAction<string>>,
+    onSubmit: Function
+}){
     const [ options, setOptions ] = useState<string[]>([]);
     const [ selectedTags, setSelectedTags ] = useState<string[]>([])
     return (
-        <form id="create-task-form">
-            <label htmlFor="task-name">Task Name</label>
-            <input type="text" name="task-name" />
+        <form method="POST" onSubmit={(e) => onSubmit(e)} id="create-task-form">
+            <label htmlFor="taskName">Task Name</label>
+            <input type="text" name="taskName" onChange={(e) => controller(e.target.value)} />
 
             <div>
                 <span>Tags: </span>
@@ -19,6 +25,7 @@ export default function CreateTask(){
                     setSelectedTags={setSelectedTags}
                 />
             </div>
+            <button type="submit">Submit</button>
         </form>
     )
 }

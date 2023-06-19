@@ -8,7 +8,7 @@ export default function TaskCard({
 }) {
 
     const tags = ["tag1", "tag2", "tag3", "tag4"];
-    const spanTags = tags.map( t => <span className="tag">{t}</span>)
+    const spanTags = tags.map( (t,idx) => <span key={idx} className="tag">{t}</span>)
     return (
         <div className="task-card">
             <h3>{task.task_name}</h3>

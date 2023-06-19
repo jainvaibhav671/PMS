@@ -1,8 +1,8 @@
 import { TaskType } from "@/app/interfaces/Task";
-import './task.css'
+import '../task.css'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import TaskCard from "./TaskCard/TaskCard";
+import TaskCard from "../TaskCard/TaskCard";
 
 function Task({
   task

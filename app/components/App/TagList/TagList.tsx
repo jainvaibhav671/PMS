@@ -11,30 +11,17 @@ function AddTag({
     value: string
 }) {
 
-    const [ clicked, setClicked ] = useState(false);
     const inputElement = <input
         autoFocus
         type="text"
         value={value}
         onChange={(e) => inputOnChange(e)}
-        onKeyDown={(e) => handleKeyDown(e)}
+        onKeyDown={(e) => inputOnKeyDown(e)}
         list="available-tags"
         autoComplete='off'
     />;
-    const btn = <button onClick={toggleComponent}>+</button>;
 
-    function toggleComponent() {
-        setClicked(!clicked)
-    }
-    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-        inputOnKeyDown(e);
-        if (e.key === "Enter") {
-            toggleComponent();
-        }
-    }
-
-    let component = (clicked) ? inputElement : btn;
-    return component;
+    return inputElement;
 }
 
 export default function TagList({

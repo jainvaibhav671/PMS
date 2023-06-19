@@ -41,6 +41,7 @@ export default function Dashboard() {
     return (
         <>
             <h2>Projects</h2>
+            <button className="secondary-button">New Project</button>
             <div id="dashboard">
                 {(isLoading || isFetching) ? <Loading /> : <ProjectGrid projects={data} />}
             </div>
