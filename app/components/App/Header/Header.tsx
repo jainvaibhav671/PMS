@@ -10,7 +10,7 @@ export default function Header({
     list_id
 }: {
     list_name: string,
-    list_id: number
+    list_id: string
 }) {
 
     const queryClient = useQueryClient();

@@ -13,24 +13,27 @@ COPY --from=builder /app/node_modules /app/node_modules/
 
 COPY . /app/
 ENV NEXT_TELEMETRY_DISABLED 1
-
+ENV NODE_ENV production
+RUN npx prisma db pull && npx prisma generate 
 RUN npm run build
 
-FROM base AS final
-WORKDIR /app
+CMD ["npm", "start"]
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# FROM base AS final
+# WORKDIR /app
 
-COPY --from=source /app/public /app/public
-COPY --from=source --chown=nextjs:nodejs /app/.next ./.next
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
 
-USER nextjs
+# COPY --from=source /app/public /app/public
+# COPY --from=source --chown=nextjs:nodejs /app/.next ./.next
 
-ENV PORT 3000
-EXPOSE ${PORT}
-ENV NEXT_TELEMETRY_DISABLED 1
-ENV NODE_ENV production
+# USER nextjs
 
-CMD ["npx", "--yes", "next", "start"]
+# ENV PORT 3000
+# EXPOSE ${PORT}
+# ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NODE_ENV production
+
+# CMD ["npx", "--yes", "next", "start"]
 

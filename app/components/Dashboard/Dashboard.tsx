@@ -6,20 +6,8 @@ import "./Dashboard.css";
 import { Project } from "@prisma/client"
 import Modal from "../Modal/Modal";
 import Prompt from "../Prompt/Prompt";
-import { useState } from "react";
-
-function ProjectCard({
-    data
-}: {
-    data: Project
-}) {
-    return (
-        <a href={`${data.name}`} className="project-card">
-            <h4>{data.name}</h4>
-            <span>{data.created_at?.toString()}</span>
-        </a>
-    )
-}
+import { useEffect, useState } from "react";
+import { ProjectCard } from "./ProjectCard";
 
 function ProjectGrid({
     projects
@@ -35,21 +23,25 @@ function ProjectGrid({
     )
 }
 
-export default function Dashboard() {
+export default function Dashboard({ list_id="" }: { list_id?: string }) {
 
     const [ open, setOpen ] = useState(false);
     const [ name, setName ] = useState("");
 
     const queryClient = useQueryClient();
+    const apiUrl = "/api/lists" + ( (list_id.length != 0) ? `/${list_id}` : "")
     const { data }: { data: Project[] | undefined } = useQuery({
-        queryFn: () => axios.get("/api/lists").then(res => res.data),
-        queryKey: ["lists"]
+        queryFn: () => axios.get(apiUrl).then(res => res.data),
+        queryKey: ["lists"].concat((list_id.length == 0) ? [] : [list_id])
     })
 
     const mutation = useMutation({
         mutationFn: () => axios.post(
             "/api/lists/create",
-            { project_name: name }, 
+            {
+                project_name: name,
+                parent_proj: list_id
+            }, 
             {
                 headers: { "Content-type": "application/json" }
             })

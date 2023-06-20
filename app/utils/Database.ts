@@ -4,7 +4,6 @@ import { PrismaClient } from '@prisma/client';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const user_id = "52d2341d-a657-42f5-b6a9-7935fafccd3d"
 const options = {
   auth: {
     persistSession: false
