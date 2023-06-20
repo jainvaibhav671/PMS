@@ -22,22 +22,11 @@ export default function Sidebar() {
 
     })
 
-    // const mutation = useMutation({
-    //     mutationFn: () => axios.post(
-    //         "/api/lists/create", { list_name: list_name }, { headers: { "Conent-type": "application/json" } })
-    //         .then(res => console.log(res.data)),
-    //     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
-    // })
-
     const mutation = useMutation({
-        mutationFn: () => fetch("/api/lists/create", {
-            method: "POST",
-            body: JSON.stringify({ list_name: list_name }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] })
+        mutationFn: () => axios.post(
+            "/api/lists/create", { list_name: list_name }, { headers: { "Conent-type": "application/json" } })
+            .then(res => console.log(res.data)),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
     })
 
     // TODO: make a loading component

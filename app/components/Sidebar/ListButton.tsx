@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import Loading from "../Loading/Loading";
 
 function MoreOptions({ list_id }: { list_id: number }) {
 
@@ -70,7 +71,7 @@ function ListButton({
 
 export default function ListButtons({ list_data }: { list_data: ListType[] }) {
 
-    const { isLoading, error, data, isFetching } = useQuery({
+    const { data } = useQuery({
         queryKey: ["lists"],
         queryFn: (): Promise<ListType[]> => axios.get("/api/lists").then(res => res.data)
     })
@@ -79,6 +80,8 @@ export default function ListButtons({ list_data }: { list_data: ListType[] }) {
     function changeList(id: number) {
         setCurrentActive(id);
     }
+
+    if (!data) return <Loading />;
 
     let list_buttons = data?.map( (l: ListType) => {
         const className = (l.id == currentActive) ? "active-list" : "inactive-list";

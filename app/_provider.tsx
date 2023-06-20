@@ -11,7 +11,7 @@ export default function Provider({ children }: { children: React.ReactNode}) {
   return <QueryClientProvider client={queryClient} >
     <Navbar />
     <div style={{height: "100%", width: "100%"}}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       {children}
     </div>
   </QueryClientProvider>

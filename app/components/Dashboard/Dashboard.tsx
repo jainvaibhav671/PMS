@@ -2,17 +2,18 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Loading from "../Loading/Loading"
-import { ListType } from "@/app/interfaces/Lists"
 import "./Dashboard.css";
+import { Projects } from "@prisma/client"
 
 function ProjectCard({
     data
 }: {
-    data: ListType
+    data: Projects
 }) {
     return (
-        <a href={`${data.list_name}`} className="project-card">
-            <h4>{data.list_name}</h4>
+        <a href={`${data.name}`} className="project-card">
+            <h4>{data.name}</h4>
+            <span>{data.created_at.toString()}</span>
         </a>
     )
 }
@@ -20,7 +21,7 @@ function ProjectCard({
 function ProjectGrid({
     projects
 }: {
-    projects: ListType[]
+    projects: Projects[]
 }) {
     return (
         <>
@@ -33,7 +34,7 @@ function ProjectGrid({
 
 export default function Dashboard() {
 
-    const { data, isLoading, isFetching } = useQuery({
+    const { data }: { data: Projects[] | undefined } = useQuery({
         queryFn: () => axios.get("/api/lists").then(res => res.data),
         queryKey: ["lists"]
     })
@@ -43,7 +44,7 @@ export default function Dashboard() {
             <h2>Projects</h2>
             <button className="secondary-button">New Project</button>
             <div id="dashboard">
-                {(isLoading || isFetching) ? <Loading /> : <ProjectGrid projects={data} />}
+                {(!data) ? <Loading /> : <ProjectGrid projects={data} />}
             </div>
         </>
     )

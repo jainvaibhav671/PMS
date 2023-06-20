@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
 import { ListType } from '@/app/interfaces/Lists';
+import { PrismaClient } from '@prisma/client';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -18,15 +19,11 @@ const supabase = createClient(
 );
 export default supabase;
 
-export async function getLists() {
-  let { data, error } = await supabase.from('Lists').select("*");
+const prisma = new PrismaClient();
 
-  if (error) {
-    console.log("ERROR FROM GETLIST")
-    // console.log(error);
-    return;
-  }
-  return data as ListType[];
+export async function getLists() {
+  const projects = await prisma.projects.findMany();
+  return projects;
 }
 
 export async function getListID({ list_name }: { list_name: string }) {
