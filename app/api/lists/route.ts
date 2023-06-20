@@ -1,7 +1,7 @@
-import { getLists } from "@/app/utils/Database";
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/app/utils/Database";
 
 export async function GET(req: NextRequest) {
-  let projects = await getLists();
+  const projects = await prisma.project.findMany();
   return NextResponse.json(projects);
 }

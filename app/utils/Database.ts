@@ -1,11 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 import { TaskType } from '@/app/interfaces/Task';
-import { ListType } from '@/app/interfaces/Lists';
 import { PrismaClient } from '@prisma/client';
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabase_api_key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
+const user_id = "52d2341d-a657-42f5-b6a9-7935fafccd3d"
 const options = {
   auth: {
     persistSession: false
@@ -19,34 +18,7 @@ const supabase = createClient(
 );
 export default supabase;
 
-const prisma = new PrismaClient();
-
-export async function getLists() {
-  const projects = await prisma.projects.findMany();
-  return projects;
-}
-
-export async function getListID({ list_name }: { list_name: string }) {
-  let { data: list_id , error } = await supabase.from("Lists").select("id").eq("list_name", list_name);
-
-  if (error || !list_id) {
-    return null;
-  }
-
-  const id = list_id[0];
-  console.log("id", id)
-  return id;
-}
-
-export async function addList({ list_name }: { list_name: string }) {
-  const { error } = await supabase
-  .from('Lists')
-  .insert([{ list_name: list_name }])
-
-  if (error) {
-      console.log("Error from addList", error);
-  }
-}
+export const prisma = new PrismaClient();
 
 export async function getTasks({ list_id }: { list_id: number }) {
   let { data: tasks, error } = await supabase
