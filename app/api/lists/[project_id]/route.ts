@@ -10,8 +10,7 @@ export async function GET(
     const tasks = await prisma.project.findMany({
         where: {
             parent_project: { 
-                equals: params.project_id,
-                not: params.project_id
+                equals: params.project_id
             }
         }
     })

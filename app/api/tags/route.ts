@@ -2,13 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/utils/Database";
 
 export async function GET(req: NextRequest) {
-  const projects = await prisma.project.findMany({
-    where: {
-      parent_project: { equals: null }
+  const tags = await prisma.tag.findMany({
+    select: {
+        name: true
     }
   });
-  console.log(projects);
-  return NextResponse.json(projects, {
+  return NextResponse.json(tags.map(t => t.name), {
     headers: { "Content-Type": "application/json" }
   });
 }
