@@ -1,5 +1,6 @@
 "use client";
 import { Project } from "@prisma/client";
+import Link from "next/link";
 
 export function ProjectCard({
     data
@@ -8,14 +9,18 @@ export function ProjectCard({
 }) {
 
     const handleClick = () => {
-        sessionStorage.setItem("current-project", JSON.stringify(data));
+        sessionStorage.setItem("current-project-id", data.id);
+        sessionStorage.setItem("current-project-name", data.name);
         console.log(JSON.stringify(data))
     }
 
     return (
-        <a onClick={handleClick} href={`${data.name}`} className="project-card">
+        <Link 
+            onClick={handleClick} href={`${data.name}`}
+            className="project-card"
+        >
             <h4>{data.name}</h4>
             <span>{data.created_at?.toString()}</span>
-        </a>
+        </Link>
     );
 }

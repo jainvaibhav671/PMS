@@ -1,0 +1,15 @@
+#create-project {
+    padding: 1rem;
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+}
+
+#create-project > div {
+    display: flex;
+    gap: 8px;
+}
+
+#create-project > div {
+    display: grid;
+}

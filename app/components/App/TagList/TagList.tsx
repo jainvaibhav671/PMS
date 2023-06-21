@@ -25,16 +25,16 @@ function AddTag({
 }
 
 export default function TagList({
-    options,
-    setOptions,
+    availableTags,
     selectedTags,
     setSelectedTags
 }: {
-    options: string[],
-    setOptions: Dispatch<SetStateAction<string[]>>,
+    availableTags: string[],
     selectedTags: string[],
     setSelectedTags: Dispatch<SetStateAction<string[]>>,
 }) {
+
+    const [ options, setOptions ] = useState(availableTags)
     const [ value, setValue ] = useState("");
 
     function handleKey(e: React.KeyboardEvent<HTMLInputElement>) {
