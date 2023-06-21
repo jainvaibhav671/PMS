@@ -1,0 +1,70 @@
+#login-main {
+    width: 100%;
+    height: 100%;
+}
+#login-main h1 {
+    text-align: center;
+}
+#login-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login {
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+    gap: 8px;
+}
+
+#login input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+#login label {
+    margin-left: 4px;
+}
+#login button {
+    border-radius: 4px;
+    background: rgb(0, 174, 255);
+    color: white;
+    font-weight: 700;
+    font-size: 11pt;
+}
+#below-button {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+#below-button a {
+    color: black;
+    opacity: 60%;
+}
+a:hover {
+    opacity: 100%;
+    text-decoration: underline;
+    text-decoration-skip: spaces;
+}
+
+.input {
+    display: flex;
+    flex-flow: column;
+    gap: 4px;
+}
+
+#login > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#signup-prompt {
+    margin-top: 3rem;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+}
+#signup-prompt a {
+    font-weight: 500;
+    color: hsl(199, 100%, 40%);
+}
