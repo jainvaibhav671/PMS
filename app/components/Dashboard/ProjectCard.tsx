@@ -14,13 +14,18 @@ export function ProjectCard({
         console.log(JSON.stringify(data))
     }
 
+    const created_at = new Date(data.created_at!);
+    const date = `${created_at.getDate()}`
     return (
         <Link 
             onClick={handleClick} href={`${data.name}`}
             className="project-card"
         >
-            <h4>{data.name}</h4>
-            <span>{data.created_at?.toString()}</span>
+            <div>
+                <h4>{data.name}</h4>
+                <span>{created_at.toLocaleString("default", { dateStyle: "medium" })}</span>
+            </div>
+            <progress value="2" max="9"></progress>
         </Link>
     );
 }

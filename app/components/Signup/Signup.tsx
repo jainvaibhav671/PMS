@@ -1,30 +1,45 @@
+"use client";
 import Link from "next/link";
 import "./Signup.css";
+import { Form } from "./Form";
+import { FormEvent } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export default function Signup() {
+export default async function Signup() {
+
+    const router = useRouter();
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        
+        axios.post("/api/user", {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            password: formData.get("password")
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).catch(() => { });
+
+        router.push("/login")
+    };
+
     return (
         <div id="signup-main">
             <h1>Signup</h1>
             <div id="signup-outer">
-                <form method="POST" action="/signup" id="signup">
-                    <div className="input">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email"/>
-                    </div>
-
-                    <div className="input">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password"/>
-                    </div>
-
-                    <button type="submit">Join Now</button>
-                </form>
+                {<Form handleSubmit={handleSubmit} />}
             </div>
 
             <div id="login-prompt">
-               Have an account?<a href="/login">Log in</a>
+               Have an account?<Link href="/login">Log in</Link>
             </div>
 
         </div>
     )
 }
+
+

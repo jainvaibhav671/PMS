@@ -28,3 +28,9 @@
     background-color: var(--accent);
     border-color: var(--accent);
 }
+
+progress {
+    position: relative;
+    top: 45%;
+    width: 100%;
+}

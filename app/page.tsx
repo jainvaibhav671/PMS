@@ -6,7 +6,6 @@ import Login from "./components/Login/Login";
 export default function Home() {
   return (
     <main style={{height: "100%", width: "100%" }}>
-        {/* <Dashboard /> */}
         <Login />
         <ReactQueryDevtools />
     </main>
