@@ -1,62 +1,62 @@
 #signup-main {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 #signup-main h1 {
-    text-align: center;
+  text-align: center;
 }
 #signup-outer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #signup {
-    display: flex;
-    flex-flow: column;
-    width: 30%;
-    gap: 8px;
+  display: flex;
+  flex-flow: column;
+  width: 30%;
+  gap: 8px;
 }
 
 #signup input {
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid black;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 #signup label {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 #signup button {
-    border-radius: 4px;
-    background: rgb(0, 174, 255);
-    color: white;
-    font-weight: 700;
-    font-size: 11pt;
+  border-radius: 4px;
+  background: rgb(0, 174, 255);
+  color: white;
+  font-weight: 700;
+  font-size: 11pt;
 }
 a:hover {
-    opacity: 100%;
-    text-decoration: underline;
-    text-decoration-skip: spaces;
+  opacity: 100%;
+  text-decoration: underline;
+  text-decoration-skip: spaces;
 }
 
 .input {
-    display: flex;
-    flex-flow: column;
-    gap: 4px;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
 }
 
 #signup > div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 #login-prompt {
-    margin-top: 3rem;
-    text-align: center;
-    width: 100%;
-    vertical-align: middle;
+  margin-top: 3rem;
+  text-align: center;
+  width: 100%;
+  vertical-align: middle;
 }
 #login-prompt a {
-    font-weight: 500;
-    color: hsl(199, 100%, 40%);
+  font-weight: 500;
+  color: hsl(199, 100%, 40%);
 }

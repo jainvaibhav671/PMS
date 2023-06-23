@@ -1,56 +1,54 @@
 :root {
+  --black: #282c34;
+  --red: #e06c75;
+  --green: #98c379;
+  --yellow: #e5c07b;
+  --blue: #61afef;
+  --pink: #c678dd;
+  --teal: #56b6c2;
+  --grey: #abb2bf;
+  --white: #fafafa;
+  --accent: var(--green);
 
-    --black: #282C34;
-    --red: #E06C75;
-    --green: #98C379;
-    --yellow: #E5C07B;
-    --blue: #61AFEF;
-    --pink: #C678dd;
-    --teal: #56B6C2;
-    --grey: #ABB2BF;
-    --white: #FAFAFA;
-    --accent: var(--green);
+  --color1: #fafafa;
+  --color2: #eaeaeb;
+  --color3: #313440;
+  --color4: #262831;
+  --color5: #878a9a;
+  --color6: hsl(207, 82%, 66%);
+  --color7: #e06c75;
 
-    --color1: #FAFAFA;
-    --color2: #EAEAEB;
-    --color3: #313440;
-    --color4: #262831;
-    --color5: #878A9A;
-    --color6: hsl(207, 82%, 66%);
-    --color7: #E06C75;
+  --background: var(--white);
+  --sidebar-bg: var(--white);
+  --sidebar-fg: var(--black);
+  --sidebar-link-bg: var(--teal);
+  --sidebar-link-fg: var(--white);
 
+  --primary-button-bg: var(--blue);
+  --primary-button-fg: var(--black);
 
-    --background: var(--white);
-    --sidebar-bg: var(--white);
-    --sidebar-fg: var(--black);
-    --sidebar-link-bg: var(--teal);
-    --sidebar-link-fg: var(--white);
-
-    --primary-button-bg: var(--blue);
-    --primary-button-fg: var(--black);
-
-    --secondary-button-bg: var(--teal);
-    --secondary-button-fg: var(--black);   
+  --secondary-button-bg: var(--teal);
+  --secondary-button-fg: var(--black);
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --color1: #FAFAFA;
-        --color2: #EAEAEB;
-        --color3: #313440;
-        --color4: #262831;
-        --color5: #878A9A;
-        --color6: hsl(207, 82%, 66%);
-        --color7: #E06C75;
+  :root {
+    --color1: #fafafa;
+    --color2: #eaeaeb;
+    --color3: #313440;
+    --color4: #262831;
+    --color5: #878a9a;
+    --color6: hsl(207, 82%, 66%);
+    --color7: #e06c75;
 
-        --background: var(--color3);
-        --sidebar-bg: var(--color4);
-        --sidebar-fg: var(--color2);
+    --background: var(--color3);
+    --sidebar-bg: var(--color4);
+    --sidebar-fg: var(--color2);
 
-        --primary-button-bg: var(--color3);
-        --primary-button-fg: var(--color2);
+    --primary-button-bg: var(--color3);
+    --primary-button-fg: var(--color2);
 
-        --secondary-button-bg: var(--color6);
-        --secondary-button-fg: var(--color3);   
-    }
+    --secondary-button-bg: var(--color6);
+    --secondary-button-fg: var(--color3);
+  }
 }

@@ -1,11 +1,11 @@
 #prompt {
-    padding: 1rem;
-    display: flex;
-    flex-flow: column;
-    gap: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
 }
 
 #prompt > div {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }

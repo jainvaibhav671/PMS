@@ -5,7 +5,7 @@
   border: 2px solid black;
   border-bottom-color: white;
   border-radius: 20px;
-  
+
   box-shadow: 0px 0px 2px 0px;
   animation: spin 1s linear infinite;
   transition: width linear 500ms;
@@ -17,7 +17,7 @@
     rotate: 0deg;
     width: 10px;
     height: 10px;
-  } 
+  }
   25% {
     rotate: 90deg;
     width: 13px;

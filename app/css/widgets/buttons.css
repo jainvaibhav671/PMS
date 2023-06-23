@@ -1,21 +1,21 @@
-
-a, button {
-    border: 0px;
-    border-radius: 8px;
-    padding: 5px;
-    cursor: pointer;
-    text-decoration: none;
+a,
+button {
+  border: 0px;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .primary-button {
-    background: var(--primary-button-bg);
-    color: var(--primary-button-fg);
-    padding: 4px 8px;
-    font-weight: 700;
-    font-size: 10pt;
+  background: var(--primary-button-bg);
+  color: var(--primary-button-fg);
+  padding: 4px 8px;
+  font-weight: 700;
+  font-size: 10pt;
 }
 
 .secondary-button {
-    background: var(--secondary-button-bg);
-    color: var(--secondary-button-fg);
+  background: var(--secondary-button-bg);
+  color: var(--secondary-button-fg);
 }

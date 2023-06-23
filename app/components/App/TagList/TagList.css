@@ -1,48 +1,49 @@
 @import "@/app/css/colors.css";
 #taglist {
-    display: flex;
+  display: flex;
 }
 
 #tag-list {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .tag {
-    padding: 2px 8px;
-    border-radius: 1rem;
-    background-color: var(--color3);
-    color: var(--color2);
-    font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 1rem;
+  background-color: var(--color3);
+  color: var(--color2);
+  font-weight: 700;
 }
 
 button {
-    border-radius: 20px;
-    border: 1px solid var(--color3);
+  border-radius: 20px;
+  border: 1px solid var(--color3);
 }
 
 #root {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 datalist {
-    position: absolute;
-    max-height: 20em;
-    border: 0 none;
-    overflow-x: hidden;
-    overflow-y: auto;
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 datalist option {
-    font-size: 0.8em;
-    padding: 0.3em 1em;
-    background-color: #ccc;
-    cursor: pointer;
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
 }
 
-datalist option:hover, datalist option:focus {
-    color: #fff;
-    background-color: #036;
-    outline: 0 none;
+datalist option:hover,
+datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
 }

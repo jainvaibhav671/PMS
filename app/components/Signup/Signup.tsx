@@ -1,45 +1,44 @@
-"use client";
 import Link from "next/link";
 import "./Signup.css";
 import { Form } from "./Form";
-import { FormEvent } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { Database } from "@/lib/database.types";
+import { cookies } from "next/headers";
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export default async function Signup() {
+  const handleSubmit = async (formData: FormData) => {
+    "use server";
 
-    const router = useRouter();
+    const supabase = createServerActionClient<Database>({ cookies });
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        
-        axios.post("/api/user", {
-            name: formData.get("name"),
-            email: formData.get("email"),
-            password: formData.get("password")
-        }, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).catch(() => { });
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    console.log("DATA: ", data, error);
 
-        router.push("/login")
-    };
+    if (!error) {
+      redirect("/auth/callback");
+    }
 
-    return (
-        <div id="signup-main">
-            <h1>Signup</h1>
-            <div id="signup-outer">
-                {<Form handleSubmit={handleSubmit} />}
-            </div>
+    revalidatePath("/");
+  };
 
-            <div id="login-prompt">
-               Have an account?<Link href="/login">Log in</Link>
-            </div>
+  return (
+    <div id="signup-main">
+      <h1>Signup</h1>
+      <div id="signup-outer">
+        <Form handleSubmit={handleSubmit} />
+      </div>
 
-        </div>
-    )
+      <div id="login-prompt">
+        Have an account?<Link href="/login">Log in</Link>
+      </div>
+    </div>
+  );
 }
-
-

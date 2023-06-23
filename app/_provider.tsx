@@ -6,13 +6,14 @@ import Navbar from "./components/Navbar/Navbar";
 
 const queryClient = new QueryClient();
 
-export default function Provider({ children }: { children: React.ReactNode}) {
-
-  return <QueryClientProvider client={queryClient} >
-    <Navbar />
-    <div style={{height: "100%", width: "100%"}}>
-      {/* <Sidebar /> */}
-      {children}
-    </div>
-  </QueryClientProvider>
+export default function Provider({ children }: { children: React.ReactNode }) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Navbar />
+      <div style={{ height: "100%", width: "100%" }}>
+        {/* <Sidebar /> */}
+        {children}
+      </div>
+    </QueryClientProvider>
+  );
 }

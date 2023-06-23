@@ -4,26 +4,26 @@
 @import "./Header.css";
 
 * {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
-    display: flex;
-    flex-flow: column;
-    background: var(--background);
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  flex-flow: column;
+  background: var(--background);
+  width: 100vw;
+  height: 100vh;
 }
 body > div {
-    display: flex;
+  display: flex;
 }
 
 #app {
-    width: 60vw;
-    padding: 20px;
+  width: 60vw;
+  padding: 20px;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
