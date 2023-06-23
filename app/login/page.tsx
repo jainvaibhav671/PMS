@@ -1,5 +1,6 @@
-import { Login } from "../components/Login/Login";
+"use server";
+import Login from "../components/Login/Login";
 
-export default function Page() {
+export default async function Page() {
   return <Login />;
 }

@@ -1,14 +1,12 @@
 import Link from "next/link";
 import "./Signup.css";
 import { Form } from "./Form";
-import { revalidatePath } from "next/cache";
 import { Database } from "@/lib/database.types";
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 
-export default async function Signup() {
+export default function Signup() {
   const handleSubmit = async (formData: FormData) => {
     "use server";
 
@@ -16,17 +14,14 @@ export default async function Signup() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
-    console.log("DATA: ", data, error);
 
     if (!error) {
       redirect("/auth/callback");
     }
-
-    revalidatePath("/");
   };
 
   return (
