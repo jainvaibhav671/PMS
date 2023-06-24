@@ -7,10 +7,8 @@ export async function GET(req: NextRequest) {
       name: true,
     },
   });
-  return NextResponse.json(
-    tags.map((t) => t.name),
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+  // tags.map((t) => t.name),
+  return NextResponse.json([], {
+    headers: { "Content-Type": "application/json" },
+  });
 }

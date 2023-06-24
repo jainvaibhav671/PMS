@@ -14,25 +14,25 @@ export interface Database {
           created_at: string | null
           created_by: string | null
           id: string
-          last_modified: string | null
+          last_modified_at: string | null
           name: string
-          parent_project: string | null
+          parent: string | null
         }
         Insert: {
           created_at?: string | null
           created_by?: string | null
           id?: string
-          last_modified?: string | null
+          last_modified_at?: string | null
           name: string
-          parent_project?: string | null
+          parent?: string | null
         }
         Update: {
           created_at?: string | null
           created_by?: string | null
           id?: string
-          last_modified?: string | null
+          last_modified_at?: string | null
           name?: string
-          parent_project?: string | null
+          parent?: string | null
         }
         Relationships: [
           {
@@ -42,36 +42,8 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "Project_parent_project_fkey"
-            columns: ["parent_project"]
-            referencedRelation: "Project"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      Tag: {
-        Row: {
-          created_at: string | null
-          id: string
-          name: string
-          project_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          name: string
-          project_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          name?: string
-          project_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "Tag_project_id_fkey"
-            columns: ["project_id"]
+            foreignKeyName: "Project_parent_fkey"
+            columns: ["parent"]
             referencedRelation: "Project"
             referencedColumns: ["id"]
           }

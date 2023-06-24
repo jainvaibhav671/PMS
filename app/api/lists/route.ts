@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/app/utils/Prisma";
-import { supabase } from "@/app/utils/Supabase";
+// import { prisma } from "@/app/utils/Prisma";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { Database } from "@/lib/database.types";
 
 export async function GET(req: NextRequest) {
   // const projects = await prisma.project.findMany({
@@ -9,13 +11,11 @@ export async function GET(req: NextRequest) {
   //   },
   // });
 
-  const projects = await supabase
-    .from("Project")
-    .select()
-    .eq("parent_project", null);
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const { data, error } = await supabase.from("Project").select("*");
 
-  console.log(projects);
-  return NextResponse.json(projects, {
+  console.log("Projects", data, error);
+  return NextResponse.json(data, {
     headers: { "Content-Type": "application/json" },
   });
 }

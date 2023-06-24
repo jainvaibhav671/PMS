@@ -46,10 +46,11 @@ export default function CreateProject({
     }
   };
 
-  const { data: availableTags } = useQuery({
-    queryKey: ["tags"],
-    queryFn: () => axios.get("/api/tags/").then((res) => res.data),
-  });
+  /* const { data: availableTags } = useQuery({
+   *   queryKey: ["tags"],
+   *   queryFn: () => axios.get("/api/tags/").then((res) => res.data),
+   * }); */
+  const availableTags: string[] = [];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   return (

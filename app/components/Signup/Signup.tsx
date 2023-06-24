@@ -19,6 +19,8 @@ export default function Signup() {
       password: password,
     });
 
+    console.log(email, password);
+    console.log("CREATE PROJECT", error);
     if (!error) {
       redirect("/auth/callback");
     }

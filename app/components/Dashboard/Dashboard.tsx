@@ -1,4 +1,3 @@
-"use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../Loading/Loading";
@@ -23,6 +22,7 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <>
       <div id="project-grid">
+        {projects.toString()}
         {projects.map((p) => (
           <ProjectCard key={p.id} data={p} />
         ))}
@@ -32,17 +32,12 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
 }
 
 export default function Dashboard() {
-  const list_id = sessionStorage.getItem("current-project-id") || "";
-  const list_name = sessionStorage.getItem("current-project-name") || "";
-
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
-  const apiUrl = "/api/lists" + (list_id.length != 0 ? `/${list_id}` : "");
-  console.log(apiUrl);
   const { data }: { data: Project[] | undefined } = useQuery({
-    queryFn: () => axios.get(apiUrl).then((res) => res.data),
-    queryKey: ["lists"].concat(list_id.length == 0 ? [] : [list_id]),
+    queryFn: () => axios.get("/api/lists").then((res) => res.data),
+    queryKey: ["lists"],
   });
 
   const ProjectMutation = useMutation({
@@ -67,7 +62,8 @@ export default function Dashboard() {
     console.log("Mutating", variables);
 
     if ("tags" in variables) {
-      TagMutation.mutate(variables);
+      /* TagMutation.mutate(variables); */
+      return;
     } else {
       ProjectMutation.mutate(variables);
     }
@@ -75,7 +71,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <h2>{list_name.length == 0 ? "Projects" : list_name}</h2>
+      <h2>{"Dashboard"}</h2>
       <button onClick={() => setOpen(!open)} className="primary-button">
         Add
       </button>
@@ -86,6 +82,7 @@ export default function Dashboard() {
         />
       </Modal>
       <div id="dashboard">
+        Items
         {!data ? <Loading /> : <ProjectGrid projects={data} />}
       </div>
     </>
