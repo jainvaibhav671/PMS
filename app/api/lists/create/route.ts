@@ -1,25 +1,39 @@
-import { prisma } from "@/app/utils/Prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/lib/database.types";
 
 export async function POST(req: NextRequest) {
   const params = await req.json();
-  const user_id = "52d2341d-a657-42f5-b6a9-7935fafccd3d";
+
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const user_id = user?.id;
 
   console.log("Creating", params);
   if (!params.parent_proj) {
-    await prisma.project.create({
-      data: {
-        name: params.name,
-        created_by: user_id,
-        parent_project: params.parent_proj,
-      },
+    await supabase.from("Project").insert({
+      name: params.name,
+      created_by: user_id,
+    });
+
+    console.log({
+      name: params.name,
+      created_by: user_id,
     });
   } else {
-    await prisma.project.create({
-      data: {
-        name: params.name,
-        created_by: user_id,
-      },
+    await supabase.from("Project").insert({
+      name: params.name,
+      created_by: user_id,
+      parent: params.parent_proj,
+    });
+
+    console.log({
+      name: params.name,
+      created_by: user_id,
+      parent: params.parent_proj,
     });
   }
   console.log("Completed");

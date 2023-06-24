@@ -5,18 +5,15 @@ export default function Page({
   params,
 }: {
   params: {
-    list_name: string;
+    current_id: string;
   };
 }) {
-  //  Correct the name
-  // const name = params.list_name.replace("%20", " ");
-
   return (
     <>
       <div id="app">
         {/* <Header list_name={name} list_id={id} /> */}
         {/* <Loading /> */}
-        {/* <Dashboard /> */}
+        <Dashboard current={params.current_id} />
       </div>
     </>
   );

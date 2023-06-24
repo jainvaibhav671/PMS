@@ -1,9 +1,6 @@
-"use client";
 import { KeyboardEvent, useState } from "react";
 import "./CreateProject.css";
 import TagList from "../../App/TagList/TagList";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../../Loading/Loading";
 import {
   ProjectMutationType,
@@ -21,17 +18,14 @@ export default function CreateProject({
 
   function func() {
     console.log("Submitting");
-    const id = sessionStorage.getItem("current-project-id");
     onSubmit({
       name: name,
-      parent_proj: id,
     } as ProjectMutationType);
 
-    onSubmit({
-      tags: selectedTags,
-      proj_id: id,
-    } as TagMutationType);
-
+    /* onSubmit({
+     *   tags: selectedTags,
+     * } as TagMutationType);
+     */
     closeDialog();
   }
 
@@ -46,10 +40,6 @@ export default function CreateProject({
     }
   };
 
-  /* const { data: availableTags } = useQuery({
-   *   queryKey: ["tags"],
-   *   queryFn: () => axios.get("/api/tags/").then((res) => res.data),
-   * }); */
   const availableTags: string[] = [];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

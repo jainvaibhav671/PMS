@@ -10,19 +10,17 @@ import CreateProject from "../Prompt/CreateProject/CreateProject";
 
 export type ProjectMutationType = {
   name: string;
-  parent_proj: string;
+  parent_proj?: string;
 };
 
 export type TagMutationType = {
   tags: string[];
-  proj_id: string;
 };
 
 function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <>
       <div id="project-grid">
-        {projects.toString()}
         {projects.map((p) => (
           <ProjectCard key={p.id} data={p} />
         ))}
@@ -31,12 +29,14 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
   );
 }
 
-export default function Dashboard() {
+export default function Dashboard({ current = "" }: { current: string }) {
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
+  const apiUrl = "/api/lists" + `/${current}`;
+  console.log("apiurl", apiUrl);
   const { data }: { data: Project[] | undefined } = useQuery({
-    queryFn: () => axios.get("/api/lists").then((res) => res.data),
+    queryFn: () => axios.get(apiUrl).then((res) => res.data),
     queryKey: ["lists"],
   });
 
@@ -65,7 +65,10 @@ export default function Dashboard() {
       /* TagMutation.mutate(variables); */
       return;
     } else {
-      ProjectMutation.mutate(variables);
+      ProjectMutation.mutate({
+        ...variables,
+        parent_proj: current.length == 0 ? null : current,
+      });
     }
   };
 
