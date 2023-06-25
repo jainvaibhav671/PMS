@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
+import { ProjectMutationType } from "@/app/components/Dashboard/Dashboard";
 
 export async function POST(req: NextRequest) {
-  const params = await req.json();
+  const params: ProjectMutationType = await req.json();
 
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
@@ -12,30 +13,37 @@ export async function POST(req: NextRequest) {
   } = await supabase.auth.getUser();
   const user_id = user?.id;
 
-  console.log("Creating", params);
-  if (!params.parent_proj) {
-    await supabase.from("Project").insert({
-      name: params.name,
-      created_by: user_id,
-    });
+  // Create project
+  const proj_data = {
+    name: params.name,
+    created_by: user_id,
+    parent: params.parent_proj,
+  };
+  const { data: proj } = await supabase
+    .from("Project")
+    .insert(proj_data)
+    .select();
+  const proj_id = proj ? proj[0].id : null;
+  console.log("create_proj", proj_id);
 
-    console.log({
-      name: params.name,
-      created_by: user_id,
-    });
-  } else {
-    await supabase.from("Project").insert({
-      name: params.name,
-      created_by: user_id,
-      parent: params.parent_proj,
-    });
+  // Create tags
+  const { data: tag_ids } = await supabase
+    .from("Tag")
+    .insert(
+      params.tags?.map((t) => {
+        return { name: t };
+      })!
+    )
+    .select("id");
+  console.log(tag_ids);
 
-    console.log({
-      name: params.name,
-      created_by: user_id,
-      parent: params.parent_proj,
+  // link project and tags
+  if (tag_ids) {
+    const project_tags = tag_ids.map((t) => {
+      return { project_id: proj_id!, tag_id: t.id };
     });
+    await supabase.from("project_tags").insert(project_tags);
   }
-  console.log("Completed");
+
   return NextResponse.json("Success");
 }

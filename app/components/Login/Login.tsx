@@ -17,7 +17,7 @@ export default function Login() {
       password,
     });
 
-    console.log("LLOGIN", data, error);
+    console.log("LOGIN", data, error);
     if (!error) {
       redirect("/");
     }
@@ -31,7 +31,8 @@ export default function Login() {
       </div>
 
       <div id="signup-prompt">
-        Don't have an account?<Link href="/signup">Sign Up</Link>
+        {"Don't have an account?"}
+        <Link href="/signup">Sign Up</Link>
       </div>
     </div>
   );

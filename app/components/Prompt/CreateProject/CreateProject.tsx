@@ -2,30 +2,28 @@ import { KeyboardEvent, useState } from "react";
 import "./CreateProject.css";
 import TagList from "../../App/TagList/TagList";
 import Loading from "../../Loading/Loading";
-import {
-  ProjectMutationType,
-  TagMutationType,
-} from "../../Dashboard/Dashboard";
+import { ProjectMutationType } from "../../Dashboard/Dashboard";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useCurrentProject } from "@/app/utils/currentProjectProvider";
 
 export default function CreateProject({
   onSubmit,
   closeDialog,
 }: {
   closeDialog: Function;
-  onSubmit: (variables: ProjectMutationType | TagMutationType) => void;
+  onSubmit: (variables: ProjectMutationType) => void;
 }) {
   const [name, setName] = useState("");
+  const currProj = useCurrentProject()!;
 
-  function func() {
+  function func(tags: string[]) {
     console.log("Submitting");
     onSubmit({
       name: name,
+      tags: tags,
     } as ProjectMutationType);
 
-    /* onSubmit({
-     *   tags: selectedTags,
-     * } as TagMutationType);
-     */
     closeDialog();
   }
 
@@ -40,6 +38,7 @@ export default function CreateProject({
     }
   };
 
+  console.log("CreateProj", currProj);
   const availableTags: string[] = [];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -69,7 +68,7 @@ export default function CreateProject({
           />
         )}
       </div>
-      <button onClick={func} type="button">
+      <button onClick={() => func(selectedTags)} type="button">
         Submit
       </button>
     </form>

@@ -2,22 +2,23 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import "./Dashboard.css";
-import { Project } from "@prisma/client";
 import Modal from "../Modal/Modal";
-import { useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import CreateProject from "../Prompt/CreateProject/CreateProject";
+import {
+  StoreContextProvider,
+  useCurrentProject,
+  useSetCurrentProject,
+} from "@/app/utils/currentProjectProvider";
+import { useState } from "react";
 
 export type ProjectMutationType = {
   name: string;
-  parent_proj?: string;
+  parent_proj?: string | null;
+  tags?: string[];
 };
 
-export type TagMutationType = {
-  tags: string[];
-};
-
-function ProjectGrid({ projects }: { projects: Project[] }) {
+function ProjectGrid({ projects }: { projects }) {
   return (
     <>
       <div id="project-grid">
@@ -29,13 +30,14 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
   );
 }
 
-export default function Dashboard({ current = "" }: { current: string }) {
+export function DashboardWrapper() {
+  const current = useCurrentProject()!;
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
-  const apiUrl = "/api/lists" + `/${current}`;
-  console.log("apiurl", apiUrl);
-  const { data }: { data: Project[] | undefined } = useQuery({
+  const apiUrl = current.length == 0 ? "/api/lists" : `/api/lists/${current}`;
+  console.log("apiUrl", apiUrl);
+  const { data } = useQuery({
     queryFn: () => axios.get(apiUrl).then((res) => res.data),
     queryKey: ["lists"],
   });
@@ -50,26 +52,12 @@ export default function Dashboard({ current = "" }: { current: string }) {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
   });
 
-  const TagMutation = useMutation({
-    mutationFn: (variables: TagMutationType) =>
-      axios
-        .post("/api/tags/create", variables)
-        .then((res) => res.data)
-        .catch(() => {}),
-  });
-
-  const handleSubmit = (variables: ProjectMutationType | TagMutationType) => {
+  const handleSubmit = (variables: ProjectMutationType) => {
     console.log("Mutating", variables);
-
-    if ("tags" in variables) {
-      /* TagMutation.mutate(variables); */
-      return;
-    } else {
-      ProjectMutation.mutate({
-        ...variables,
-        parent_proj: current.length == 0 ? null : current,
-      });
-    }
+    ProjectMutation.mutate({
+      ...variables,
+      parent_proj: current.length == 0 ? null : current,
+    });
   };
 
   return (
@@ -89,5 +77,15 @@ export default function Dashboard({ current = "" }: { current: string }) {
         {!data ? <Loading /> : <ProjectGrid projects={data} />}
       </div>
     </>
+  );
+}
+
+export default function Dashboard({ current = "" }: { current: string }) {
+  useSetCurrentProject(current);
+
+  return (
+    <StoreContextProvider>
+      <DashboardWrapper />
+    </StoreContextProvider>
   );
 }

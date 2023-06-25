@@ -7,7 +7,6 @@ export async function GET(req: NextRequest) {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data, error } = await supabase.from("Project").select("*");
 
-  console.log("Projects", data, error);
   return NextResponse.json(data, {
     headers: { "Content-Type": "application/json" },
   });

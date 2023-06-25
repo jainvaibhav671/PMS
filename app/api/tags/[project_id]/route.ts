@@ -5,24 +5,22 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  {
-    params,
-  }: {
-    params: {
-      project_id: string;
-    };
-  }
+  { params }: { params: { project_id: string } }
 ) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  console.log(params.project_id);
-  const { data: projects, error } = await supabase
-    .from("Project")
-    .select()
-    .eq("parent", params.project_id);
+  const { data: tags, error } = await supabase
+    .from("project_tags")
+    .select("*, Tag(name)")
+    .eq("project_id", params.project_id);
 
-  if (error || !projects) {
-    console.log("Fetch Subprojects: ", params.project_id, error);
+  if (error) {
+    console.log(error);
     return NextResponse.json([]);
   }
-  return NextResponse.json(projects);
+
+  console.log(
+    "fetch tags",
+    tags?.map((t) => t.Tag?.name)
+  );
+  return NextResponse.json(tags?.map((t) => t.Tag?.name));
 }

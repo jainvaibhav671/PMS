@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 export default function Home() {
   return (
     <main style={{ height: "100%", width: "100%" }}>
-      <Dashboard />
+      <Dashboard current={""} />
       <ReactQueryDevtools />
     </main>
   );
