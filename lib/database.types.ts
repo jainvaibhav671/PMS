@@ -49,6 +49,58 @@ export interface Database {
           }
         ]
       }
+      project_tags: {
+        Row: {
+          created_at: string | null
+          id: number
+          project_id: string | null
+          tag_id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          project_id?: string | null
+          tag_id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          project_id?: string | null
+          tag_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_tags_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "Project"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            referencedRelation: "Tag"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      Tag: {
+        Row: {
+          created_at: string | null
+          id: number
+          name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
