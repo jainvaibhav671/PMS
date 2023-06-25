@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-types": "bash ./gen-supabase-types.sh"
   },
   "dependencies": {
     "@prisma/client": "4.15.0",
