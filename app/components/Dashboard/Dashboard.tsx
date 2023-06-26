@@ -5,12 +5,10 @@ import "./Dashboard.css";
 import Modal from "../Modal/Modal";
 import { ProjectCard } from "./ProjectCard";
 import CreateProject from "../Prompt/CreateProject/CreateProject";
-import {
-  StoreContextProvider,
-  useCurrentProject,
-  useSetCurrentProject,
-} from "@/app/utils/currentProjectProvider";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { Project } from "@/lib/database.types";
+
+export const ProjectContext = createContext<string | null>(null);
 
 export type ProjectMutationType = {
   name: string;
@@ -18,7 +16,7 @@ export type ProjectMutationType = {
   tags?: string[];
 };
 
-function ProjectGrid({ projects }: { projects }) {
+function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <>
       <div id="project-grid">
@@ -31,12 +29,12 @@ function ProjectGrid({ projects }: { projects }) {
 }
 
 export function DashboardWrapper() {
-  const current = useCurrentProject()!;
+  const current = useContext(ProjectContext) as string;
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
   const apiUrl = current.length == 0 ? "/api/lists" : `/api/lists/${current}`;
-  console.log("apiUrl", apiUrl);
+  console.log("apiUrl", current.length, apiUrl);
   const { data } = useQuery({
     queryFn: () => axios.get(apiUrl).then((res) => res.data),
     queryKey: ["lists"],
@@ -62,7 +60,7 @@ export function DashboardWrapper() {
 
   return (
     <>
-      <h2>{"Dashboard"}</h2>
+      <h2>{"Dashboard" + (current.length == 0 ? "No id" : current)}</h2>
       <button onClick={() => setOpen(!open)} className="primary-button">
         Add
       </button>
@@ -80,12 +78,10 @@ export function DashboardWrapper() {
   );
 }
 
-export default function Dashboard({ current = "" }: { current: string }) {
-  useSetCurrentProject(current);
-
+export default function Dashboard({ current }: { current: string }) {
   return (
-    <StoreContextProvider>
+    <ProjectContext.Provider value={current}>
       <DashboardWrapper />
-    </StoreContextProvider>
+    </ProjectContext.Provider>
   );
 }

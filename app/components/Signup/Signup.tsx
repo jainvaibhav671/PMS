@@ -1,10 +1,10 @@
-import Link from "next/link";
 import "./Signup.css";
 import { Form } from "./Form";
 import { Database } from "@/lib/database.types";
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function Signup() {
   const handleSubmit = async (formData: FormData) => {
@@ -19,8 +19,6 @@ export default function Signup() {
       password: password,
     });
 
-    console.log(email, password);
-    console.log("CREATE PROJECT", error);
     if (!error) {
       redirect("/auth/callback");
     }

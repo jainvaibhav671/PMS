@@ -14,13 +14,13 @@ export async function GET(
     .eq("project_id", params.project_id);
 
   if (error) {
-    console.log(error);
+    // console.log(error);
     return NextResponse.json([]);
   }
 
-  console.log(
-    "fetch tags",
-    tags?.map((t) => t.Tag?.name)
-  );
+  // console.log(
+  //   "fetch tags",
+  //   tags?.map((t) => t.Tag?.name)
+  // );
   return NextResponse.json(tags?.map((t) => t.Tag?.name));
 }

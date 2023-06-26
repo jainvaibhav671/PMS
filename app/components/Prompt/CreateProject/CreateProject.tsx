@@ -1,11 +1,8 @@
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useContext, useState } from "react";
 import "./CreateProject.css";
 import TagList from "../../App/TagList/TagList";
 import Loading from "../../Loading/Loading";
 import { ProjectMutationType } from "../../Dashboard/Dashboard";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useCurrentProject } from "@/app/utils/currentProjectProvider";
 
 export default function CreateProject({
   onSubmit,
@@ -15,7 +12,6 @@ export default function CreateProject({
   onSubmit: (variables: ProjectMutationType) => void;
 }) {
   const [name, setName] = useState("");
-  const currProj = useCurrentProject()!;
 
   function func(tags: string[]) {
     console.log("Submitting");
@@ -38,7 +34,6 @@ export default function CreateProject({
     }
   };
 
-  console.log("CreateProj", currProj);
   const availableTags: string[] = [];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

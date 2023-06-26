@@ -11,8 +11,6 @@ export default function Page({
   return (
     <>
       <div id="app">
-        {/* <Header list_name={name} list_id={id} /> */}
-        {/* <Loading /> */}
         <Dashboard current={params.current_id} />
       </div>
     </>

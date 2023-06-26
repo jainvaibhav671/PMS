@@ -3,25 +3,26 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from "next/link";
 import Loading from "../Loading/Loading";
+import { Project } from "@/lib/database.types";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
 }
 
-export function ProjectCard({ data }: { data }) {
+export function ProjectCard({ data }: { data: Project }) {
   const created_at = new Date(data.created_at!);
   const date = `${created_at.toLocaleString("default", {
     dateStyle: "medium",
   })}`;
 
-  console.log(data.id);
+  // console.log(data.id);
   const { isLoading, data: tags_list } = useQuery({
     queryKey: ["tags", data.id],
     queryFn: (): Promise<string[]> =>
       axios.get(`/api/tags/${data.id}`).then((res) => res.data),
   });
 
-  console.log(tags_list);
+  // console.log(tags_list);
   const tags = tags_list?.map((t, idx) => <Tag key={idx} tag_name={t} />);
 
   return (

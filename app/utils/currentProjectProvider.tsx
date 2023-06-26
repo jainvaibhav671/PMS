@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 interface Store {
-  currProj: string;
+  getProj: () => string;
   setProj: (proj: string) => void;
 }
 
@@ -9,8 +9,11 @@ const useStore = (): Store => {
   const [currProj, setCurrProj] = useState("");
 
   return {
-    currProj: currProj,
-    setProj: (proj: string) => setCurrProj(proj),
+    getProj: () => currProj,
+    setProj: (proj: string) => {
+      console.log("Setting", proj);
+      setCurrProj(proj);
+    },
   };
 };
 
@@ -26,7 +29,7 @@ export function StoreContextProvider({
   );
 }
 
-export const useCurrentProject = () => useContext(StoreContext)?.currProj;
+export const useCurrentProject = () => useContext(StoreContext)?.getProj();
 
 export const useSetCurrentProject = (proj: string) =>
   useContext(StoreContext)?.setProj(proj);
