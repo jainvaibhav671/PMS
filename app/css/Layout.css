@@ -1,7 +1,5 @@
 @import "./colors.css";
 @import "./widgets/buttons.css";
-@import "./Sidebar.css";
-@import "./Header.css";
 
 * {
   margin: 0px;
