@@ -120,11 +120,14 @@ export interface Database {
   };
 }
 
-export type Project = Partial<Database["public"]["Tables"]["Project"]["Row"]>;
+export type Project = Database["public"]["Tables"]["Project"]["Row"];
 export type Tag = Database["public"]["Tables"]["Tag"]["Row"];
 export type ProjectTags = Database["public"]["Tables"]["project_tags"]["Row"];
 
-export type Project3 = Pick<
+export type CreateProject = Omit<
   Database["public"]["Tables"]["Project"]["Row"],
-  "last_modified_at" | "created_at" | "id"
+  "created_at" | "last_modified_at" | "id"
 >;
+
+export type CreateTag = Pick<Tag, "name">;
+export type LinkProjectTag = Pick<ProjectTags, "project_id" | "tag_id">;

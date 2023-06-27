@@ -37,7 +37,7 @@ export function DashboardWrapper() {
   console.log("apiUrl", current.length, apiUrl);
   const { data } = useQuery({
     queryFn: () => axios.get(apiUrl).then((res) => res.data),
-    queryKey: ["lists"],
+    queryKey: ["lists", current],
   });
 
   const ProjectMutation = useMutation({
@@ -60,7 +60,7 @@ export function DashboardWrapper() {
 
   return (
     <>
-      <h2>{"Dashboard" + (current.length == 0 ? "No id" : current)}</h2>
+      <h2>{"Dashboard"}</h2>
       <button onClick={() => setOpen(!open)} className="primary-button">
         Add
       </button>

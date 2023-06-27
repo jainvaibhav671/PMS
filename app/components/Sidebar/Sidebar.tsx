@@ -1,58 +1,74 @@
-"use client";
+import React, { useState } from "react";
+import "./Sidebar.css";
+import { Route, routes } from "./sidebar-routes";
+import Link from "next/link";
 
-import { useState } from "react";
-import ListButtons from "./ListButton";
+function SidebarItem({
+  onClick,
+  route,
+}: {
+  onClick: () => void;
+  route: Route;
+}) {
+  return (
+    <li onClick={onClick} id={route.isActive ? "active" : ""}>
+      <Link href={route.href}>{route.name}</Link>
+    </li>
+  );
+}
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { ListType } from "../../interfaces/Lists";
-import Loading from "../Loading/Loading";
-import Modal from "../Modal/Modal";
-import Prompt from "../Prompt/Prompt";
+function SidebarToggle() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+      />
+    </svg>
+  );
+}
+
+function Header() {
+  return (
+    <>
+      <div id="header">
+        <SidebarToggle />
+      </div>
+    </>
+  );
+}
 
 export default function Sidebar() {
-  const queryClient = useQueryClient();
-  const [list_name, setListName] = useState("");
-  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["lists"],
-    queryFn: (): Promise<ListType[]> =>
-      axios.get("/api/lists").then((res) => res.data),
-  });
-
-  const mutation = useMutation({
-    mutationFn: () =>
-      axios
-        .post(
-          "/api/lists/create",
-          { list_name: list_name },
-          { headers: { "Conent-type": "application/json" } }
-        )
-        .then((res) => console.log(res.data)),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
-  });
-
-  // TODO: make a loading component
-  async function onSubmit() {
-    console.log("List Name", list_name);
-    mutation.mutate();
+  function ItemOnClick(idx: number) {
+    setActive(idx);
   }
 
   return (
     <>
-      <div id="sidebar">
-        <button onClick={() => setOpen(!open)} className="primary-button">
-          Add
-        </button>
-        <Modal title="New List" open={open} setOpen={setOpen}>
-          <Prompt
-            label="Enter List Name"
-            setData={setListName}
-            onSubmit={onSubmit}
-          />
-        </Modal>
-        {isLoading ? <Loading /> : <ListButtons list_data={data!} />}
+      <Header />
+      <div id={`sidebar`}>
+        <ul>
+          {routes.map((route, idx) => {
+            route.isActive = idx == active;
+            return (
+              <SidebarItem
+                key={idx}
+                onClick={() => ItemOnClick(idx)}
+                route={route}
+              />
+            );
+          })}
+        </ul>
       </div>
     </>
   );
