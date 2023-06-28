@@ -13,17 +13,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Changes
 
-- [x] Made the sidebar collapsable
-- [x] Redesigned prompt and modal
-- [x] Shifted Create Project button from dashboard to header
-- [x] Integrated Tailwind
-- [x] Added a lot of icons
+- [x] **Solved** Looks different in chrome and firefox.
+  > Firefox doesn't support the :has() :pseudo class yet.
 
 ## Known Issues
 
 - Creating a tag already in the database does not let any tag to be created
 - Weird gap between sidebar and header
-- Looks different in chrome and firefox ( might be because of old versions )
 
 ## Getting Started
 

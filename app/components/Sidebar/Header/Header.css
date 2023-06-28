@@ -7,7 +7,7 @@ svg {
 }
 
 #header {
-  @apply w-screen bg-dark-white dark:bg-black text-black dark:text-white;
+  @apply py-2 w-screen bg-dark-white dark:bg-black text-black dark:text-white;
 }
 
 .logo {
@@ -16,6 +16,10 @@ svg {
 #header > div:nth-child(2) svg {
   width: 24px;
 }
+
+#header button {
+  border: 0px;
+}
 button:has(svg) {
   @apply bg-inherit text-inherit py-1 px-2 border-0 cursor-pointer;
   border: 0px;
@@ -23,4 +27,5 @@ button:has(svg) {
 
 #header > div:nth-child(2) button:first-child {
   @apply bg-teal rounded-md py-1 px-2 flex gap-1;
+  border: 0px;
 }
