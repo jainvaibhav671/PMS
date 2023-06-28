@@ -6,13 +6,13 @@ import Sidebar from "./components/Sidebar/Sidebar";
 export default function Home() {
   return (
     <>
-      <Sidebar />
       <main
         style={{
           height: "100%",
           width: "100%",
         }}
       >
+        <Sidebar />
         <Dashboard current={""} />
         <ReactQueryDevtools />
       </main>

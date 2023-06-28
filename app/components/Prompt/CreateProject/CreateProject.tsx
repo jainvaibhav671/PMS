@@ -1,4 +1,4 @@
-import { KeyboardEvent, useContext, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import "./CreateProject.css";
 import TagList from "../../App/TagList/TagList";
 import Loading from "../../Loading/Loading";
@@ -40,32 +40,51 @@ export default function CreateProject({
   return (
     <form onKeyDown={(e) => handleKey(e)} id="create-project">
       <div>
-        <label htmlFor="inp">Project Name</label>
-        <input
-          id="inp"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          value={name}
-          type="text"
-          name="inp"
-          autoFocus
-        />
-
-        <span>Tags </span>
-        {!availableTags ? (
-          <Loading />
-        ) : (
-          <TagList
-            availableTags={availableTags}
-            selectedTags={selectedTags}
-            setSelectedTags={setSelectedTags}
+        <div className="input-group">
+          <label className="form-label" htmlFor="inp">
+            Project Name
+          </label>
+          <input
+            id="inp"
+            className="form-input"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            value={name}
+            type="text"
+            name="inp"
+            autoFocus
           />
-        )}
+        </div>
+        <div className="input-group">
+          <span>Tags </span>
+          {!availableTags ? (
+            <Loading />
+          ) : (
+            <TagList
+              availableTags={availableTags}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+            />
+          )}
+        </div>
       </div>
-      <button onClick={() => func(selectedTags)} type="button">
-        Submit
-      </button>
+      <div>
+        <button
+          className="primary-button"
+          onClick={() => func(selectedTags)}
+          type="button"
+        >
+          Submit
+        </button>
+        <button
+          onClick={() => closeDialog()}
+          type="button"
+          className="secondary-button"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

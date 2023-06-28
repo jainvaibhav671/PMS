@@ -57,27 +57,26 @@ export default function TagList({
 
   return (
     <>
-      <span id="taglist">
-        <span id="tag-list">
-          {selectedTags.map((st, idx) => (
-            <span key={idx} className="tag">
-              {st.trim()}
-            </span>
-          ))}
-        </span>
-
+      <div id="taglist">
         <AddTag
           inputOnChange={handleChange}
           inputOnKeyDown={handleKey}
           value={value}
         />
+        <div id="tag-list">
+          {selectedTags.map((st, idx) => (
+            <span key={idx} className="tag">
+              {st.trim()}
+            </span>
+          ))}
+        </div>
 
         <datalist id="available-tags">
           {options.map((t, key) => (
             <option key={key}>{t}</option>
           ))}
         </datalist>
-      </span>
+      </div>
     </>
   );
 }

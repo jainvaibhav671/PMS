@@ -1,21 +1,16 @@
-a,
-button {
-  border: 0px;
-  border-radius: 8px;
-  padding: 5px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.primary-button {
-  background: var(--primary-button-bg);
-  color: var(--primary-button-fg);
-  padding: 4px 8px;
-  font-weight: 700;
-  font-size: 10pt;
+.primary-button,
+.primary-button a {
+  @apply bg-blue text-white
+    rounded-md border-0
+    px-2 py-1
+    font-semibold text-sm
+    flex items-center;
 }
 
 .secondary-button {
-  background: var(--secondary-button-bg);
-  color: var(--secondary-button-fg);
+  @apply bg-red text-white
+    rounded-md border-0
+    font-semibold text-sm
+    px-2 py-1
+    flex items-center;
 }

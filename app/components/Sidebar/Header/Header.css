@@ -3,15 +3,11 @@ svg {
 }
 
 .center-x {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @apply flex items-center justify-between;
 }
 
 #header {
-  width: 100vw;
-  background: var(--black);
-  color: white;
+  @apply w-screen bg-dark-white dark:bg-black text-black dark:text-white;
 }
 
 .logo {
@@ -21,16 +17,10 @@ svg {
   width: 24px;
 }
 button:has(svg) {
-  background: inherit;
-  color: inherit;
-  padding: 0px 0.5rem;
-  margin: 0.5rem 0px;
-
-  font-size: 10pt;
-  font-weight: 600;
+  @apply bg-inherit text-inherit py-1 px-2 border-0 cursor-pointer;
+  border: 0px;
 }
+
 #header > div:nth-child(2) button:first-child {
-  background: var(--teal);
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  @apply bg-teal rounded-md py-1 px-2 flex gap-1;
 }

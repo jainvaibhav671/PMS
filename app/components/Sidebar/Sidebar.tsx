@@ -12,7 +12,11 @@ function SidebarItem({
   route: Route;
 }) {
   return (
-    <li onClick={onClick} id={route.isActive ? "active" : ""}>
+    <li
+      className="primary-button"
+      onClick={onClick}
+      id={route.isActive ? "active" : ""}
+    >
       <Link href={route.href}>{route.name}</Link>
     </li>
   );

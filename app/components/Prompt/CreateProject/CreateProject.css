@@ -1,15 +1,23 @@
 #create-project {
-  padding: 1rem;
-  display: flex;
-  flex-flow: column;
-  gap: 8px;
+  @apply flex flex-col p-8 gap-4;
 }
 
-#create-project > div {
-  display: flex;
-  gap: 8px;
+#create-project > div:first-child {
+  @apply flex flex-col gap-2;
 }
 
-#create-project > div {
-  display: grid;
+.input-group {
+  @apply flex justify-between gap-4;
+}
+
+input {
+  @apply px-2 py-1 rounded-md border;
+}
+input:active,
+input:focus {
+  @apply border;
+}
+
+#create-project > div:nth-child(2) {
+  @apply flex gap-2;
 }

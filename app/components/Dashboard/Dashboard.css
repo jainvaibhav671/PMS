@@ -1,22 +1,25 @@
 @import "@/app/css/colors.css";
 
 #dashboard {
+  @apply bg-white dark:bg-black px-8 py-4;
   width: 100%;
+}
+a {
+  text-decoration: none;
 }
 
 #project-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  @apply flex flex-wrap gap-4;
 }
 
 .project-card {
-  flex: 1;
-  padding-left: 8px;
-  background-color: var(--color1);
-  border-radius: 1rem;
-  border: 1px solid var(--color2);
-  box-shadow: 3px 3px 0px 0px var(--grey);
+  @apply flex-auto p-2
+    bg-white dark:bg-black
+    rounded-md border border-solid border-grey
+    shadow-lg;
+
+  min-width: 300px;
+  min-height: 50px;
   transition: all linear 100ms;
 }
 

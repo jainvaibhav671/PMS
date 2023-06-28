@@ -5,16 +5,25 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## TODOS
 
 - [ ] Landing Page
-- [ ] Make Sidebar Responsive and collapsable
+- [ ] wrap tags on dashboard and prompt
 - [ ] CSS Styles
 - [ ] RLS Policies on Supabase
 - [ ] Multiple User Integration
 - [ ] Increase User Session duration
-- [ ] Redesign the prompt modals
+
+## Changes
+
+- [x] Made the sidebar collapsable
+- [x] Redesigned prompt and modal
+- [x] Shifted Create Project button from dashboard to header
+- [x] Integrated Tailwind
+- [x] Added a lot of icons
 
 ## Known Issues
 
 - Creating a tag already in the database does not let any tag to be created
+- Weird gap between sidebar and header
+- Looks different in chrome and firefox ( might be because of old versions )
 
 ## Getting Started
 

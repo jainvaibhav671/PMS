@@ -1,4 +1,5 @@
 import { Dispatch, RefObject, SetStateAction } from "react";
+import Cross from "../icons/Cross";
 
 export default function ModalHeader({
   title,
@@ -13,8 +14,10 @@ export default function ModalHeader({
 
   return (
     <div id="dialog-header">
-      <span>{title}</span>
-      <button onClick={closeDialog}></button>
+      <h3>{title}</h3>
+      <button onClick={closeDialog}>
+        <Cross />
+      </button>
     </div>
   );
 }

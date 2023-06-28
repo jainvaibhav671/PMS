@@ -1,11 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import "./Dashboard.css";
-import Modal from "../Modal/Modal";
 import { ProjectCard } from "./ProjectCard";
-import CreateProject from "../Prompt/CreateProject/CreateProject";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { Project } from "@/lib/database.types";
 
 export const ProjectContext = createContext<string | null>(null);
@@ -30,9 +28,7 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
 
 export function DashboardWrapper() {
   const current = useContext(ProjectContext) as string;
-  const [open, setOpen] = useState(false);
 
-  const queryClient = useQueryClient();
   const apiUrl = current.length == 0 ? "/api/lists" : `/api/lists/${current}`;
   console.log("apiUrl", current.length, apiUrl);
   const { data } = useQuery({
@@ -40,38 +36,10 @@ export function DashboardWrapper() {
     queryKey: ["lists", current],
   });
 
-  const ProjectMutation = useMutation({
-    mutationFn: (variables: ProjectMutationType) =>
-      axios
-        .post("/api/lists/create", variables)
-        .then((res) => res.data)
-        .catch(() => {}),
-
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
-  });
-
-  const handleSubmit = (variables: ProjectMutationType) => {
-    console.log("Mutating", variables);
-    ProjectMutation.mutate({
-      ...variables,
-      parent_proj: current.length == 0 ? null : current,
-    });
-  };
-
   return (
     <>
-      <h2>{"Dashboard"}</h2>
-      <button onClick={() => setOpen(!open)} className="primary-button">
-        Add
-      </button>
-      <Modal title="New Project" open={open} setOpen={setOpen}>
-        <CreateProject
-          closeDialog={() => setOpen(false)}
-          onSubmit={handleSubmit}
-        />
-      </Modal>
       <div id="dashboard">
-        Items
+        <h2>{"Dashboard"}</h2>
         {!data ? <Loading /> : <ProjectGrid projects={data} />}
       </div>
     </>

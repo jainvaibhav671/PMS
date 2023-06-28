@@ -4,15 +4,14 @@
 * {
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  flex-flow: column;
-  background: var(--background);
-  width: 100vw;
-  height: 100vh;
+  @apply flex flex-col w-screen h-screen dark:bg-black bg-white;
 }
+
+/* Have no idea why this exists but is necessary */
 body > div {
   display: flex;
 }

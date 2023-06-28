@@ -1,19 +1,16 @@
 @import "@/app/css/colors.css";
 #taglist {
-  display: flex;
+  @apply flex flex-col;
 }
 
 #tag-list {
-  display: flex;
-  gap: 8px;
+  @apply flex gap-2 flex-wrap;
 }
 
 .tag {
-  padding: 2px 8px;
-  border-radius: 1rem;
-  background-color: var(--color3);
-  color: var(--color2);
-  font-weight: 700;
+  @apply bg-blue dark:bg-green text-white 
+    rounded-lg font-semibold 
+    px-2 py-1 mt-2;
 }
 
 button {
