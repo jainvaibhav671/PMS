@@ -5,12 +5,13 @@
 }
 
 #project-grid {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .project-card {
+  flex: 1;
   padding-left: 8px;
   background-color: var(--color1);
   border-radius: 1rem;

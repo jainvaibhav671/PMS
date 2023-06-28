@@ -1,0 +1,36 @@
+svg {
+  width: 32px;
+}
+
+.center-x {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header {
+  width: 100vw;
+  background: var(--black);
+  color: white;
+}
+
+.logo {
+  font-weight: 700;
+}
+#header > div:nth-child(2) svg {
+  width: 24px;
+}
+button:has(svg) {
+  background: inherit;
+  color: inherit;
+  padding: 0px 0.5rem;
+  margin: 0.5rem 0px;
+
+  font-size: 10pt;
+  font-weight: 600;
+}
+#header > div:nth-child(2) button:first-child {
+  background: var(--teal);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}

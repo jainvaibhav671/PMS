@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 import { Route, routes } from "./sidebar-routes";
 import Link from "next/link";
+import Header from "./Header/Header";
 
 function SidebarItem({
   onClick,
@@ -17,46 +18,18 @@ function SidebarItem({
   );
 }
 
-function SidebarToggle() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-      />
-    </svg>
-  );
-}
-
-function Header() {
-  return (
-    <>
-      <div id="header">
-        <SidebarToggle />
-      </div>
-    </>
-  );
-}
-
 export default function Sidebar() {
   const [active, setActive] = useState(0);
+  const [open, setOpen] = useState(false);
 
   function ItemOnClick(idx: number) {
     setActive(idx);
   }
 
   return (
-    <>
-      <Header />
-      <div id={`sidebar`}>
+    <div style={{ display: "flex", flexFlow: "column" }}>
+      <Header open={open} setOpen={setOpen} />
+      <div className={`sidebar sidebar-${open ? "open" : "close"}`}>
         <ul>
           {routes.map((route, idx) => {
             route.isActive = idx == active;
@@ -70,6 +43,6 @@ export default function Sidebar() {
           })}
         </ul>
       </div>
-    </>
+    </div>
   );
 }

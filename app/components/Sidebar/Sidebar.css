@@ -1,23 +1,33 @@
 @import "@/app/css/colors.css";
 
-#sidebar {
+.sidebar {
+  overflow-x: hidden;
   background: var(--black);
   color: var(--white);
-  width: max(20%, 100px);
+  height: 100%;
   padding: 1rem;
   margin-right: 0.5rem;
-  position: relative;
+  transition: 0.3s;
+}
+.sidebar-open {
+  width: max(20%, 10rem);
+}
+.sidebar-close {
+  width: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 #sidebar ul {
-  list-style-type: none;
   display: flex;
   flex-flow: column;
+  align-items: center;
+  /* overflow-x: clip; */
+
+  list-style-type: none;
   gap: 1rem;
   margin: 0px;
-  align-items: center;
   width: 100%;
-  overflow-x: clip;
 }
 
 #sidebar li {
@@ -31,7 +41,7 @@
 li a {
   color: inherit;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 1rem;
   font-weight: 700;
   opacity: 0.4;
   text-align: center;
