@@ -51,7 +51,7 @@ export default function Header({
     <>
       <div id="header" className="center-x">
         <div className="center-x">
-          <button onClick={() => setOpen(!open)}>
+          <button className="svg-button" onClick={() => setOpen(!open)}>
             {open ? <Cross /> : <BarsThree />}
           </button>
           <span className="logo">PMS</span>
@@ -64,10 +64,10 @@ export default function Header({
             <SquarePlus /> New Project
           </button>
           <CreateProjectModal />
-          <button>
+          <button className="svg-button">
             <Notification />
           </button>
-          <button>
+          <button className="svg-button">
             <UserCircle />
           </button>
         </div>

@@ -17,10 +17,7 @@ svg {
   width: 24px;
 }
 
-#header button {
-  border: 0px;
-}
-button:has(svg) {
+.svg-button{
   @apply bg-inherit text-inherit py-1 px-2 border-0 cursor-pointer;
   border: 0px;
 }

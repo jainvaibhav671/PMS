@@ -15,11 +15,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - [x] **Solved** Looks different in chrome and firefox.
   > Firefox doesn't support the :has() :pseudo class yet.
+- [x] **Solved** Weird gap between sidebar and header
 
 ## Known Issues
 
-- Creating a tag already in the database does not let any tag to be created
-- Weird gap between sidebar and header
+- Creating a tag which exists in the database does not let any tag to be created
 
 ## Getting Started
 

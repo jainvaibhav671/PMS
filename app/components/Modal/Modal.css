@@ -4,12 +4,14 @@
   @apply px-8 pt-4 flex justify-between items-center;
 }
 
-#dialog-header > button:hover {
-  @apply rounded-lg bg-dark-white dark:bg-red text-black dark:text-white;
+#dialog-header button {
+  @apply bg-white text-black dark:bg-black dark:text-white border-0;
+}
+
+#dialog-header button:hover {
+  @apply text-red;
 }
 
 dialog {
-  @apply absolute top-[20%] rounded-xl;
-  border: 1px solid var(--color3);
-  margin: auto;
+  @apply absolute rounded-xl top-1/2 m-auto;
 }

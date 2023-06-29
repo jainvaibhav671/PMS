@@ -1,7 +1,9 @@
 @import "@/app/css/colors.css";
 
 #dashboard {
-  @apply bg-white dark:bg-black px-8 py-4;
+  @apply bg-white dark:bg-black 
+    text-black dark:text-white
+    px-8 py-4;
   width: 100%;
 }
 a {
@@ -9,14 +11,17 @@ a {
 }
 
 #project-grid {
-  @apply flex flex-wrap gap-4;
+  @apply grid gap-4
+  text-inherit;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
 }
 
 .project-card {
   @apply flex-auto p-2
     bg-white dark:bg-black
+    text-inherit
     rounded-md border border-solid border-grey
-    shadow-lg;
+    shadow-lg dark:shadow-white dark:shadow-sm;
 
   min-width: 300px;
   min-height: 50px;
@@ -24,25 +29,18 @@ a {
 }
 
 .project-card a {
-  color: var(--color3);
-  display: flex;
-  flex-flow: column;
-  gap: 0.5rem;
+  @apply flex flex-col gap-2
+    text-black dark:text-white;
 }
 .project-card:hover {
   box-shadow: none;
   border: 2px solid var(--accent);
 }
 #tags {
-  display: flex;
-  flex-flow: row;
-  gap: 4px;
+  @apply flex flex-row gap-1;
 }
 .project-tag {
-  padding: 4px;
-  background: var(--yellow);
-  border-radius: 4px;
-  font-weight: 500;
+  @apply bg-yellow text-black rounded-md px-2 py-1 font-semibold;
 }
 
 .project-card #options-icon {
