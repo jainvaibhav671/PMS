@@ -7,9 +7,10 @@ import SquarePlus from "../../icons/SquarePlus";
 import Modal from "../../Modal/Modal";
 import CreateProject from "../../Prompt/CreateProject/CreateProject";
 import { ProjectContext, ProjectMutationType } from "../../Dashboard/Dashboard";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { CreateProjectMutation } from "@/lib/queries";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Header({
   open,
@@ -19,23 +20,23 @@ export default function Header({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const current = useContext(ProjectContext) as string;
-  const queryClient = useQueryClient();
-  const ProjectMutation = useMutation({
-    mutationFn: (variables: ProjectMutationType) =>
-      axios
-        .post("/api/lists/create", variables)
-        .then((res) => res.data)
-        .catch(() => {}),
 
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
-  });
+  const current = useContext(ProjectContext) as string;
+  const ProjectMutation = CreateProjectMutation(current);
+  const router = useRouter();
   const handleSubmit = (variables: ProjectMutationType) => {
     console.log("Mutating", variables);
     ProjectMutation.mutate({
       ...variables,
       parent_proj: current?.length == 0 ? null : current,
     });
+  };
+
+  const signOut = async () => {
+    const supabase = createClientComponentClient();
+    console.log("signing out");
+    supabase.auth.signOut();
+    router.push("/login");
   };
 
   const CreateProjectModal = () => (
@@ -67,7 +68,7 @@ export default function Header({
           <button className="svg-button">
             <Notification />
           </button>
-          <button className="svg-button">
+          <button onClick={signOut} className="svg-button">
             <UserCircle />
           </button>
         </div>

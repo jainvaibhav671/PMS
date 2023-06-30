@@ -4,28 +4,13 @@ import axios from "axios";
 import Link from "next/link";
 import Loading from "../Loading/Loading";
 import { Project } from "@/lib/database.types";
-import EllipsisVertical from "../icons/EllipsisVertical";
+import Eye from "../icons/Eye";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
+import CardOptions from "./CardOptions/CardOptions";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
-}
-
-function MoreOptionsMenu() {
-  return (
-    <div id="more-options">
-      <ul>
-        <li>
-          <button>Delete Item</button>
-        </li>
-        <li>
-          <button>Edit Project</button>
-        </li>
-        <li></li>
-      </ul>
-    </div>
-  );
 }
 
 export function ProjectCard({ data }: { data: Project }) {
@@ -54,10 +39,10 @@ export function ProjectCard({ data }: { data: Project }) {
   return (
     <div className="project-card">
       <button id="options-icon" onClick={() => setOpen(!open)}>
-        <EllipsisVertical />
+        <Eye />
       </button>
-      <Modal open={open} setOpen={setOpen} title={data.name}>
-        <MoreOptionsMenu />
+      <Modal open={open} setOpen={setOpen} title={"Details"}>
+        <CardOptions data={data} />
       </Modal>
 
       <Link href={`/${data.id}`}>

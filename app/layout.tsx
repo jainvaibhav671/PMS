@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./css/Layout.css";
 import Provider from "./_provider";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <main
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
+          >
+            <Sidebar />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );

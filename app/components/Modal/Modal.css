@@ -17,6 +17,5 @@ hr {
 }
 
 dialog {
-  @apply absolute rounded-xl top-1/2 m-auto 
-    bg-white dark:bg-black text-black dark:text-white;
+  @apply fixed top-1/4 mx-auto bg-white dark:bg-black text-black dark:text-white;
 }

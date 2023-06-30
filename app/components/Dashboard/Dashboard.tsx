@@ -31,7 +31,7 @@ export function DashboardWrapper() {
 
   const apiUrl = current.length == 0 ? "/api/lists" : `/api/lists/${current}`;
   console.log("apiUrl", current.length, apiUrl);
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => axios.get(apiUrl).then((res) => res.data),
     queryKey: ["lists", current],
   });
@@ -39,8 +39,14 @@ export function DashboardWrapper() {
   return (
     <>
       <div id="dashboard">
-        <h2>{"Dashboard"}</h2>
-        {!data ? <Loading /> : <ProjectGrid projects={data} />}
+        <h1>{"Dashboard"}</h1>
+        {isLoading ? (
+          <Loading />
+        ) : data.length == 0 ? (
+          "No Projects to show. Create a new Project"
+        ) : (
+          <ProjectGrid projects={data} />
+        )}
       </div>
     </>
   );

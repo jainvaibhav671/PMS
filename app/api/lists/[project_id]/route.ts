@@ -17,9 +17,9 @@ export async function GET(
   console.log(params.project_id);
   const { data: projects, error } = await supabase
     .from("Project")
-    .select()
+    .select("*, project_tags(tag_id)")
     .eq("parent", params.project_id);
-
+  console.log(projects);
   if (error || !projects) {
     console.log("Fetch Subprojects: ", params.project_id, error);
     return NextResponse.json([]);

@@ -4,14 +4,25 @@
     rounded-md border-0
     px-2 py-1
     font-semibold text-sm
-    flex items-center cursor-pointer
-    transition-all duration-300;
+    flex items-center cursor-pointer;
+}
+.primary-button-red,
+.primary-button-red a {
+  @apply bg-red text-white dark:text-black
+    rounded-md border-0
+    px-2 py-1
+    font-semibold text-sm
+    flex items-center cursor-pointer;
 }
 
 .secondary-button {
-  @apply bg-red text-black
-    rounded-md border-0
+  @apply bg-white border-2 border-blue text-blue dark:text-black
+    rounded-md
     font-semibold text-sm
     px-2 py-1
     flex items-center cursor-pointer;
+}
+
+button:hover {
+  scale: 1.05;
 }

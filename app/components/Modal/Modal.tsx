@@ -18,7 +18,7 @@ export default function Modal({
   useEffect(() => {
     const { current: dlg } = modalRef;
     if (open) {
-      dlg?.show();
+      dlg?.showModal();
     } else {
       dlg?.close();
     }
