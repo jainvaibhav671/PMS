@@ -10,11 +10,12 @@
   @apply flex justify-between gap-4;
 }
 
-input {
-  @apply px-2 py-1 rounded-md border;
+#create-project input {
+  @apply px-2 py-1 rounded-md border 
+    bg-white dark:bg-black border-b-black dark:border-b-white;
 }
-input:active,
-input:focus {
+#create-project input:active,
+#create-project input:focus {
   @apply border;
 }
 

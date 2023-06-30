@@ -12,6 +12,11 @@
   @apply text-red;
 }
 
+hr {
+  @apply border-black dark:border-white opacity-10;
+}
+
 dialog {
-  @apply absolute rounded-xl top-1/2 m-auto;
+  @apply absolute rounded-xl top-1/2 m-auto 
+    bg-white dark:bg-black text-black dark:text-white;
 }

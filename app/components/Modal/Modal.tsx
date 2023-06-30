@@ -28,6 +28,7 @@ export default function Modal({
     <>
       <dialog ref={modalRef}>
         <ModalHeader title={title} setOpen={setOpen} />
+        <hr />
         {children}
       </dialog>
     </>

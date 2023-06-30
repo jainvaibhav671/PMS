@@ -59,7 +59,7 @@ export default function Header({
         <div className="center-x">
           <button
             onClick={() => setModalOpen(!modalOpen)}
-            className="center-x secondary-button"
+            className="center-x primary-button"
           >
             <SquarePlus /> New Project
           </button>

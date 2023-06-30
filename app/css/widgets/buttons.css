@@ -1,16 +1,17 @@
 .primary-button,
 .primary-button a {
-  @apply bg-blue text-white
+  @apply bg-blue text-white dark:text-black
     rounded-md border-0
     px-2 py-1
     font-semibold text-sm
-    flex items-center;
+    flex items-center cursor-pointer
+    transition-all duration-300;
 }
 
 .secondary-button {
-  @apply bg-red text-white
+  @apply bg-red text-black
     rounded-md border-0
     font-semibold text-sm
     px-2 py-1
-    flex items-center;
+    flex items-center cursor-pointer;
 }

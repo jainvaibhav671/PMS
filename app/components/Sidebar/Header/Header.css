@@ -13,6 +13,7 @@ svg {
 .logo {
   font-weight: 700;
 }
+
 #header > div:nth-child(2) svg {
   width: 24px;
 }
@@ -23,6 +24,6 @@ svg {
 }
 
 #header > div:nth-child(2) button:first-child {
-  @apply bg-teal rounded-md py-1 px-2 flex gap-1;
+  /* @apply bg-blue rounded-md py-1 px-2 flex gap-1; */
   border: 0px;
 }
