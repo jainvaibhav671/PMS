@@ -13,7 +13,7 @@ a {
 #project-grid {
   @apply grid p-4 gap-5
   text-inherit;
-  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .project-card {
