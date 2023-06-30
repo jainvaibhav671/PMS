@@ -5,6 +5,7 @@
 
 #tag-list {
   @apply flex gap-2 flex-wrap;
+  max-width: 200px;
 }
 
 .tag {

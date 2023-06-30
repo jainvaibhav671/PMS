@@ -11,7 +11,9 @@ export function Form({
       <InputGroup name="email" type="email" label="Email" />
       <InputGroup name="password" type="password" label="Password" />
 
-      <button type="submit">Login</button>
+      <button type="submit" className="primary-button">
+        Login
+      </button>
       <div id="below-button">
         <span>
           <input type="checkbox" name="remember" />

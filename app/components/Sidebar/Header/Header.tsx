@@ -25,10 +25,9 @@ export default function Header({
   const ProjectMutation = CreateProjectMutation(current);
   const router = useRouter();
   const handleSubmit = (variables: ProjectMutationType) => {
-    console.log("Mutating", variables);
     ProjectMutation.mutate({
       ...variables,
-      parent_proj: current?.length == 0 ? null : current,
+      parent_proj: !current ? null : current,
     });
   };
 

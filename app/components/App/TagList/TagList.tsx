@@ -41,9 +41,9 @@ export default function TagList({
     if (e.key === "Enter") {
       if (value.length == 0 || selectedTags.indexOf(value) != -1) return;
       if (options.indexOf(value) == -1) {
-        setOptions([...options, value]);
+        setOptions([value, ...options]);
       }
-      setSelectedTags([...selectedTags, value]);
+      setSelectedTags([value, ...selectedTags]);
       setValue("");
     } else if (value.length == 0 && e.key === "Backspace") {
       setValue(selectedTags[selectedTags.length - 1] || "");
@@ -55,6 +55,12 @@ export default function TagList({
     setValue(e.target.value);
   }
 
+  const tags = selectedTags.slice(0, 5).map((st, idx) => (
+    <span key={idx} className="tag">
+      {st.trim()}
+    </span>
+  ));
+
   return (
     <>
       <div id="taglist">
@@ -64,11 +70,7 @@ export default function TagList({
           value={value}
         />
         <div id="tag-list">
-          {selectedTags.map((st, idx) => (
-            <span key={idx} className="tag">
-              {st.trim()}
-            </span>
-          ))}
+          {tags} {selectedTags.length > 5 ? "..." : ""}
         </div>
 
         <datalist id="available-tags">

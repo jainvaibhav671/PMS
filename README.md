@@ -10,6 +10,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [ ] RLS Policies on Supabase
 - [ ] Multiple User Integration
 - [ ] Increase User Session duration
+- [ ] Invite other users or assign them tasks
+- [ ] Create tags
 
 ## Changes
 

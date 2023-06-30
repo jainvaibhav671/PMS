@@ -17,8 +17,8 @@ body > div {
 }
 
 #app {
-  width: 60vw;
-  padding: 20px;
+  width: 100vw;
+  height: 100vh;
 }
 
 ul {

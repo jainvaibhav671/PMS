@@ -32,7 +32,7 @@ export default function Login() {
 
       <div id="signup-prompt">
         {"Don't have an account?"}
-        <Link href="/signup">Sign Up</Link>
+        <Link href="/signup"> Sign Up</Link>
       </div>
     </div>
   );

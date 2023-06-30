@@ -34,6 +34,9 @@ a {
   border: 2px solid var(--blue);
   scale: 1.05;
 }
+.project-card:hover a {
+  text-decoration: none;
+}
 #tags {
   @apply flex flex-row gap-1;
 }

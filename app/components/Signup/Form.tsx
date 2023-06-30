@@ -8,12 +8,12 @@ export function Form({
 }) {
   return (
     <form id="signup" action={handleSubmit}>
-      {/* <InputGroup name="name" type="text" label="Name" /> */}
       <InputGroup name="email" type="email" label="Email" />
-
       <InputGroup name="password" type="password" label="Password" />
 
-      <button type="submit">Join Now</button>
+      <button className="primary-button" type="submit">
+        Join Now
+      </button>
     </form>
   );
 }
