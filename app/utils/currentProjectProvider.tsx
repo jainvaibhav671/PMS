@@ -11,7 +11,6 @@ const useStore = (): Store => {
   return {
     getProj: () => currProj,
     setProj: (proj: string) => {
-      console.log("Setting", proj);
       setCurrProj(proj);
     },
   };

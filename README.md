@@ -5,23 +5,20 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## TODOS
 
 - [ ] Landing Page
-- [ ] wrap tags on dashboard and prompt
 - [ ] CSS Styles
-- [ ] RLS Policies on Supabase
 - [ ] Multiple User Integration
 - [ ] Increase User Session duration
 - [ ] Invite other users or assign them tasks
-- [ ] Create tags
+- [ ] RLS Policies on Supabase
 
 ## Changes
 
-- [x] **Solved** Looks different in chrome and firefox.
-  > Firefox doesn't support the :has() :pseudo class yet.
-- [x] **Solved** Weird gap between sidebar and header
+- [x] Create tags
+- [x] wrap tags on dashboard and prompt
+- [x] Refactored React Query queries to another module
+- [x] **FIXED** Creating a tag which exists in the database does not let any tag to be created
 
 ## Known Issues
-
-- Creating a tag which exists in the database does not let any tag to be created
 
 ## Getting Started
 

@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
   const user_id = user?.id;
 
   // Create project
-  console.log("Creating project", params);
   const proj_data: CreateProject = {
     name: params.name,
     created_by: user_id as string,
@@ -27,7 +26,6 @@ export async function POST(req: NextRequest) {
     .insert(proj_data)
     .select();
   const proj_id = proj ? proj[0].id : null;
-  console.log("created_proj", proj);
 
   if (params.tags) {
     // Create tags if not already exist
@@ -43,16 +41,13 @@ export async function POST(req: NextRequest) {
       .from("Tag")
       .select("id")
       .in("name", params.tags);
-    console.log(tag_ids, tag_ids?.length);
     // link project and tags
-    console.log("Linking project and tags");
     if (tag_ids) {
       const project_tags = tag_ids.map((t) => {
         return { project_id: proj_id!, tag_id: t.id };
       });
       await supabase.from("project_tags").insert(project_tags);
     }
-    console.log("Linked");
   }
 
   return NextResponse.json("Success");

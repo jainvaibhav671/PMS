@@ -1,3 +1,5 @@
+import { UnionType } from "typescript";
+
 export type Json =
   | string
   | number
@@ -131,3 +133,9 @@ export type CreateProject = Omit<
 
 export type CreateTag = Pick<Tag, "name">;
 export type LinkProjectTag = Pick<ProjectTags, "project_id" | "tag_id">;
+export type ProjectInfo = Project & {
+  project_tags: ProjectTags &
+    {
+      Tag: Tag;
+    }[];
+};

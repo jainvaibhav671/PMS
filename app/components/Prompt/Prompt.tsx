@@ -11,7 +11,6 @@ export default function Prompt({
   onSubmit: Function;
 }) {
   const func = () => {
-    console.log("Submitting");
     onSubmit();
   };
 

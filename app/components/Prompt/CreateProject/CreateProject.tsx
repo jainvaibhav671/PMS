@@ -14,7 +14,6 @@ export default function CreateProject({
   const [name, setName] = useState("");
 
   function func(tags: string[]) {
-    console.log("Submitting");
     onSubmit({
       name: name,
       tags: tags,

@@ -1,12 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../Loading/Loading";
 import "./Dashboard.css";
 import { ProjectCard } from "./ProjectCard";
 import { createContext, useContext } from "react";
 import { Project } from "@/lib/database.types";
-import { GetAllProjects, GetProject } from "@/lib/queries";
+import { GetAllProjects, GetProject, GetProjectInfo } from "@/lib/queries";
 import Sidebar from "../Sidebar/Sidebar";
+import ProjectInfo from "./ProjectInfo";
 
 export const ProjectContext = createContext<string | null>(null);
 
@@ -30,16 +29,25 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
 
 export function DashboardWrapper() {
   const current = useContext(ProjectContext) as string;
+  const { data: currProj, isLoading: isCurrProjLoading } =
+    GetProjectInfo(current);
+  const projectInfo = <ProjectInfo data={currProj!} />;
 
-  const apiUrl = current.length == 0 ? "/api/lists" : `/api/lists/${current}`;
-  console.log("apiUrl", current.length, apiUrl);
   const { data, isLoading } =
     current.length == 0 ? GetAllProjects() : GetProject(current);
 
   return (
     <>
       <div id="dashboard">
-        <h1>{"Dashboard"}</h1>
+        {/* Project Info */}
+        {current.length == 0 ? (
+          "Dashboard"
+        ) : isCurrProjLoading ? (
+          <Loading />
+        ) : (
+          projectInfo
+        )}
+
         {isLoading ? (
           <Loading />
         ) : data?.length == 0 ? (
