@@ -1,12 +1,14 @@
 "use client";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./components/Dashboard/Dashboard";
+import { useSetAtom } from "jotai";
+import { CurrentProjectAtom } from "@/lib/atoms";
 
 export default function Home() {
+  useSetAtom(CurrentProjectAtom)("");
+
   return (
     <>
-      <Dashboard current={""} />
-      <ReactQueryDevtools />
+      <Dashboard />
     </>
   );
 }

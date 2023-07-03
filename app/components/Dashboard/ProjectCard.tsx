@@ -19,7 +19,7 @@ export function ProjectCard({ data }: { data: Project }) {
     dateStyle: "medium",
   })}`;
 
-  const { tagsList, isLoading }= GetTags(data.id);
+  const { tagsList, isLoading } = GetTags(data.id);
   const tags = tagsList?.map((t, idx) => <Tag key={idx} tag_name={t} />);
 
   if (isLoading) {

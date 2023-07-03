@@ -52,7 +52,7 @@ export function DeleteProject(proj_id: string) {
   const queryClient = useQueryClient();
   const DeleteProjectMutation = useMutation({
     mutationFn: () => axios.post(`/api/lists/delete/${proj_id}`),
-    onSuccess: () => queryClient.invalidateQueries(["projects"])
+    onSuccess: () => queryClient.invalidateQueries(["projects"]),
   });
   return DeleteProjectMutation;
 }
@@ -80,7 +80,7 @@ export function CreateTags(tags: Tag[]) {
 
 export function AssignUser(project_id: string) {
   const { data, isLoading } = useQuery({
-    queryFn: () => axios.post(`/api/users/${project_id}`)
-  })
+    queryFn: () => axios.post(`/api/users/${project_id}`),
+  });
   return { data, isLoading };
 }

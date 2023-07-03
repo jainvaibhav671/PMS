@@ -1,13 +1,12 @@
 import Loading from "../Loading/Loading";
 import "./Dashboard.css";
 import { ProjectCard } from "./ProjectCard";
-import { createContext, useContext } from "react";
 import { Project } from "@/lib/database.types";
 import { GetAllProjects, GetProject, GetProjectInfo } from "@/lib/queries";
 import Sidebar from "../Sidebar/Sidebar";
 import ProjectInfo from "./ProjectInfo/ProjectInfo";
-
-export const ProjectContext = createContext<string | null>(null);
+import { useAtomValue } from "jotai";
+import { CurrentProjectAtom } from "@/lib/atoms";
 
 export type ProjectMutationType = {
   name: string;
@@ -18,51 +17,48 @@ export type ProjectMutationType = {
 function ProjectGrid({ projects }: { projects: Project[] | undefined }) {
   return (
     <>
-      {(!projects) ? "No projects to show" :
-      <div id="project-grid">
-        {projects.map((p) => (
-          <ProjectCard key={p.id} data={p} />
-        ))}
-      </div>}
+      {!projects ? (
+        "No projects to show"
+      ) : (
+        <div id="project-grid">
+          {projects.map((p) => (
+            <ProjectCard key={p.id} data={p} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
 
 export function DashboardWrapper() {
-  const current = useContext(ProjectContext) as string;
+  const current = useAtomValue(CurrentProjectAtom);
   const { data: currProj, isLoading: isCurrProjLoading } =
     GetProjectInfo(current);
-  const projectInfo = <ProjectInfo data={currProj} />;
-
+  console.log("currproj", currProj);
   const { data, isLoading } =
     current.length == 0 ? GetAllProjects() : GetProject(current);
 
   return (
     <>
       <div id="dashboard">
-        {/* Project Info */}
-        {current.length == 0 || currProj ? (
-          "Dashboard"
+        {current.length == 0 ? (
+          <h2>Dashboard</h2>
         ) : isCurrProjLoading ? (
           <Loading />
         ) : (
-          projectInfo
+          <ProjectInfo data={currProj} />
         )}
-
-        {isLoading ? <Loading /> :
-          <ProjectGrid projects={data} />
-        }
+        {isLoading ? <Loading /> : <ProjectGrid projects={data} />}
       </div>
     </>
   );
 }
 
-export default function Dashboard({ current }: { current: string }) {
+export default function Dashboard() {
   return (
-    <ProjectContext.Provider value={current}>
-      {current}
+    <>
       <Sidebar />
       <DashboardWrapper />
-    </ProjectContext.Provider>
+    </>
   );
 }

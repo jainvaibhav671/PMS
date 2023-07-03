@@ -1,4 +1,10 @@
 .project-info {
-    @apply grid grid-cols-2 p-2 border border-black dark:border-white;
-    /* border: 2px solid black; */
+  @apply grid grid-cols-2 gap-y-4
+  p-4 
+  rounded-lg shadow-md shadow-white-200
+  bg-white dark:bg-black-200;
+}
+
+.project-info .tags {
+  @apply flex gap-2;
 }

@@ -6,11 +6,13 @@ import UserCircle from "../../icons/UserCircle";
 import SquarePlus from "../../icons/SquarePlus";
 import Modal from "../../Modal/Modal";
 import CreateProject from "../../Prompt/CreateProject/CreateProject";
-import { ProjectContext, ProjectMutationType } from "../../Dashboard/Dashboard";
-import { useContext, useState } from "react";
+import { ProjectMutationType } from "../../Dashboard/Dashboard";
+import { useState } from "react";
 import { CreateProjectMutation } from "@/lib/queries";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { useAtomValue } from "jotai";
+import { CurrentProjectAtom } from "@/lib/atoms";
 
 export default function Header({
   open,
@@ -21,7 +23,7 @@ export default function Header({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const current = useContext(ProjectContext) as string;
+  const current = useAtomValue(CurrentProjectAtom);
   const ProjectMutation = CreateProjectMutation(current);
   const router = useRouter();
   const handleSubmit = (variables: ProjectMutationType) => {

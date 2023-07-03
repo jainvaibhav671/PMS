@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./css/Layout.css";
-import Provider from "./_provider";
+import Providers from "./_provider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>
+        <Providers>
           <main
             style={{
               height: "100%",
@@ -26,7 +27,8 @@ export default function RootLayout({
           >
             {children}
           </main>
-        </Provider>
+          <ReactQueryDevtools />
+        </Providers>
       </body>
     </html>
   );

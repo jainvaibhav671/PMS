@@ -3,7 +3,7 @@
 .sidebar {
   --header-height: 3rem;
   @apply dark:bg-black dark:text-white
-    bg-dark-white text-black
+    bg-white text-black
     transition-all duration-300
     overflow-x-hidden fixed mt-[var(--header-height)]
     h-full p-4 mr-2;

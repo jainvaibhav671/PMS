@@ -6,7 +6,13 @@ export default function CardOptions({ data }: { data: Project }) {
   return (
     <div id="card-options">
       <div id="top">
-        <input type="text" id="proj-name" name="proj-name" value={data.name} />
+        <input
+          type="text"
+          id="proj-name"
+          name="proj-name"
+          value={data.name}
+          onChange={() => {}}
+        />
         <div id="button-group">
           <button className="primary-button-red">
             <Trash />
