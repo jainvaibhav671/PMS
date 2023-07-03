@@ -49,21 +49,25 @@ export function CreateProjectMutation(proj_id: string) {
   return mutation;
 }
 export function DeleteProject(proj_id: string) {
+  const queryClient = useQueryClient();
   const DeleteProjectMutation = useMutation({
-    mutationFn: () => axios.post("/api/lists/delete"),
+    mutationFn: () => axios.post(`/api/lists/delete/${proj_id}`),
+    onSuccess: () => queryClient.invalidateQueries(["projects"])
   });
+  return DeleteProjectMutation;
 }
 
 export function GetTags(proj_id: string) {
-  const { data: tags, isLoading } = useQuery({
+  const { data: tagsList, isLoading } = useQuery({
     queryKey: ["tags", proj_id],
-    queryFn: () =>
+    queryFn: (): Promise<string[]> =>
       axios
         .get(`/api/tags/${proj_id}`)
         .then((res) => res.data)
         .catch(() => {}),
   });
-  return { tags, isLoading };
+
+  return { tagsList, isLoading };
 }
 
 export function CreateTags(tags: Tag[]) {
@@ -72,4 +76,11 @@ export function CreateTags(tags: Tag[]) {
     mutationFn: () => axios.post("/api/tags/create", tags),
   });
   return mutation;
+}
+
+export function AssignUser(project_id: string) {
+  const { data, isLoading } = useQuery({
+    queryFn: () => axios.post(`/api/users/${project_id}`)
+  })
+  return { data, isLoading };
 }

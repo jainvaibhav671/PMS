@@ -1,4 +1,5 @@
 #signup-main {
+  @apply text-black dark:text-white;
   width: 100%;
   height: 100%;
 }

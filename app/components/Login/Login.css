@@ -1,4 +1,5 @@
 #login-main {
+  @apply text-black dark:text-white;
   width: 100%;
   height: 100%;
 }
@@ -34,7 +35,7 @@
   padding-right: 4px;
 }
 #below-button a {
-  color: black;
+  @apply text-black dark:text-white;
   opacity: 60%;
 }
 a:hover {

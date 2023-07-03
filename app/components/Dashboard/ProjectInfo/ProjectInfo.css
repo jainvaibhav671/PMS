@@ -1,0 +1,4 @@
+.project-info {
+    @apply grid grid-cols-2 p-2 border border-black dark:border-white;
+    /* border: 2px solid black; */
+}

@@ -1,6 +1,4 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Link from "next/link";
 import Loading from "../Loading/Loading";
 import { Project } from "@/lib/database.types";
@@ -8,6 +6,7 @@ import Eye from "../icons/Eye";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import CardOptions from "./CardOptions/CardOptions";
+import { GetTags } from "@/lib/queries";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
@@ -20,13 +19,8 @@ export function ProjectCard({ data }: { data: Project }) {
     dateStyle: "medium",
   })}`;
 
-  const { isLoading, data: tags_list } = useQuery({
-    queryKey: ["tags", data.id],
-    queryFn: (): Promise<string[]> =>
-      axios.get(`/api/tags/${data.id}`).then((res) => res.data),
-  });
-
-  const tags = tags_list?.map((t, idx) => <Tag key={idx} tag_name={t} />);
+  const { tagsList, isLoading }= GetTags(data.id);
+  const tags = tagsList?.map((t, idx) => <Tag key={idx} tag_name={t} />);
 
   if (isLoading) {
     return (

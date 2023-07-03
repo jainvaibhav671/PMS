@@ -17,6 +17,7 @@ export default function Login() {
       password,
     });
 
+    console.log(email, password)
     console.log("LOGIN", data, error);
     if (!error) {
       redirect("/");
