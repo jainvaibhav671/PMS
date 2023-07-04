@@ -1,9 +1,4 @@
-import Cross from "../../icons/Cross";
-import BarsThree from "../../icons/BarsThree";
 import "./Header.css";
-import Notification from "../../icons/Notification";
-import UserCircle from "../../icons/UserCircle";
-import SquarePlus from "../../icons/SquarePlus";
 import Modal from "../../Modal/Modal";
 import CreateProject from "../../Prompt/CreateProject/CreateProject";
 import { ProjectMutationType } from "../../Dashboard/Dashboard";
@@ -13,6 +8,13 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useAtomValue } from "jotai";
 import { CurrentProjectAtom } from "@/lib/atoms";
+import {
+  BarsThree,
+  Cross,
+  SquarePlus,
+  UserCircle,
+  Notification,
+} from "../../icons/icons";
 
 export default function Header({
   open,

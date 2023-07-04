@@ -1,5 +1,5 @@
 import { Dispatch, RefObject, SetStateAction } from "react";
-import Cross from "../icons/Cross";
+import { Cross } from "../icons/icons";
 
 export default function ModalHeader({
   title,

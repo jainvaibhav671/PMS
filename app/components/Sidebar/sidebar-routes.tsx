@@ -1,5 +1,5 @@
 import Dashboard from "../Dashboard/Dashboard";
-import Grid from "../icons/Grid";
+import { Grid } from "../icons/icons";
 
 export interface Route {
   name: JSX.Element;
@@ -16,7 +16,7 @@ export const routes: Route[] = [
       </>
     ),
     href: "/",
-    component: <Dashboard current="" />,
+    component: <Dashboard />,
     isActive: true,
   },
 ];

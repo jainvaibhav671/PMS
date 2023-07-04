@@ -1,4 +1,4 @@
-export default function BarsThree() {
+export function BarsThree() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

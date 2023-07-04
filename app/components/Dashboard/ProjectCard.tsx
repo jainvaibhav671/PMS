@@ -2,11 +2,11 @@
 import Link from "next/link";
 import Loading from "../Loading/Loading";
 import { Project } from "@/lib/database.types";
-import Eye from "../icons/Eye";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import CardOptions from "./CardOptions/CardOptions";
 import { GetTags } from "@/lib/queries";
+import { Eye } from "../icons/icons";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;

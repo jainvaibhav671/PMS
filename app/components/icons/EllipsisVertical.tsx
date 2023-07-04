@@ -1,4 +1,4 @@
-export default function EllipsisVertical() {
+export function EllipsisVertical() {
   return (
     <svg
       aria-hidden="true"

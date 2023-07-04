@@ -1,4 +1,4 @@
-export default function () {
+export function PencilSquare() {
   return (
     <svg
       aria-hidden="true"

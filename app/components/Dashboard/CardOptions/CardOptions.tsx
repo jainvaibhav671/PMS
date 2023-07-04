@@ -1,7 +1,6 @@
 import { Project } from "@/lib/database.types";
 import "./CardOptions.css";
-import PencilSquare from "../../icons/PencilSquare";
-import Trash from "../../icons/Trash";
+import { PencilSquare, Trash } from "../../icons/icons";
 export default function CardOptions({ data }: { data: Project }) {
   return (
     <div id="card-options">

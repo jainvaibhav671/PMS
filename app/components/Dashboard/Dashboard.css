@@ -12,20 +12,19 @@ a {
 }
 
 #project-grid {
-  @apply grid p-4 text-inherit;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  @apply grid p-4 text-inherit gap-x-4;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
 
 .project-card {
   @apply flex-auto p-2
     bg-white dark:bg-black
-    text-inherit m-2
+    text-inherit
     rounded-md border border-solid border-grey
     shadow-lg dark:shadow-white dark:shadow-sm;
-  max-width: 300px;
+  min-width: 300px;
   transition: all linear 100ms;
 }
-
 .project-card a {
   @apply flex flex-col gap-2
     text-black dark:text-white;

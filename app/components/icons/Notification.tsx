@@ -1,4 +1,4 @@
-export default function Notification() {
+export function Notification() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
