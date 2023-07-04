@@ -8,3 +8,9 @@
 .project-info .tags {
   @apply flex gap-2;
 }
+
+.project-info .svg-button {
+  scale: 0.9;
+  padding: 0px;
+  margin: 0px;
+}

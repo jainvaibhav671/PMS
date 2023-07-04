@@ -23,6 +23,10 @@
     flex items-center cursor-pointer;
 }
 
+.svg-button {
+  @apply bg-inherit text-inherit  px-2 border-0 cursor-pointer;
+}
+
 button:hover {
   scale: 1.05;
 }

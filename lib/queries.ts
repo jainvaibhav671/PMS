@@ -56,7 +56,17 @@ export function DeleteProject(proj_id: string) {
   });
   return DeleteProjectMutation;
 }
-
+export function UpdateProject(proj_id: string, data: Partial<Project>) {
+  const queryClient = useQueryClient();
+  const {} = useMutation({
+    mutationFn: () =>
+      axios.put("/api/lists/update", {
+        proj_id: proj_id,
+        data: data,
+      }),
+    onSuccess: () => queryClient.invalidateQueries(["project", proj_id]),
+  });
+}
 export function GetTags(proj_id: string) {
   const { data: tagsList, isLoading } = useQuery({
     queryKey: ["tags", proj_id],

@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: { project_id: string } }
 ) {
   const supabase = createServerComponentClient<Database>({ cookies });
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("Project")
     .select("*, project_tags(Tag(name))")
     .eq("id", params.project_id);
