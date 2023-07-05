@@ -12,7 +12,10 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.refreshSession();
 
   if (session) console.log("Logged in");
-  if (!session) return NextResponse.redirect("http://localhost:3000/login");
+  if (!session)
+    return NextResponse.redirect(
+      "http://task-lists-cse-vaibhav.vercel.app/login"
+    );
   return res;
 }
 
