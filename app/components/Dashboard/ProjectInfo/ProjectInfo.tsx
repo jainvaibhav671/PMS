@@ -71,14 +71,10 @@ function SetDeadline() {
   );
 }
 
-export default function ProjectInfo({
-  data,
-}: {
-  data: ProjectInfo | undefined;
-}) {
+export default function ProjectInfo({ data }: { data: ProjectInfo }) {
+  const [open, setOpen] = useState(false);
   if (!data) return <></>;
 
-  const [open, setOpen] = useState(false);
   const tags = data?.project_tags.map((pt, idx) => (
     <span key={idx} className="project-tag">
       {pt.Tag.name}

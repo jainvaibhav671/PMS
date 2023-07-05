@@ -37,7 +37,7 @@ export function DashboardWrapper() {
       <div id="dashboard">
         {current.length == 0 ? (
           <h2>Dashboard</h2>
-        ) : isCurrProjLoading ? (
+        ) : isCurrProjLoading || !currProj ? (
           <Loading />
         ) : (
           <ProjectInfo data={currProj} />

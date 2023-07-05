@@ -10,7 +10,7 @@ export default function SingleInput({
 }) {
   const inputs = type
     .split(" ")
-    .map((t) => <input type={t} name={`${name}-${t}`} />);
+    .map((t, key) => <input key={key} type={t} name={`${name}-${t}`} />);
 
   return (
     <form id="single-input" action={onSubmit}>
