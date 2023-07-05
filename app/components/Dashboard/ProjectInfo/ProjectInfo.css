@@ -6,11 +6,15 @@
 }
 
 .project-info .tags {
-  @apply flex gap-2;
+  @apply flex gap-2 items-center;
 }
 
 .project-info .svg-button {
   scale: 0.9;
   padding: 0px;
   margin: 0px;
+}
+
+#addtag {
+  @apply p-4;
 }

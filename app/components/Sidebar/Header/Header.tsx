@@ -1,7 +1,6 @@
 import "./Header.css";
 import Modal from "../../Modal/Modal";
 import CreateProject from "../../Prompt/CreateProject/CreateProject";
-import { ProjectMutationType } from "../../Dashboard/Dashboard";
 import { useState } from "react";
 import { CreateProjectMutation } from "@/lib/queries";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -16,6 +15,11 @@ import {
   Notification,
 } from "../../icons/icons";
 
+export type ProjectMutationType = {
+  name: string;
+  parent: string | null;
+};
+
 export default function Header({
   open,
   setOpen,
@@ -28,10 +32,10 @@ export default function Header({
   const current = useAtomValue(CurrentProjectAtom);
   const ProjectMutation = CreateProjectMutation(current);
   const router = useRouter();
-  const handleSubmit = (variables: ProjectMutationType) => {
+  const handleSubmit = (name: string) => {
     ProjectMutation.mutate({
-      ...variables,
-      parent_proj: !current ? null : current,
+      name: name,
+      parent: !current ? null : current,
     });
   };
 

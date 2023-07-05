@@ -1,5 +1,5 @@
 import { CurrentProjectAtom } from "@/lib/atoms";
-import { UpdateProject } from "@/lib/queries";
+import { UpdateProjectMutation } from "@/lib/queries";
 import { useAtomValue } from "jotai";
 import "./DatePicker.css";
 
@@ -8,7 +8,8 @@ export function DatePicker() {
   function handleSubmit(formData: FormData) {
     const deadline = formData.get("deadline");
     if (deadline) {
-      UpdateProject(current, {
+      console.log(deadline);
+      UpdateProjectMutation(current, {
         deadline: deadline as string,
       });
     }
@@ -16,7 +17,7 @@ export function DatePicker() {
 
   return (
     <form id="date-picker" action={handleSubmit}>
-      <input type="datetime-local" name="deadline-date" />
+      <input type="datetime-local" name="deadline" />
       <div>
         <button className="primary-button">Submit</button>
       </div>

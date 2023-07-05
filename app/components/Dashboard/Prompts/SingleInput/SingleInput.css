@@ -1,0 +1,6 @@
+#single-input {
+  @apply p-4 flex flex-col justify-center items-center gap-2 opacity-100;
+}
+#single-input input {
+  @apply p-2;
+}

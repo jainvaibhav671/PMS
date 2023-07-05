@@ -41,7 +41,7 @@ export function ProjectCard({ data }: { data: Project }) {
 
       <Link href={`/${data.id}`}>
         <h4>{data.name}</h4>
-        <div id="tags">{tags}</div>
+        <div className="tags">{tags}</div>
         <p>{date}</p>
       </Link>
     </div>

@@ -13,10 +13,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Changes
 
-- [x] Create tags
-- [x] wrap tags on dashboard and prompt
-- [x] Refactored React Query queries to another module
-- [x] **FIXED** Creating a tag which exists in the database does not let any tag to be created
+- [x] Create tags from project page instead of project creation dialog
+- [x] **FIXED** Wrap tags on dashboard and prompt
 
 ## Known Issues
 

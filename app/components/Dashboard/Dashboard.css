@@ -37,8 +37,8 @@ a {
 .project-card:hover a {
   text-decoration: none;
 }
-#tags {
-  @apply flex flex-row gap-1;
+.tags {
+  @apply flex flex-row flex-wrap gap-1;
 }
 .project-tag {
   @apply bg-yellow text-black rounded-md px-2 py-1 font-semibold;

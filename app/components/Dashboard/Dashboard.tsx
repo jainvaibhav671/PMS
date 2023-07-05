@@ -8,12 +8,6 @@ import ProjectInfo from "./ProjectInfo/ProjectInfo";
 import { useAtomValue } from "jotai";
 import { CurrentProjectAtom } from "@/lib/atoms";
 
-export type ProjectMutationType = {
-  name: string;
-  parent_proj?: string | null;
-  tags?: string[];
-};
-
 function ProjectGrid({ projects }: { projects: Project[] | undefined }) {
   return (
     <>

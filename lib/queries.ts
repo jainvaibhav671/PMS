@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Project, ProjectInfo, Tag } from "./database.types";
-import { ProjectMutationType } from "@/app/components/Dashboard/Dashboard";
+import { ProjectMutationType } from "@/app/components/Sidebar/Header/Header";
 
 // Project related functions
 export function GetAllProjects() {
@@ -48,6 +48,7 @@ export function CreateProjectMutation(proj_id: string) {
   });
   return mutation;
 }
+
 export function DeleteProject(proj_id: string) {
   const queryClient = useQueryClient();
   const DeleteProjectMutation = useMutation({
@@ -56,9 +57,10 @@ export function DeleteProject(proj_id: string) {
   });
   return DeleteProjectMutation;
 }
-export function UpdateProject(proj_id: string, data: Partial<Project>) {
+
+export function UpdateProjectMutation(proj_id: string, data: Partial<Project>) {
   const queryClient = useQueryClient();
-  const {} = useMutation({
+  const mutation = useMutation({
     mutationFn: () =>
       axios.put("/api/lists/update", {
         proj_id: proj_id,
@@ -66,7 +68,9 @@ export function UpdateProject(proj_id: string, data: Partial<Project>) {
       }),
     onSuccess: () => queryClient.invalidateQueries(["project", proj_id]),
   });
+  return mutation;
 }
+
 export function GetTags(proj_id: string) {
   const { data: tagsList, isLoading } = useQuery({
     queryKey: ["tags", proj_id],
@@ -80,10 +84,15 @@ export function GetTags(proj_id: string) {
   return { tagsList, isLoading };
 }
 
-export function CreateTags(tags: Tag[]) {
+export function useCreateTags() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: () => axios.post("/api/tags/create", tags),
+    mutationFn: (variables: {
+      tags: string[];
+      project: string;
+    }): Promise<number[]> => axios.post("/api/tags/create", variables),
+    onSuccess: (data, variables) =>
+      queryClient.invalidateQueries(["project", variables.project]),
   });
   return mutation;
 }

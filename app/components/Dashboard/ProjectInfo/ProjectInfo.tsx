@@ -1,9 +1,68 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Modal from "../../Modal/Modal";
 import { Plus } from "../../icons/Plus";
-import { DatePicker } from "../Prompts/DatePicker/DatePicker";
 import "./ProjectInfo.css";
-import { ProjectInfo, Tag } from "@/lib/database.types";
+import { ProjectInfo } from "@/lib/database.types";
+import SingleInput from "../Prompts/SingleInput/SingleInput";
+import { useCreateTags, UpdateProjectMutation } from "@/lib/queries";
+import { useAtomValue } from "jotai";
+import { CurrentProjectAtom } from "@/lib/atoms";
+
+function AddTagModal() {
+  const [open, setOpen] = useState(false);
+  const CreateTagMutation = useCreateTags();
+  const currentProject = useAtomValue(CurrentProjectAtom);
+
+  async function handleSubmit(formData: FormData) {
+    const tag_name = formData.get("tag")! as string;
+    const data = await CreateTagMutation.mutateAsync({
+      tags: [tag_name],
+      project: currentProject,
+    });
+    console.log(data);
+    setOpen(!open);
+  }
+
+  return (
+    <>
+      <button onClick={() => setOpen(!open)} className="svg-button">
+        <Plus />
+      </button>
+      <Modal title="Enter tag" open={open} setOpen={setOpen}>
+        <SingleInput type="text" name="tag" onSubmit={handleSubmit} />
+      </Modal>
+    </>
+  );
+}
+
+function SetDeadline() {
+  const [open, setOpen] = useState(false);
+  const currentProject = useAtomValue(CurrentProjectAtom);
+
+  async function handleSubmit(formData: FormData) {
+    const date = (formData.get("deadline-date") as string)
+      .split("-")
+      .map((x) => parseInt(x));
+    const time = (formData.get("deadline-time") as string)
+      .split(":")
+      .map((x) => parseInt(x));
+    const deadline = new Date(date[0], date[1], date[2], time[0], time[1]);
+
+    UpdateProjectMutation(currentProject, { deadline: deadline.toString() });
+    setOpen(!open);
+  }
+
+  return (
+    <>
+      <button onClick={() => setOpen(!open)} className="primary-button">
+        Set Deadline
+      </button>
+      <Modal title="Enter Deadline" open={open} setOpen={setOpen}>
+        <SingleInput type="date time" name="deadline" onSubmit={handleSubmit} />
+      </Modal>
+    </>
+  );
+}
 
 export default function ProjectInfo({
   data,
@@ -24,9 +83,7 @@ export default function ProjectInfo({
       dateStyle: "medium",
     })
   ) : (
-    <button className="primary-button" onClick={() => setOpen(!open)}>
-      Set Deadline
-    </button>
+    <SetDeadline />
   );
 
   return (
@@ -41,13 +98,7 @@ export default function ProjectInfo({
         <span>Members List</span> */}
         <span>Tags</span>
         <div className="tags">
-          {tags}{" "}
-          <button className="svg-button">
-            <Plus />
-          </button>
-          <Modal open={open} setOpen={setOpen} title={"Set Deadline"}>
-            <DatePicker />
-          </Modal>
+          {tags} <AddTagModal />
         </div>
       </div>
     </>

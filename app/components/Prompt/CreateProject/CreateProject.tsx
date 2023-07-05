@@ -1,23 +1,17 @@
 import { KeyboardEvent, useState } from "react";
 import "./CreateProject.css";
-import TagList from "../../App/TagList/TagList";
-import Loading from "../../Loading/Loading";
-import { ProjectMutationType } from "../../Dashboard/Dashboard";
 
 export default function CreateProject({
   onSubmit,
   closeDialog,
 }: {
   closeDialog: Function;
-  onSubmit: (variables: ProjectMutationType) => void;
+  onSubmit: (name: string) => void;
 }) {
   const [name, setName] = useState("");
 
-  function func(tags: string[]) {
-    onSubmit({
-      name: name,
-      tags: tags,
-    } as ProjectMutationType);
+  function func() {
+    onSubmit(name);
 
     closeDialog();
   }
@@ -32,9 +26,6 @@ export default function CreateProject({
         (() => {})();
     }
   };
-
-  const availableTags: string[] = [];
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   return (
     <form onKeyDown={(e) => handleKey(e)} id="create-project">
@@ -55,25 +46,9 @@ export default function CreateProject({
             autoFocus
           />
         </div>
-        <div className="input-group">
-          <span>Tags </span>
-          {!availableTags ? (
-            <Loading />
-          ) : (
-            <TagList
-              availableTags={availableTags}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
-            />
-          )}
-        </div>
       </div>
       <div>
-        <button
-          className="primary-button"
-          onClick={() => func(selectedTags)}
-          type="button"
-        >
+        <button className="primary-button" onClick={() => func()} type="button">
           Submit
         </button>
         <button
