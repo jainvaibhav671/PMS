@@ -1,16 +1,18 @@
 import { CurrentProjectAtom } from "@/lib/atoms";
-import { UpdateProjectMutation } from "@/lib/queries";
+import { UpdateProject } from "@/lib/queries";
 import { useAtomValue } from "jotai";
 import "./DatePicker.css";
 
 export function DatePicker() {
   const current = useAtomValue(CurrentProjectAtom);
+  const mutation = UpdateProject(current);
   function handleSubmit(formData: FormData) {
     const deadline = formData.get("deadline");
     if (deadline) {
       console.log(deadline);
-      UpdateProjectMutation(current, {
-        deadline: deadline as string,
+      mutation.mutate({
+        proj_id: current,
+        data: { deadline: deadline as string },
       });
     }
   }

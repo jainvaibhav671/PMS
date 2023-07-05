@@ -4,17 +4,19 @@ import { Plus } from "../../icons/Plus";
 import "./ProjectInfo.css";
 import { ProjectInfo } from "@/lib/database.types";
 import SingleInput from "../Prompts/SingleInput/SingleInput";
-import { useCreateTags, UpdateProjectMutation } from "@/lib/queries";
+import { CreateTags, UpdateProject } from "@/lib/queries";
 import { useAtomValue } from "jotai";
 import { CurrentProjectAtom } from "@/lib/atoms";
 
 function AddTagModal() {
   const [open, setOpen] = useState(false);
-  const CreateTagMutation = useCreateTags();
+  const CreateTagMutation = CreateTags();
   const currentProject = useAtomValue(CurrentProjectAtom);
 
   async function handleSubmit(formData: FormData) {
-    const tag_name = formData.get("tag")! as string;
+    const tag_name = formData.get("tag-text") as string;
+    console.log("tagNmae", tag_name);
+    if (!tag_name) return;
     const data = await CreateTagMutation.mutateAsync({
       tags: [tag_name],
       project: currentProject,
@@ -38,6 +40,7 @@ function AddTagModal() {
 function SetDeadline() {
   const [open, setOpen] = useState(false);
   const currentProject = useAtomValue(CurrentProjectAtom);
+  const updateProjectMutation = UpdateProject(currentProject);
 
   async function handleSubmit(formData: FormData) {
     const date = (formData.get("deadline-date") as string)
@@ -46,9 +49,13 @@ function SetDeadline() {
     const time = (formData.get("deadline-time") as string)
       .split(":")
       .map((x) => parseInt(x));
+
     const deadline = new Date(date[0], date[1], date[2], time[0], time[1]);
 
-    UpdateProjectMutation(currentProject, { deadline: deadline.toString() });
+    await updateProjectMutation.mutateAsync({
+      proj_id: currentProject,
+      data: { deadline: deadline.toISOString() },
+    });
     setOpen(!open);
   }
 

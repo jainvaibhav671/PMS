@@ -14,6 +14,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Changes
 
 - [x] Create tags from project page instead of project creation dialog
+- [x] Can update deadlines from the project page
 - [x] **FIXED** Wrap tags on dashboard and prompt
 
 ## Known Issues
