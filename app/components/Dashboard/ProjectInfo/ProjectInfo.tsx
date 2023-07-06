@@ -72,7 +72,10 @@ function SetDeadline() {
 }
 
 export default function ProjectInfo({ data }: { data: ProjectInfo }) {
-  const [open, setOpen] = useState(false);
+  const [name, setName] = useState(data.name);
+  const current = useAtomValue(CurrentProjectAtom);
+  const mutation = UpdateProject(current);
+
   if (!data) return <></>;
 
   const tags = data?.project_tags.map((pt, idx) => (
@@ -89,11 +92,26 @@ export default function ProjectInfo({ data }: { data: ProjectInfo }) {
     <SetDeadline />
   );
 
+  function handleUpdateName() {
+    mutation.mutate({
+      proj_id: current,
+      data: { name: name },
+    });
+  }
+
   return (
     <>
       <div className="project-info">
         <span>{data?.isSubproject ? "Task Name" : "Project Name"}</span>
-        <span>{data?.name}</span>
+        <span>
+          <input
+            id="name-input"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlur={handleUpdateName}
+          />
+        </span>
         <span>Deadline</span>
         <span>{date}</span>
         {/* TODO: make this */}

@@ -12,7 +12,7 @@ a {
 }
 
 #project-grid {
-  @apply grid p-4 text-inherit gap-x-4;
+  @apply grid p-4 text-inherit gap-4;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
 
@@ -23,6 +23,7 @@ a {
     rounded-md border border-solid border-grey
     shadow-lg dark:shadow-white dark:shadow-sm;
   min-width: 300px;
+  min-height: 200px;
   transition: all linear 100ms;
 }
 .project-card a {

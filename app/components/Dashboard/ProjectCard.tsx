@@ -6,7 +6,7 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import CardOptions from "./CardOptions/CardOptions";
 import { GetTags } from "@/lib/queries";
-import { Eye } from "../icons/icons";
+import { CogSixTooth } from "../icons/icons";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
@@ -14,10 +14,12 @@ export function Tag({ tag_name }: { tag_name: string }) {
 
 export function ProjectCard({ data }: { data: Project }) {
   const [open, setOpen] = useState(false);
-  const created_at = new Date(data.created_at!);
-  const date = `${created_at.toLocaleString("default", {
-    dateStyle: "medium",
-  })}`;
+  const deadline = new Date(data.deadline!);
+  const date = data.deadline
+    ? `${new Date(data.deadline).toLocaleString("default", {
+        dateStyle: "medium",
+      })}`
+    : "No due date";
 
   const { tagsList, isLoading } = GetTags(data.id);
   const tags = tagsList?.map((t, idx) => <Tag key={idx} tag_name={t} />);
@@ -33,7 +35,7 @@ export function ProjectCard({ data }: { data: Project }) {
   return (
     <div className="project-card">
       <button id="options-icon" onClick={() => setOpen(!open)}>
-        <Eye />
+        <CogSixTooth />
       </button>
       <Modal open={open} setOpen={setOpen} title={"Details"}>
         <CardOptions data={data} />

@@ -52,8 +52,9 @@ export function CreateProjectMutation(proj_id: string) {
 export function DeleteProject(proj_id: string) {
   const queryClient = useQueryClient();
   const DeleteProjectMutation = useMutation({
-    mutationFn: () => axios.post(`/api/lists/delete/${proj_id}`),
-    onSuccess: () => queryClient.invalidateQueries(["projects"]),
+    mutationFn: (variables: { proj_id: string }) =>
+      axios.post(`/api/lists/delete/`, variables),
+    onSuccess: () => queryClient.invalidateQueries(["projects", proj_id]),
   });
   return DeleteProjectMutation;
 }
