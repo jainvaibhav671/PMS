@@ -17,7 +17,7 @@ a {
 }
 
 .project-card {
-  @apply flex-auto p-2
+  @apply p-2
     bg-white dark:bg-black
     text-inherit
     rounded-md border border-solid border-grey
@@ -27,7 +27,7 @@ a {
   transition: all linear 100ms;
 }
 .project-card a {
-  @apply flex flex-col gap-2
+  @apply flex flex-col justify-between gap-2
     text-black dark:text-white;
 }
 .project-card:hover {

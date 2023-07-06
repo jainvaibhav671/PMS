@@ -84,14 +84,17 @@ export default function ProjectInfo({ data }: { data: ProjectInfo }) {
   ));
 
   const date = data.deadline ? (
-    new Date(data?.deadline!).toLocaleString("default", {
-      dateStyle: "medium",
-    })
+    <span>
+      {new Date(data?.deadline!).toLocaleString("default", {
+        dateStyle: "medium",
+      })}
+    </span>
   ) : (
     <SetDeadline />
   );
 
   function handleUpdateName() {
+    console.log(name);
     if (name !== data.name) {
       mutation.mutate({
         proj_id: current,
@@ -105,13 +108,15 @@ export default function ProjectInfo({ data }: { data: ProjectInfo }) {
       <div className="project-info">
         <span>{data?.isSubproject ? "Task Name" : "Project Name"}</span>
         <span>
-          <input
+          <span
             id="name-input"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            role="textbox"
+            onInput={(e) => setName(e.currentTarget.textContent as string)}
             onBlur={handleUpdateName}
-          />
+            contentEditable
+          >
+            {name}
+          </span>
         </span>
         <span>Deadline</span>
         <span>{date}</span>

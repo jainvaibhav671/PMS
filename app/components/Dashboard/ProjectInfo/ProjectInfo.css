@@ -6,7 +6,7 @@
 }
 
 .project-info #name-input {
-  @apply p-1 border-0 bg-inherit text-lg font-bold w-max;
+  @apply w-full p-1 border-0 bg-inherit text-lg font-bold;
 }
 
 .project-info .tags {
