@@ -50,8 +50,7 @@ function SetDeadline() {
       .split(":")
       .map((x) => parseInt(x));
 
-    const deadline = new Date(date[0], date[1], date[2], time[0], time[1]);
-
+    const deadline = new Date(date[0], date[1] - 1, date[2], time[0], time[1]);
     await updateProjectMutation.mutateAsync({
       proj_id: currentProject,
       data: { deadline: deadline.toISOString() },
@@ -93,10 +92,12 @@ export default function ProjectInfo({ data }: { data: ProjectInfo }) {
   );
 
   function handleUpdateName() {
-    mutation.mutate({
-      proj_id: current,
-      data: { name: name },
-    });
+    if (name !== data.name) {
+      mutation.mutate({
+        proj_id: current,
+        data: { name: name },
+      });
+    }
   }
 
   return (
