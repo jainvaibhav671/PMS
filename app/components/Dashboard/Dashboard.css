@@ -33,7 +33,7 @@ a {
 .project-card:hover {
   box-shadow: none;
   border: 2px solid var(--blue);
-  scale: 1.05;
+  scale: 0.95;
 }
 .project-card:hover a {
   text-decoration: none;

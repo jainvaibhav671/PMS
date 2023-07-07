@@ -1,11 +1,14 @@
 @import "@/app/css/colors.css";
 
+.sidebar-main {
+  @apply flex flex-col sticky top-0 z-10;
+}
 .sidebar {
   --header-height: 3rem;
   @apply dark:bg-black dark:text-white
     bg-white text-black
     transition-all duration-300
-    overflow-x-hidden fixed mt-[var(--header-height)]
+    overflow-x-hidden fixed top-[var(--header-height)]
     h-full p-4 mr-2;
 }
 .sidebar-open {

@@ -32,7 +32,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div style={{ display: "flex", flexFlow: "column" }}>
+    <div className="sidebar-main">
       <Header open={open} setOpen={setOpen} />
       <div className={`sidebar sidebar-${open ? "open" : "close"}`}>
         <ul>
