@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
 import "./Sidebar.css";
 import { Route, routes } from "./sidebar-routes";
 import Link from "next/link";
 import Header from "./Header/Header";
+import SubHeader from "./SubHeader/SubHeader";
 
 function SidebarItem({
   onClick,
@@ -34,6 +35,8 @@ export default function Sidebar() {
   return (
     <div className="sidebar-main">
       <Header open={open} setOpen={setOpen} />
+      <SubHeader />
+      <hr />
       <div className={`sidebar sidebar-${open ? "open" : "close"}`}>
         <ul>
           {routes.map((route, idx) => {

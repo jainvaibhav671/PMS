@@ -1,0 +1,15 @@
+.high-priority {
+    @apply px-2 py-1 text-red-200 bg-red-100 rounded-md font-bold;
+}
+
+.medium-priority {
+    @apply px-2 py-1 text-yellow-200 bg-yellow-100 rounded-md font-bold;
+}
+
+.low-priority {
+    @apply px-2 py-1 text-blue-200 bg-blue-100 rounded-md font-bold;
+}
+
+.tag {
+    @apply px-2 py-1 bg-yellow text-black rounded-md;
+}

@@ -1,0 +1,9 @@
+.sub-header {
+    @apply bg-white dark:bg-black text-black dark:text-white
+        flex justify-between
+    ;
+}
+
+.sub-header .views {
+    @apply flex items-center gap-2;
+}

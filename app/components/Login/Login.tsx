@@ -12,12 +12,12 @@ export default function Login() {
     const supabase = createServerActionClient<Database>({ cookies });
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+    console.log(email, password);
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: email,
+      password: password,
     });
 
-    console.log(email, password)
     console.log("LOGIN", data, error);
     if (!error) {
       redirect("/");

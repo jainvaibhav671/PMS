@@ -1,0 +1,9 @@
+.list-view {
+    @apply text-black dark:text-white;
+    border-spacing: 2rem;
+    border-collapse: separate;
+}
+
+.list-view .project-row {   
+    @apply p-4 shadow-md cursor-pointer;
+}

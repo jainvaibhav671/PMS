@@ -10,20 +10,21 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [ ] Increase User Session duration
 - [ ] Invite other users or assign them tasks
 - [ ] RLS Policies on Supabase
+- [ ] Arrows / Breadcrumbs for Forward and Backward navigation
 
 ## Changes
 
-- [x] Create tags from project page instead of project creation dialog
-- [x] Can update deadlines from the project page
-- [x] **FIXED** Wrap tags on dashboard and prompt
+- [x] Created List View and Board View
 
 ## Known Issues
 
-## Getting Started
+- Well, none at the moment
+
+# Getting Started
 
 First, install the dependencies using: `yarn`
 
-### Local Server
+## Local Server
 
 - Start the server using `yarn dev`<br>
   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
