@@ -1,0 +1,40 @@
+.breadcrumbs {
+    @apply text-black dark:text-white
+    flex items-center gap-2 w-fit
+    mx-4 mt-2 p-2;
+}
+
+.crumb {
+    @apply cursor-pointer dark:bg-black-100 bg-white-100
+    p-1 rounded-md;
+    transition: all 0.2s ease-in-out;
+}
+
+.crumb:hover {
+    @apply font-bold;
+    background: none;
+}
+
+.breadcrumbs button {
+    @apply bg-inherit border-0 cursor-pointer;
+}
+
+.breadcrumbs button:hover svg {
+    animation-duration: 300ms;
+    animation-name: slide;
+    animation-interation-count: infinite;
+}
+
+.breadcrumbs button svg {
+    scale: 0.8;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(5px);
+    }
+
+    to {
+        transform: translateX(-1px);
+    }
+}

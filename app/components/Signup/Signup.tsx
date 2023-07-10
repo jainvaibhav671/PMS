@@ -18,7 +18,6 @@ export default function Signup() {
       email: email,
       password: password,
     });
-
     if (!error) {
       redirect("/auth/callback");
     }

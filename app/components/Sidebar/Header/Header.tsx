@@ -31,7 +31,9 @@ export default function Header({
 
   const current = useAtomValue(CurrentProjectAtom);
   const ProjectMutation = CreateProjectMutation(current);
+  const supabase = createClientComponentClient();
   const router = useRouter();
+
   const handleSubmit = (name: string) => {
     ProjectMutation.mutate({
       name: name,
@@ -40,10 +42,9 @@ export default function Header({
   };
 
   const signOut = async () => {
-    const supabase = createClientComponentClient();
     console.log("signing out");
-    supabase.auth.signOut();
-    router.push("/login");
+    await supabase.auth.signOut();
+    router.refresh();
   };
 
   const CreateProjectModal = () => (

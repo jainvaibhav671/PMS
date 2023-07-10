@@ -26,8 +26,8 @@ a {
   min-height: 200px;
   transition: all linear 100ms;
 }
-.project-card a {
-  @apply flex flex-col justify-between gap-2
+.project-card .card {
+  @apply flex flex-col justify-between  gap-2
     text-black dark:text-white;
 }
 .project-card:hover {
@@ -35,9 +35,7 @@ a {
   border: 2px solid var(--blue);
   scale: 0.95;
 }
-.project-card:hover a {
-  text-decoration: none;
-}
+
 .tags {
   @apply flex flex-row flex-wrap gap-1;
 }
