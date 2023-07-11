@@ -1,13 +1,13 @@
-import { Project } from "@/lib/database.types";
-import { GetAllProjects, GetProject } from "@/lib/queries";
+import { ProjectInfoType } from "@/lib/database.types";
 import Badge from "../../Badge/Badge";
-import { useAtomValue } from "jotai";
-import { CurrentProjectAtom, usePushProject } from "@/lib/atoms";
+import { usePushProject } from "@/lib/atoms";
 
-function ProjectRow({ project }: { project: Project }) {
+function ProjectRow({ project }: { project: ProjectInfoType }) {
+  
+  const pushProject = usePushProject();
   if (!project) return <>Loading...</>;
 
-  const pushProject = usePushProject();
+  const tags = project.project_tags.map((t, idx) => <Badge key={idx} text={t.Tag?.name as string} type="tag" />)
 
   return (
     <tr
@@ -23,24 +23,18 @@ function ProjectRow({ project }: { project: Project }) {
           dateStyle: "medium",
         })}
       </td>
+      <td className="taglist">{tags}</td>
     </tr>
   );
 }
 
-export default function ProjectList() {
-  const current = useAtomValue(CurrentProjectAtom);
-  const { data: projects, isLoading } =
-    current.length == 0 ? GetAllProjects() : GetProject(current);
-
-  if (isLoading || !projects) {
-    return <>Loading...</>;
-  }
-
+export default function ProjectList({projects}: {projects: ProjectInfoType[]}) {
+  
   return (
-    <>
+    <tbody>
       {projects.map((project, idx) => (
         <ProjectRow key={idx} project={project} />
       ))}
-    </>
+    </tbody>
   );
 }

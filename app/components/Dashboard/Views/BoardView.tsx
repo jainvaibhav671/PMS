@@ -1,12 +1,12 @@
 import { CurrentProjectAtom } from "@/lib/atoms";
-import { Project } from "@/lib/database.types";
+import { ProjectInfoType } from "@/lib/database.types";
 import { GetProjectInfo, GetAllProjects, GetProject } from "@/lib/queries";
 import { useAtomValue } from "jotai";
 import Loading from "../../Loading/Loading";
 import { ProjectCard } from "../ProjectCard";
 import ProjectInfo from "../ProjectInfo/ProjectInfo";
 
-function ProjectGrid({ projects }: { projects: Project[] | undefined }) {
+function ProjectGrid({ projects }: { projects: ProjectInfoType[] | undefined }) {
   return (
     <>
       {!projects ? (

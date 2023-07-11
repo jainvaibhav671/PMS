@@ -16,7 +16,7 @@
 }
 
 .breadcrumbs button {
-    @apply bg-inherit border-0 cursor-pointer;
+    @apply bg-inherit border-0 cursor-pointer text-inherit;
 }
 
 .breadcrumbs button:hover svg {

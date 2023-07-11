@@ -14,8 +14,8 @@ export type CreateProject = Omit<
 
 export type CreateTag = Pick<Tag, "name">;
 export type LinkProjectTag = Pick<ProjectTags, "project_id" | "tag_id">;
-export type ProjectInfo = Project & {
+export type ProjectInfoType = Project & {
   project_tags: {
-      Tag: Tag;
+      Tag: Pick<Tag, "name"> | null;
     }[];
 };

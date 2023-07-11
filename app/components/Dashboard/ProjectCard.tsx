@@ -1,10 +1,8 @@
 "use client";
-import Loading from "../Loading/Loading";
-import { Project } from "@/lib/database.types";
+import { ProjectInfoType } from "@/lib/database.types";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import CardOptions from "./CardOptions/CardOptions";
-import { GetTags } from "@/lib/queries";
 import { CogSixTooth } from "../icons/icons";
 import { usePushProject } from "@/lib/atoms";
 
@@ -12,7 +10,7 @@ export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
 }
 
-export function ProjectCard({ data }: { data: Project }) {
+export function ProjectCard({ data }: { data: ProjectInfoType }) {
   const [open, setOpen] = useState(false);
   const deadline = data.deadline
     ? `${new Date(data.deadline).toLocaleString("default", {
@@ -20,18 +18,9 @@ export function ProjectCard({ data }: { data: Project }) {
       })}`
     : "No due date";
 
-  const { tagsList, isLoading } = GetTags(data.id);
-  const tags = tagsList?.map((t, idx) => <Tag key={idx} tag_name={t} />);
+
+  const tags = data.project_tags.map((t, idx) => <Tag key={idx} tag_name={t.Tag?.name as string} />);
   const pushProject = usePushProject();
-
-  if (isLoading) {
-    return (
-      <a className="project-card" href="">
-        <Loading />
-      </a>
-    );
-  }
-
 
   return (
     <div className="project-card">

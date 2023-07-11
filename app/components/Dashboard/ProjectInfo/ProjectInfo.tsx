@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "../../Modal/Modal";
 import { Plus } from "../../icons/Plus";
 import "./ProjectInfo.css";
-import { ProjectInfo } from "@/lib/database.types";
+import { ProjectInfoType } from "@/lib/database.types";
 import SingleInput from "../Prompts/SingleInput/SingleInput";
 import { CreateTags, UpdateProject } from "@/lib/queries";
 import { useAtomValue } from "jotai";
@@ -70,7 +70,7 @@ function SetDeadline() {
   );
 }
 
-export default function ProjectInfo({ data }: { data: ProjectInfo }) {
+export default function ProjectInfo({ data }: { data: ProjectInfoType }) {
   const [name, setName] = useState(data.name);
   const current = useAtomValue(CurrentProjectAtom);
   const mutation = UpdateProject(current);

@@ -16,7 +16,7 @@ export async function GET(
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: projects, error } = await supabase
     .from("Project")
-    .select("*, project_tags(tag_id)")
+    .select("*, project_tags(Tag(name))")
     .eq("parent", params.project_id);
   if (error || !projects) {
     return NextResponse.json([]);

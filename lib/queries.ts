@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Project, ProjectInfo, Tag } from "./database.types";
+import { Project, ProjectInfoType } from "./database.types";
 import { ProjectMutationType } from "@/app/components/Sidebar/Header/Header";
 
 // Project related functions
 export function GetAllProjects() {
   const { data, isLoading } = useQuery({
-    queryFn: () => axios.get("/api/lists").then((res) => res.data as Project[]),
+    queryFn: () => axios.get("/api/lists").then((res) => res.data as ProjectInfoType[]),
     queryKey: ["projects"],
   });
   return { data, isLoading };
@@ -17,7 +17,7 @@ export function GetProject(project_id: string) {
     queryFn: () =>
       axios
         .get(`/api/lists/${project_id}`)
-        .then((res) => res.data as Project[]),
+        .then((res) => res.data as ProjectInfoType[]),
     queryKey: ["projects", project_id],
   });
   return { data, isLoading };
@@ -25,7 +25,7 @@ export function GetProject(project_id: string) {
 
 export function GetProjectInfo(project_id: string) {
   const { data, isLoading } = useQuery({
-    queryFn: (): Promise<ProjectInfo> =>
+    queryFn: (): Promise<ProjectInfoType> =>
       axios.get(`/api/lists/info/${project_id}`).then((res) => res.data),
     queryKey: ["project", project_id],
   });
