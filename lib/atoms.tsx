@@ -29,6 +29,7 @@ export const usePushProject = () => {
   const setCurrentProject = useSetAtom(CurrentProjectAtom);
 
   return (proj: NavHistoryInterface) => {
+    console.log(proj)
     setHistory([...history, proj]);
     setCurrentProject(proj.id);
   };
@@ -41,6 +42,6 @@ export const usePopProject = () => {
   return () => {
     if (history.length == 1) return;
     setHistory(history.slice(0, -1));
-    setCurrentProject(history[history.length - 1].id);
+    setCurrentProject(history[history.length - 2].id);
   };
 };
