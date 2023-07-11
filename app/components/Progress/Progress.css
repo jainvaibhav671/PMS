@@ -1,0 +1,11 @@
+.progress-container {
+    @apply bg-white-100 rounded-lg w-full;
+}
+
+.progress {
+    @apply p-2 rounded-lg text-center;
+}
+
+.green-progress {
+    @apply bg-green;
+}

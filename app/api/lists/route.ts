@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     .select("*, project_tags(Tag(name))")
     .eq("isSubproject", false);
 
-  console.log(data)
+  // console.log(data)
 
   return NextResponse.json(data, {
     headers: { "Content-Type": "application/json" },

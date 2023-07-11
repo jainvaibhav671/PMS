@@ -101,3 +101,12 @@ export function AssignUser(project_id: string) {
   });
   return { data, isLoading };
 }
+
+export function GetCount(project_id: string) {
+  const { data, isLoading } = useQuery({
+    queryFn: (): Promise<number[]> => axios.get(`/api/lists/count/${(project_id.length == 0) ? "no_proj" : project_id}`).then(res => res.data),
+    queryKey: ["count", project_id]
+  })
+
+  return { data, isLoading }
+}
