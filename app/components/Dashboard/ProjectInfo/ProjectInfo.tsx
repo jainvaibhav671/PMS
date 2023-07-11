@@ -102,7 +102,6 @@ export default function ProjectInfo({ data }: { data: ProjectInfo }) {
       });
     }
   }
-
   return (
     <>
       <div className="project-info">

@@ -22,6 +22,7 @@ export function ProjectCard({ data }: { data: Project }) {
 
   const { tagsList, isLoading } = GetTags(data.id);
   const tags = tagsList?.map((t, idx) => <Tag key={idx} tag_name={t} />);
+  const pushProject = usePushProject();
 
   if (isLoading) {
     return (
@@ -31,7 +32,6 @@ export function ProjectCard({ data }: { data: Project }) {
     );
   }
 
-  const pushProject = usePushProject();
 
   return (
     <div className="project-card">
