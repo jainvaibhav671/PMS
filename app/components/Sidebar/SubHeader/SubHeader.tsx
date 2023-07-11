@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./SubHeader.css";
 import { useSetAtom } from "jotai";
 import { ActiveTab } from "@/lib/atoms";
 import ListView from "../../Dashboard/Views/ListView/ListView";
-import BoardView from "../../Dashboard/Views/BoardView";
+import BoardView from "../../Dashboard/Views/BoardView/BoardView";
 import TimelineView from "../../Dashboard/Views/TimelineView";
 
-function Tabs() {
-  return <ul></ul>;
-}
 export default function SubHeader() {
   // List View is default view
   const setActiveTab = useSetAtom(ActiveTab);
   const [active, setActive] = useState(0);
-  const tabs = [
+  const tabs = useMemo(() => [
     { name: "List", component: <ListView /> },
     { name: "Board", component: <BoardView /> },
     { name: "Timeline", component: <TimelineView /> },
-  ];
+  ], []);
 
   useEffect(() => {
     setActiveTab(tabs[active].component);
-  }, [active]);
+  }, [active, setActiveTab, tabs]);
 
   return (
     <div className="sub-header">

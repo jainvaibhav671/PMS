@@ -1,0 +1,13 @@
+#card-options {
+  padding: 2rem;
+}
+#card-options #button-group {
+  @apply flex gap-4;
+}
+#card-options #top {
+  @apply flex justify-between gap-2;
+}
+
+#proj-name {
+  @apply border-0 bg-inherit p-1 text-lg font-medium;
+}
