@@ -15,10 +15,15 @@
     bg-white dark:bg-black border-b-black dark:border-b-white;
 }
 #create-project input:active,
-#create-project input:focus {
-  @apply border;
+#create-project input {
+  @apply border border-solid border-black;
 }
 
 #create-project > div:nth-child(2) {
   @apply flex gap-2;
+}
+
+.selectbox {
+  @apply border border-black;
+  width: 100px;
 }

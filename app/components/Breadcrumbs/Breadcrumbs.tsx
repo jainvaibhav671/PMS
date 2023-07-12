@@ -12,12 +12,12 @@ export default function BreadCrumbs() {
 
   const elems = history.map((curr, idx) => {
     return (
-      <>
-        <span className="crumb" key={idx+20} onClick={() => jumpToProject(idx)}>
+      <span key={idx}>
+        <span className="crumb" onClick={() => jumpToProject(idx)}>
           {curr.name}
         </span>
-        <span key={idx+21}>/</span>
-      </>
+        <span>/</span>
+      </span>
     );
   });
 

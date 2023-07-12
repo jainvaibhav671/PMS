@@ -1,9 +1,18 @@
 .sub-header {
     @apply bg-white dark:bg-black text-black dark:text-white
         flex justify-between
+        ml-12;
     ;
 }
 
 .sub-header .views {
     @apply flex items-center gap-2;
+}
+
+.sub-header .views .tab {
+    transition: text-decoration-line linear 1s;
+}
+
+.sub-header .views .active {
+    @apply underline underline-offset-2 decoration-blue decoration-4;
 }

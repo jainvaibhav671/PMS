@@ -1,0 +1,22 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    @apply absolute bg-white rounded-lg shadow-md;
+    left: 50%;
+    top: 53%;
+    padding: 1rem;
+}
+
+.dropdown-menu > ul {
+    @apply flex flex-col gap-3;
+}
+
+.open {
+    display: block;
+}
+
+.close {
+    display: none;
+}

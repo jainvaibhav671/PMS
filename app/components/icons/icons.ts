@@ -9,6 +9,7 @@ export * from "./Grid";
 export * from "./Home";
 export * from "./Notification";
 export * from "./PencilSquare";
+export * from "./Plus";
 export * from "./SquarePlus";
 export * from "./Trash";
 export * from "./UserCircle";

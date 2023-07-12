@@ -27,7 +27,7 @@ export default function SubHeader() {
           return (
             <li
               key={idx}
-              className={active === idx ? "active" : ""}
+              className={active === idx ? "active tab" : "tab"}
               onClick={() => setActive(idx)}
             >
               {tab.name}

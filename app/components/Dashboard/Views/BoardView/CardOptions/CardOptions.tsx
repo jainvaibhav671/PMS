@@ -1,6 +1,6 @@
 import { Project } from "@/lib/database.types";
 import "./CardOptions.css";
-import { PencilSquare, Trash } from "../../icons/icons";
+import { PencilSquare, Trash } from "@/app/components/icons/icons";
 import { useAtomValue } from "jotai";
 import { CurrentProjectAtom } from "@/lib/atoms";
 import { DeleteProject } from "@/lib/queries";

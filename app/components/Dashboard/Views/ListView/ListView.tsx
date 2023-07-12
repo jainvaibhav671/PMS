@@ -29,6 +29,7 @@ export default function ListView() {
       </thead>
       <ProjectList projects={projects} />
     </table>
+
     {/* <Table projects={projects} /> */}
   </div>;
 }
