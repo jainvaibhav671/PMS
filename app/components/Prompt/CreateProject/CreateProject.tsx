@@ -2,6 +2,8 @@ import { KeyboardEvent, useState } from "react";
 import "./CreateProject.css";
 import DropDown from "../../DropDown/DropDown";
 import PriorityMenu from "../../DropDown/Menus/PriorityMenu";
+import Badge from "../../Badge/Badge";
+import { UserPlus } from "../../icons/icons";
 
 export default function CreateProject({
   onSubmit,
@@ -11,7 +13,8 @@ export default function CreateProject({
   onSubmit: (name: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [priority, setPriority] = useState(<input type="text" value={"Select a Priority"} />);
+  const [priority, setPriority] = useState("");
+  const [users, setUsers] = useState<string[]>([])
 
 
   function func(formData: FormData) {
@@ -40,7 +43,6 @@ export default function CreateProject({
             Project Name
           </label>
           <input
-            id="proj-name"
             className="form-input"
             type="text"
             name="proj-name"
@@ -49,14 +51,24 @@ export default function CreateProject({
         </div>
         <div className="input-group dropdown">
           <label htmlFor="priority">Priority</label>
-          <div onClick={() => setOpen(!open)}>{priority}</div>
+          <div onClick={() => setOpen(!open)}>
+            {(priority.length == 0)
+              ? "Set Priority"
+              : <Badge type={"priority"} text={priority} />
+            }
+          </div>
           <DropDown open={open} setOpen={setOpen}>
             <PriorityMenu setValue={setPriority} />
           </DropDown>
         </div>
         <div className="input-group">
+          <label htmlFor="deadline">Deadline</label>
+          <input type="datetime-local" name="deadline" />
+        </div>
+        <div className="input-group">
           <label htmlFor="users">Users</label>
-          <input type="text" name="users" />
+          {users.map((u,idx) => <span key={idx}>{u}</span>)}
+          <button className="secondary-button"><UserPlus /></button>
         </div>
       </div>
       <div>

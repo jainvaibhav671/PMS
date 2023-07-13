@@ -13,3 +13,4 @@ export * from "./Plus";
 export * from "./SquarePlus";
 export * from "./Trash";
 export * from "./UserCircle";
+export * from "./UserPlus"

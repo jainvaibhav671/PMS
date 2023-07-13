@@ -16,7 +16,9 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
   if (!project) return <>Loading...</>;
 
   const [total,completed] = (isLoading) ? [0,0] : counts!;
-  const percentage = (total == 0) ? 0 : completed / total * 100;
+  const percentage = (project.isCompleted)
+    ? 100 : (total == 0)
+      ? 0 : completed / total * 100;
 
   const tags = project.project_tags.map((t, idx) => <Badge key={idx} text={t.Tag?.name as string} type="tag" />)
 
@@ -41,6 +43,7 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
   );
 }
 
+// DELETE: if necessary
 function CreateProject() {
 
   const [open, setOpen] = useState(false);
@@ -100,7 +103,6 @@ export default function ProjectList({projects}: {projects: ProjectInfoType[]}) {
       {projects.map((project, idx) => (
         <ProjectRow key={idx} project={project} />
         ))}
-      <CreateProject />
     </tbody>
   );
 }
