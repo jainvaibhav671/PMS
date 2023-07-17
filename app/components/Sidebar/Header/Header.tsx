@@ -1,6 +1,5 @@
 import "./Header.css";
 import Modal from "../../Modal/Modal";
-// import CreateProject from "../../Prompt/CreateProject/CreateProject";
 import { CreateProject } from "@/components/form/CreateProject/CreateProject"
 import { useState } from "react";
 import { CreateProjectMutation } from "@/lib/queries";
@@ -15,11 +14,7 @@ import {
   UserCircle,
   Notification,
 } from "../../icons/icons";
-
-export type ProjectMutationType = {
-  name: string;
-  parent: string | null;
-};
+import { CreateProjectType } from "@/lib/database.types";
 
 export default function Header({
   open,
@@ -35,11 +30,8 @@ export default function Header({
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  const handleSubmit = (name: string) => {
-    ProjectMutation.mutate({
-      name: name,
-      parent: !current ? null : current,
-    });
+  const handleSubmit = (data: Omit<CreateProjectType, "created_by">) => {
+    ProjectMutation.mutate(data);
   };
 
   const signOut = async () => {

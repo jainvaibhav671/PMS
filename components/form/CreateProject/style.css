@@ -6,6 +6,18 @@
     @apply flex gap-4 w-full justify-between;
 }
 
+#cp-form > div:last-child {
+    @apply flex gap-1;
+}
+
+#cp-form section {
+    visibility: hidden;
+}
+
+#cp-form .show {
+    @apply visible;
+}
+
 .input-group {
     @apply flex flex-col gap-1 w-full;
 }
@@ -20,4 +32,28 @@
 
 .input-group input {    
     @apply p-1 bg-inherit border border-solid border-black rounded-md;
+}
+
+.deadline::before {
+    position: absolute;
+    content: "DD/MM/YYYY HH:MM";
+    background: inherit;
+    opacity: 0.8;
+    transform: translateY(1.5rem);
+    padding: 0.25rem;
+    pointer-events: none;
+
+    transition: all 300ms ease-in-out;
+}
+
+.deadline:focus-within::before {
+    scale: 0.9;
+    transform: translateY(3.25rem);
+    opacity: 1;
+    font-weight: bold;
+
+}
+
+.tags {
+    @apply mt-1 flex flex-wrap max-w-[40ch];
 }

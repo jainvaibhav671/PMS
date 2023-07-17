@@ -7,7 +7,7 @@ export type Project = Database["public"]["Tables"]["Project"]["Row"];
 export type Tag = Database["public"]["Tables"]["Tag"]["Row"];
 export type ProjectTags = Database["public"]["Tables"]["project_tags"]["Row"];
 
-export type CreateProject = Omit<
+export type CreateProjectType = Omit<
   Database["public"]["Tables"]["Project"]["Row"],
   "created_at" | "last_modified_at" | "id"
 >;

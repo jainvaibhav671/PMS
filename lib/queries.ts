@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Project, ProjectInfoType } from "./database.types";
-import { ProjectMutationType } from "@/app/components/Sidebar/Header/Header";
+import { CreateProjectType, Project, ProjectInfoType } from "./database.types";
 
 // Project related functions
 export function GetAllProjects() {
@@ -36,7 +35,7 @@ export function GetProjectInfo(project_id: string) {
 export function CreateProjectMutation(proj_id: string) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (variables: ProjectMutationType) =>
+    mutationFn: (variables: Omit<CreateProjectType, "created_by">) =>
       axios
         .post("/api/lists/create", variables)
         .then((res) => res.data)
@@ -92,6 +91,19 @@ export function CreateTags() {
     onSuccess: (data, variables) =>
       queryClient.invalidateQueries(["project", variables.project]),
   });
+  return mutation;
+}
+
+export function DeleteTag(proj_id: string) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (variables: {
+      proj_id: string,
+      tag_name: string
+    }) => axios.post("/api/tags/delete", variables),
+    onSuccess: () => queryClient.invalidateQueries(["project", proj_id])
+  })
+
   return mutation;
 }
 

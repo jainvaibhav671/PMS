@@ -11,5 +11,18 @@
 }
 
 .tag {
-    @apply px-2 py-1 bg-yellow text-black rounded-md;
+    @apply  flex items-center px-2 py-1 bg-yellow text-black rounded-md;
+}
+
+.tag svg {
+    width: 0px;
+    transition: width 300ms ease-in-out;
+}
+
+.tag:hover svg {
+    width: 1rem;
+}
+
+.badge {
+    @apply relative whitespace-break-spaces overflow-hidden;
 }

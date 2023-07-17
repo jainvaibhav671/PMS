@@ -1,20 +1,44 @@
 import { useState } from "react"
 import "./style.css"
+import { CreateProjectType } from "@/lib/database.types";
+import { useAtomValue } from "jotai";
+import { CurrentProjectAtom } from "@/lib/atoms";
+import Badge from "@/app/components/Badge/Badge";
 
 interface CreateProjectInterface {
     closeDialog: () => void,
-    onSubmit: (name: string) => void
+    onSubmit: (data: Omit<CreateProjectType, "created_by">) => void
 }
 
 export function CreateProject({ closeDialog, onSubmit }: CreateProjectInterface) {
 
-    const [user, setUser] = useState("");
-    const [assignedUsers, setAssignedUsers] = useState<string[]>([])
-    const [tags, setTags] = useState<string[]>([])
-    const [tag, setTag] = useState("");
+    const current = useAtomValue(CurrentProjectAtom);
+
+    function handleSubmit(formData: FormData) {
+
+        const [date, time] = (formData.get("deadline") as string).split(" ")
+        const [day,month,year] = date.split("/").map((t) => parseInt(t))
+        const [hour,minute] = time.split(":").map((t) => parseInt(t))
+
+        console.log(day,month,year,hour,minute)
+        const deadline = new Date(year,month-1,day,hour,minute)
+        console.log(deadline)
+        const data: Omit<CreateProjectType, "created_by"> = {
+            name: formData.get("proj_name") as string,
+            deadline: deadline.toISOString(),
+            isCompleted: false,
+            isSubproject: current.length != 0,
+            parent: (current.length == 0) ? null : current,
+            priority: formData.get("priority") as string
+        }
+
+        onSubmit(data);
+        closeDialog();
+    }
 
     return (
-        <form id="cp-form">
+        <>
+        <form action={handleSubmit} id="cp-form">
             <div className="row">
                 <div className="input-group">
                     <label htmlFor="proj_name">Project Name</label>
@@ -33,39 +57,18 @@ export function CreateProject({ closeDialog, onSubmit }: CreateProjectInterface)
                     </select>
                 </div>
 
-                <div className="input-group">
+                <div className="input-group deadline">
                     <label htmlFor="deadline">Set Deadline</label>
                     <input type="text" name="deadline" />
                 </div>
             </div>
 
-            <div className="row">
-                <div className="input-group">
-                    <label htmlFor="users">Assign To</label>
-                    <div className="row">
-                        <input type="text" value={user} onChange={(e) => setUser(e.target.value)} />
-                        <button role="button" onClick={() => setAssignedUsers((u) => [...u, user])} className="primary-button">Assign</button>
-                    </div>
-                    <span>{assignedUsers.map((u,key) => <span key={key}>{u}</span>)}</span>
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="input-group">
-                    <label htmlFor="tags">Tags</label>
-                    <div className="row">
-                        <input value={tag} onChange={(e) => setTag(e.target.value)} type="text" />
-                        <button role="button" onClick={() => setTags((v) => [...v, tag])} className="primary-button">Add Tag</button>
-                    </div>
-                    <span>{tags.map((t,key) => <span key={key}>{t}</span>)}</span>
-                </div>
-            </div>
             <div className="row"></div>
-            <div className="flex gap-1">
-                <button className="primary-button">Submit</button>
-                <button className="secondary-button">Cancel</button>
+            <div>
+                <button type="button" className="secondary-button">Cancel</button>
+                <button type="submit" className="primary-button">Submit</button>
             </div>
-
         </form>
+        </>
     )
 }
