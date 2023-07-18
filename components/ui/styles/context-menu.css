@@ -1,0 +1,11 @@
+.context-menu {
+    @apply rounded-md shadow-md p-2;
+}
+
+.context-menu-item {
+    @apply p-1 rounded-md;
+}
+
+.context-menu-item:hover {
+    @apply bg-white-100;
+}
