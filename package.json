@@ -11,6 +11,7 @@
     "gen-types": "bash ./gen-supabase-types.sh"
   },
   "dependencies": {
+    "@radix-ui/react-context-menu": "^2.1.4",
     "@supabase/auth-helpers-nextjs": "^0.7.2",
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/auth-ui-shared": "^0.1.6",
@@ -22,12 +23,17 @@
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "axios": "^1.4.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "eslint": "8.41.0",
     "eslint-config-next": "^12.0.4",
     "jotai": "^2.2.1",
+    "lucide-react": "^0.261.0",
     "next": "^13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.6",
     "typescript": "5.0.4"
   },
   "devDependencies": {

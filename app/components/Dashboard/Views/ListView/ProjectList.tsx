@@ -2,7 +2,7 @@ import { ProjectInfoType } from "@/lib/database.types";
 import Badge from "@/app/components/Badge/Badge";
 import { usePushProject } from "@/lib/atoms";
 import Progreess from "@/app/components/Progress/Progress";
-import { DeleteTag, GetCount } from "@/lib/queries";
+import { DeleteTag, GetCount, UpdateProject } from "@/lib/queries";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { CSSProperties, useState } from "react";
 
@@ -15,11 +15,24 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
   })
 
   const DeleteTagMutation = DeleteTag(project.id)
+  const UpdateProjectMutation = UpdateProject(project.id)
+
+  function toggleTask() {
+    UpdateProjectMutation.mutate({
+      data: {
+        isCompleted: !project.isCompleted
+      },
+      proj_id: project.id
+    })
+  }
   function removeTag(tag_name: string) {
     DeleteTagMutation.mutate({
       proj_id: project.id,
       tag_name: tag_name
     })
+  }
+  const disableDefaultContextMenu = (e: React.MouseEvent<Element, MouseEvent>) => {
+    e.preventDefault()
   }
 
   if (!project) return <>Loading...</>;
@@ -31,9 +44,6 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
 
   const tags = project.project_tags.map((t, idx) => <Badge removerFn={() => removeTag(t.Tag?.name as string)} key={idx} text={t.Tag?.name as string} type="tag" />)
 
-  const disableDefaultContextMenu = (e: React.MouseEvent<Element, MouseEvent>) => {
-    e.preventDefault()
-  }
 
   const RightClickDivPos: CSSProperties = {
     position: "absolute",
@@ -41,7 +51,6 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
     top: pos.y,
     width: "2px",
     height: "2px",
-    transition: "left 100ms ease-in-out, top 100ms ease-in-out",
     cursor: "pointer",
   }
 
@@ -74,10 +83,11 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
       </tr>
 
       <ContextMenuContent className="context-menu">
-        <ContextMenuItem className="context-menu-item">Profile</ContextMenuItem>
-        <ContextMenuItem className="context-menu-item">Billing</ContextMenuItem>
-        <ContextMenuItem className="context-menu-item">Team</ContextMenuItem>
-        <ContextMenuItem className="context-menu-item">Subscription</ContextMenuItem>
+        {(project.isSubproject)
+          ? <ContextMenuItem onClick={() => toggleTask()}  className="context-menu-item">{(project.isCompleted) ? "Mark not Complete" : "Mark Complete"}</ContextMenuItem>
+          : <></>
+        }
+        <ContextMenuItem className="context-menu-item">Delete Project</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );

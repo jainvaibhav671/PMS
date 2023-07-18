@@ -63,7 +63,7 @@ export function UpdateProject(proj_id: string) {
   const mutation = useMutation({
     mutationFn: (variables: { proj_id: string; data: Partial<Project> }) =>
       axios.put("/api/lists/update", variables),
-    onSuccess: () => queryClient.invalidateQueries(["project", proj_id]),
+    onSuccess: () => queryClient.invalidateQueries(["projects", proj_id]),
   });
   return mutation;
 }
@@ -101,7 +101,7 @@ export function DeleteTag(proj_id: string) {
       proj_id: string,
       tag_name: string
     }) => axios.post("/api/tags/delete", variables),
-    onSuccess: () => queryClient.invalidateQueries(["project", proj_id])
+    onSuccess: () => queryClient.invalidateQueries(["projects", proj_id])
   })
 
   return mutation;
