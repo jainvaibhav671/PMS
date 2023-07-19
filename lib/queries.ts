@@ -58,11 +58,15 @@ export function DeleteProject(proj_id: string) {
   return DeleteProjectMutation;
 }
 
-export function UpdateProject(proj_id: string) {
+export const UpdateProject = (proj_id: string) => {
+
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (variables: { proj_id: string; data: Partial<Project> }) =>
-      axios.put("/api/lists/update", variables),
+    mutationFn: (variables: Partial<ProjectInfoType>) =>
+      axios.put("/api/lists/update", {
+        proj_id: proj_id,
+        data: variables
+      }),
     onSuccess: () => queryClient.invalidateQueries(["projects", proj_id]),
   });
   return mutation;

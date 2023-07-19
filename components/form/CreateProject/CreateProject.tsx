@@ -1,9 +1,7 @@
-import { useState } from "react"
 import "./style.css"
 import { CreateProjectType } from "@/lib/database.types";
 import { useAtomValue } from "jotai";
 import { CurrentProjectAtom } from "@/lib/atoms";
-import Badge from "@/app/components/Badge/Badge";
 
 interface CreateProjectInterface {
     closeDialog: () => void,
@@ -49,8 +47,8 @@ export function CreateProject({ closeDialog, onSubmit }: CreateProjectInterface)
             <div className="row">
                 <div className="input-group">
                     <label htmlFor="priority">Priority</label>
-                    <select name="priority" id="">
-                        <option selected value="null">Select Priority</option>
+                    <select defaultValue={"Select Priority"} name="priority" id="">
+                        <option value="null">Select Priority</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>

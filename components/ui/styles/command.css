@@ -1,0 +1,24 @@
+.command-container {
+    @apply rounded-md shadow-md bg-white px-4 py-2;
+}
+
+.command-container svg {
+    @apply hidden;
+}
+
+.command-input {
+    @apply h-9 px-1 rounded-md my-2 border border-black;
+}
+
+.command-item {
+    @apply my-1 p-1 rounded-md  ;
+}
+.command-item:first-child {
+    @apply mb-1;
+}
+.command-item:last-child {
+    @apply mt-1;
+}
+.command-item:hover {
+    @apply bg-white-100;
+}
