@@ -1,7 +1,7 @@
 @import "@/app/css/colors.css";
 
 #dashboard {
-  @apply bg-white-100 dark:bg-black 
+  @apply bg-white-100 dark:bg-black relative
     text-black dark:text-white
     px-8 py-4;
   width: 100%;

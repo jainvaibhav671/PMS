@@ -6,6 +6,8 @@ import Loading from "../../../Loading/Loading";
 import { ProjectCard } from "./ProjectCard";
 import ProjectInfo from "./ProjectInfo/ProjectInfo";
 
+import "./BoardView.css";
+
 function ProjectGrid({ projects }: { projects: ProjectInfoType[] | undefined }) {
   return (
     <>

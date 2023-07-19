@@ -2,22 +2,17 @@ import { ProjectInfoType } from "@/lib/database.types";
 import Badge from "@/app/components/Badge/Badge";
 import { usePushProject } from "@/lib/atoms";
 import Progreess from "@/app/components/Progress/Progress";
-import { DeleteTag, GetCount, UpdateProject } from "@/lib/queries";
+import { DeleteTag, GetCount } from "@/lib/queries";
 import {
   ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { CSSProperties, useCallback, useEffect, useMemo, useState } from "react";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { useState } from "react";
+import { ProjectContextMenu } from "@/components/ProjectContextMenu/ProjectContextMenu";
+import { Trigger } from "@/components/ProjectContextMenu/Trigger";
+import { disableDefaultContextMenu } from "@/lib/utils";
 
 function ProjectRow({ project }: { project: ProjectInfoType }) {
-  const [priority,setPriority] = useState(project.priority)
-  const priorities = ["High", "Medium", "Low"]
 
   const pushProject = usePushProject();
   const { data: counts, isLoading } = GetCount(project.id);
@@ -27,40 +22,17 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
   });
 
   const DeleteTagMutation = DeleteTag(project.id);
-  const UpdateProjectMutation = UpdateProject(project.id);
-
-  const updateProject = useCallback(<K extends keyof ProjectInfoType>(
-    property: K,
-    value: ProjectInfoType[K],
-  ) => {
-    UpdateProjectMutation.mutateAsync({
-      [property]: value,
-    });
-  }, [UpdateProjectMutation])
-    
   function removeTag(tag_name: string) {
     DeleteTagMutation.mutate({
       proj_id: project.id,
       tag_name: tag_name,
     });
   }
-  const disableDefaultContextMenu = (
-    e: React.MouseEvent<Element, MouseEvent>,
-  ) => {
-    e.preventDefault();
-  };
-
-  useEffect(() => {
-    if (priority !== project.priority) updateProject("priority", priority)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [priority])
 
   const [total, completed] = isLoading ? [0, 0] : counts!;
   const percentage = project.isCompleted
-    ? 100
-    : total == 0
-    ? 0
-    : (completed / total) * 100;
+    ? 100 : total == 0
+    ? 0 : (completed / total) * 100;
 
   const tags = project.project_tags.map((t, idx) => (
     <Badge
@@ -71,22 +43,10 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
     />
   ));
 
-  const RightClickDivPos: CSSProperties = {
-    position: "absolute",
-    left: pos.x,
-    top: pos.y,
-    width: "2px",
-    height: "2px",
-    cursor: "pointer",
-  };
-
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <div
-          onClick={() => pushProject({ name: project.name, id: project.id })}
-          style={RightClickDivPos}
-        ></div>
+        <Trigger onLeftClick={() => pushProject({ name: project.name, id: project.id })} XPos={pos.x} YPos={pos.y} />
       </ContextMenuTrigger>
       <tr
         className="project-row"
@@ -97,7 +57,7 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
       >
         <td>{project.name}</td>
         <td>
-          <Badge text={priority} type="priority" />
+          <Badge text={project.priority} type="priority" />
         </td>
         <td>
           {new Date(project.deadline as string).toLocaleString("default", {
@@ -110,58 +70,7 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
           <Progreess percentage={percentage} />
         </td>
       </tr>
-
-      <ContextMenuContent className="context-menu">
-        {project.isSubproject ? (
-          <ContextMenuItem
-            onClick={() => updateProject("isCompleted", !project.isCompleted)}
-            className="context-menu-item"
-          >
-            {project.isCompleted ? "Mark not Complete" : "Mark Complete"}
-          </ContextMenuItem>
-        ) : (
-          <></>
-        )}
-        <ContextMenuItem className="context-menu-item">
-          Change Project Name
-        </ContextMenuItem>
-        <ContextMenuSub>
-        <ContextMenuSubTrigger className="context-menu-item">
-          Change Priority
-        </ContextMenuSubTrigger>
-        <ContextMenuSubContent className="command-container">
-          <Command>
-            <CommandInput
-              placeholder="Filter label..."
-              autoFocus={true}
-              className="command-input"
-            />
-            <CommandList className="command-list">
-              <CommandEmpty>No label found.</CommandEmpty>
-              <CommandGroup className="command-group">
-                {priorities.map((p,key) => (
-                  <CommandItem
-                    className="command-item"
-                    key={key}
-                    onSelect={(value) => {
-                      setPriority(value)
-                    }}
-                  >
-                    {p}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </ContextMenuSubContent>
-        </ContextMenuSub>
-        <ContextMenuItem className="context-menu-item">
-          Change Deadline
-        </ContextMenuItem>
-        <ContextMenuItem className="context-menu-item">
-          Delete Project
-        </ContextMenuItem>
-      </ContextMenuContent>
+      <ProjectContextMenu project={project} />
     </ContextMenu>
   );
 }

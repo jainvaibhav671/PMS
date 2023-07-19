@@ -1,9 +1,13 @@
 .context-menu {
-    @apply rounded-md bg-white shadow-md p-2;
+    @apply rounded-md bg-white shadow-md p-2 z-10;
 }
 
 .context-menu-item {
-    @apply p-1 rounded-md border-0 flex items-center;
+    @apply p-1 rounded-md border-0 flex justify-between items-center;
+}
+.context-menu-item svg {
+    height: 1rem;
+    width: 1rem;
 }
 
 .context-menu-item:hover {

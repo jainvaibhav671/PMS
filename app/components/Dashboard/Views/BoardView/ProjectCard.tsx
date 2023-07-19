@@ -5,6 +5,10 @@ import Modal from "../../../Modal/Modal";
 import CardOptions from "./CardOptions/CardOptions";
 import { CogSixTooth } from "../../../icons/icons";
 import { usePushProject } from "@/lib/atoms";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { Trigger } from "@/components/ProjectContextMenu/Trigger";
+import { disableDefaultContextMenu } from "@/lib/utils";
+import { ProjectContextMenu } from "@/components/ProjectContextMenu/ProjectContextMenu";
 
 export function Tag({ tag_name }: { tag_name: string }) {
   return <span className="project-tag">{tag_name}</span>;
@@ -12,6 +16,8 @@ export function Tag({ tag_name }: { tag_name: string }) {
 
 export function ProjectCard({ data }: { data: ProjectInfoType }) {
   const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState({ x: "0px", y: "0px" });
+  
   const deadline = data.deadline
     ? `${new Date(data.deadline).toLocaleString("default", {
         dateStyle: "medium",
@@ -23,7 +29,18 @@ export function ProjectCard({ data }: { data: ProjectInfoType }) {
   const pushProject = usePushProject();
 
   return (
-    <div className="project-card">
+    <ContextMenu>
+    <div onMouseMove={(e) => {
+          console.log("screen", e.screenX, e.screenY)
+          console.log("page", e.pageX, e.pageY)
+          console.log("client", e.clientX, e.clientY)
+          console.log("movement", e.movementX, e.movementY)
+          setPos({ x: `${e.clientX}px`, y: `${e.clientY}px` });
+        }}
+        onContextMenu={disableDefaultContextMenu} className="project-card">
+      <ContextMenuTrigger>
+        <Trigger onLeftClick={() => pushProject({ name: data.name, id: data.id })} XPos={pos.x} YPos={pos.y} />
+      </ContextMenuTrigger>
       <button id="options-icon" onClick={() => setOpen(!open)}>
         <CogSixTooth />
       </button>
@@ -40,5 +57,7 @@ export function ProjectCard({ data }: { data: ProjectInfoType }) {
         <p>{deadline}</p>
       </div>
     </div>
+    <ProjectContextMenu project={data} />
+    </ContextMenu>
   );
 }
