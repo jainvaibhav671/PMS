@@ -16,7 +16,6 @@ export function Tag({ tag_name }: { tag_name: string }) {
 
 export function ProjectCard({ data }: { data: ProjectInfoType }) {
   const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState({ x: "0px", y: "0px" });
   
   const deadline = data.deadline
     ? `${new Date(data.deadline).toLocaleString("default", {
@@ -30,34 +29,28 @@ export function ProjectCard({ data }: { data: ProjectInfoType }) {
 
   return (
     <ContextMenu>
-    <div onMouseMove={(e) => {
-          console.log("screen", e.screenX, e.screenY)
-          console.log("page", e.pageX, e.pageY)
-          console.log("client", e.clientX, e.clientY)
-          console.log("movement", e.movementX, e.movementY)
-          setPos({ x: `${e.clientX}px`, y: `${e.clientY}px` });
-        }}
-        onContextMenu={disableDefaultContextMenu} className="project-card">
       <ContextMenuTrigger>
-        <Trigger onLeftClick={() => pushProject({ name: data.name, id: data.id })} XPos={pos.x} YPos={pos.y} />
-      </ContextMenuTrigger>
-      <button id="options-icon" onClick={() => setOpen(!open)}>
-        <CogSixTooth />
-      </button>
-      <Modal open={open} setOpen={setOpen} title={"Details"}>
-        <CardOptions data={data} />
-      </Modal>
+        <div
+          // onContextMenu={disableDefaultContextMenu} 
+          className="project-card">
+          <button id="options-icon" onClick={() => setOpen(!open)}>
+            <CogSixTooth />
+          </button>
+          <Modal open={open} setOpen={setOpen} title={"Details"}>
+            <CardOptions data={data} />
+          </Modal>
 
-      <div
-        onClick={() => pushProject({ name: data.name, id: data.id })}
-        className="card"
-      >
-        <h4>{data.name}</h4>
-        <div className="tags">{tags}</div>
-        <p>{deadline}</p>
-      </div>
-    </div>
-    <ProjectContextMenu project={data} />
+          <div
+            onClick={() => pushProject({ name: data.name, id: data.id })}
+            className="card"
+            >
+            <h4>{data.name}</h4>
+            <div className="tags">{tags}</div>
+            <p>{deadline}</p>
+          </div>
+        </div>
+      </ContextMenuTrigger>
+      <ProjectContextMenu project={data} />
     </ContextMenu>
   );
 }

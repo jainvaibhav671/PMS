@@ -11,7 +11,7 @@ export function Trigger({ onLeftClick, XPos, YPos }: TriggerInterface) {
     top: YPos,
     width: "2px",
     height: "2px",
-    border: "2px solid black",
+    // border: "2px solid black",
     cursor: "pointer",
   };
 
