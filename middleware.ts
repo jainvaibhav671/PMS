@@ -7,12 +7,13 @@ import { Database } from "./lib/database.types";
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient<Database>({ req, res });
+  const projectUrl = process.env.NEXT_PUBLIC_URL as string
   const {
     data: { session }, error
   } = await supabase.auth.getSession();
 
   if (session) console.log("Logged in");
-  if (!session) return NextResponse.redirect("http://localhost:3000/login");
+  if (!session) return NextResponse.redirect(`${projectUrl}/login`);
   return res;
 }
 
