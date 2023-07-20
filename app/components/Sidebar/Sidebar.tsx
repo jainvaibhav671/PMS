@@ -1,10 +1,12 @@
 "use client";
-import React, { RefObject, useState } from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
-import { Route, routes } from "./sidebar-routes";
+import { Route, routes } from "@/lib/sidebar-routes";
 import Link from "next/link";
 import Header from "./Header/Header";
 import SubHeader from "./SubHeader/SubHeader";
+import { useAtom } from "jotai";
+import { ActivePage } from "@/lib/atoms";
 
 function SidebarItem({
   onClick,
@@ -25,7 +27,7 @@ function SidebarItem({
 }
 
 export default function Sidebar() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useAtom(ActivePage);
   const [open, setOpen] = useState(false);
 
   function ItemOnClick(idx: number) {

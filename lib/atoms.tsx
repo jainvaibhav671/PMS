@@ -6,7 +6,8 @@ interface NavHistoryInterface {
 }
 
 export const CurrentProjectAtom = atom("");
-export const ActiveTab = atom(<p>Select a view</p>);
+export const ActiveTab = atom(0);
+export const ActivePage = atom(0);
 export const NavHistory = atom<NavHistoryInterface[]>([
   { name: "All Projects", id: "" },
 ]);

@@ -1,14 +1,17 @@
 "use client";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { useSetAtom } from "jotai";
-import { CurrentProjectAtom } from "@/lib/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
+import { ActivePage, CurrentProjectAtom } from "@/lib/atoms";
+
+import { routes as SidebarRoutes } from "@/lib/sidebar-routes";
 
 export default function Home() {
   useSetAtom(CurrentProjectAtom)("");
+  const activePage = useAtomValue(ActivePage);
 
   return (
     <>
-      <Dashboard />
+      {SidebarRoutes[activePage].component}
     </>
   );
 }

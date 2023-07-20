@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./css/Layout.css";
 import Providers from "./_provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Sidebar from "./components/Sidebar/Sidebar";
+import BreadCrumbs from "./components/Breadcrumbs/Breadcrumbs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,8 @@ export default function RootLayout({
               width: "100%",
             }}
           >
+            <Sidebar />
+            <BreadCrumbs />
             {children}
           </main>
           <ReactQueryDevtools />

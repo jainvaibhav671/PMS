@@ -24,12 +24,12 @@
   opacity: 0;
 }
 
-#sidebar ul {
-  @apply flex flex-col items-center gap-4 m-0 min-w-full;
+.sidebar ul {
+  @apply flex flex-col items-center gap-1 m-0 min-w-full;
 }
 
-#sidebar li {
-  @apply w-full p-2 cursor-pointer text-center transition-all ease-linear duration-300 pt-5;
+.sidebar li {
+  @apply w-full p-2 cursor-pointer text-center transition-all ease-linear duration-300;
 }
 
 li a {
@@ -38,10 +38,10 @@ li a {
 }
 
 #active,
-#sidebar li:hover {
+.sidebar li:hover {
   background: var(--blue);
 }
 #active a,
-#sidebar li:hover a {
+.sidebar li:hover a {
   opacity: 1;
 }

@@ -1,5 +1,6 @@
+"use client"
 import { NavHistory, useJumpToProject, usePopProject } from "@/lib/atoms";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 
 import "./BreadCrumbs.css";
 import { ArrowSmallLeft } from "../icons/icons";
