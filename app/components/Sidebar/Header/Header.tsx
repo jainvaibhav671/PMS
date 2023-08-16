@@ -1,6 +1,6 @@
 import "./Header.css";
 import Modal from "../../Modal/Modal";
-import { CreateProject } from "@/components/form/CreateProject/CreateProject"
+import { CreateProject } from "@/components/form/CreateProject/CreateProject";
 import { useState } from "react";
 import { CreateProjectMutation } from "@/lib/queries";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -15,6 +15,7 @@ import {
   Notification,
 } from "../../icons/icons";
 import { CreateProjectType } from "@/lib/database.types";
+import { Button } from "@/components/ui/button";
 
 export default function Header({
   open,

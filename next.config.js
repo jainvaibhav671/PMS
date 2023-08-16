@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  compiler: {
+    removeConsole: false
+  }
 };
 
 module.exports = nextConfig;

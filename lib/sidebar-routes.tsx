@@ -1,5 +1,7 @@
+import { Roles } from "@/components/Roles/Roles";
 import Dashboard from "../app/components/Dashboard/Dashboard";
 import { Grid } from "../app/components/icons/icons";
+import { LockIcon } from "lucide-react";
 
 export interface Route {
   name: JSX.Element;
@@ -20,9 +22,13 @@ export const routes: Route[] = [
     isActive: true,
   },
   {
-    name: <>{"Roles"}</>,
-    component: <h2>Roles</h2>,
+    name: (
+      <>
+        <LockIcon /> {"Roles"}
+      </>
+    ),
+    component: <Roles />,
     href: "/",
-    isActive: false
-  }
+    isActive: false,
+  },
 ];

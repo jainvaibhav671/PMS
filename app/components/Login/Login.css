@@ -27,9 +27,7 @@
 #login label {
   margin-left: 4px;
 }
-#login button {
-  @apply justify-center;
-}
+
 #below-button {
   padding-left: 4px;
   padding-right: 4px;

@@ -1,3 +1,4 @@
+// Imports{{{
 import { ProjectInfoType } from "@/lib/database.types";
 import Badge from "@/app/components/Badge/Badge";
 import { usePushProject } from "@/lib/atoms";
@@ -10,7 +11,7 @@ import {
 import { useState } from "react";
 import { ProjectContextMenu } from "@/components/ProjectContextMenu/ProjectContextMenu";
 import { Trigger } from "@/components/ProjectContextMenu/Trigger";
-import { disableDefaultContextMenu } from "@/lib/utils";
+import { disableDefaultContextMenu } from "@/lib/utils";//}}}
 
 function ProjectRow({ project }: { project: ProjectInfoType }) {
 
@@ -22,7 +23,8 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
   });
 
   const DeleteTagMutation = DeleteTag(project.id);
-  function removeTag(tag_name: string) {
+  function removeTag(tag_name: string | null) {
+    if (!tag_name || tag_name.length == 0) return;
     DeleteTagMutation.mutate({
       proj_id: project.id,
       tag_name: tag_name,
@@ -34,13 +36,14 @@ function ProjectRow({ project }: { project: ProjectInfoType }) {
     ? 100 : total == 0
     ? 0 : (completed / total) * 100;
 
-  const tags = project.project_tags.map((t, idx) => (
+  const tags = project.project_tags.map((tag, idx) => (
+    (tag.Tag !== null) ? (
     <Badge
-      removerFn={() => removeTag(t.Tag?.name as string)}
+      removerFn={() => removeTag(tag.Tag?.name as string)}
       key={idx}
-      text={t.Tag?.name as string}
+      text={tag.Tag?.name as string}
       type="tag"
-    />
+    />) : <></>
   ));
 
   return (

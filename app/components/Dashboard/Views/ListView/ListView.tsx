@@ -7,13 +7,13 @@ import "../views.css";
 export default function ListView() {
 
   const current = useAtomValue(CurrentProjectAtom);
-  const { data: projects, isLoading } =
+  const { data: projects } =
     current.length == 0 ? GetAllProjects() : GetProject(current);
 
   return (
     <>
-      {isLoading || !projects ? (
-        "Loading..."
+      {!projects ? (
+        `Loading... ${projects}`
       ) : (
         <div className="table-container">
           <table className="list-view">

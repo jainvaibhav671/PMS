@@ -4,22 +4,22 @@ import { CreateProjectType, Project, ProjectInfoType } from "./database.types";
 
 // Project related functions
 export function GetAllProjects() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     queryFn: () => axios.get("/api/lists").then((res) => res.data as ProjectInfoType[]),
     queryKey: ["projects"],
   });
-  return { data, isLoading };
+  return { data, isLoading, isFetching };
 }
 
 export function GetProject(project_id: string) {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     queryFn: () =>
       axios
         .get(`/api/lists/${project_id}`)
         .then((res) => res.data as ProjectInfoType[]),
     queryKey: ["projects", project_id],
   });
-  return { data, isLoading };
+  return { data, isLoading, isFetching };
 }
 
 export function GetProjectInfo(project_id: string) {

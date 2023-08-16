@@ -1,28 +1,89 @@
+// Imports
+"use client";
+import { useForm } from "react-hook-form";
+import { LoginSchema } from "@/lib/Schema";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  Form as FForm,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { handleSignIn } from "./handleSignin";
+import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { InputGroup } from "../Signup/Form";
 
-export function Form({
-  handleSignIn,
-}: {
-  handleSignIn: (formData: FormData) => Promise<void>;
-}) {
+type Login = z.infer<typeof LoginSchema>;
+
+export function Form() {
+  const router = useRouter();
+  const form = useForm<Login>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (values: Login) => {
+    const error = await handleSignIn(values.email, values.password);
+    if (!error) {
+      router.push("/");
+    }
+  };
+
   return (
-    <form action={handleSignIn} id="login">
-      <InputGroup name="email" type="email" label="Email" />
-      <InputGroup name="password" type="password" label="Password" />
+    <FForm {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} id="login">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="input">
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <button type="submit" className="primary-button">
-        Login
-      </button>
-      <div id="below-button">
-        <span>
-          <input type="checkbox" name="remember" />
-          <label htmlFor="remember">Remember me</label>
-        </span>
-        <span>
-          <Link href="/forgot">Forgot Password?</Link>
-        </span>
-      </div>
-    </form>
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem className="input">
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div>
+          <Button>Submit</Button>
+        </div>
+
+        <div id="below-button">
+          <span>
+            <Input type="checkbox" name="remember" />
+            <Label htmlFor="remember">Remember me</Label>
+          </span>
+          <span>
+            <Link href="/forgot">Forgot Password?</Link>
+          </span>
+        </div>
+      </form>
+    </FForm>
   );
 }

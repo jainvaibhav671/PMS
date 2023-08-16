@@ -1,38 +1,32 @@
+"use client";
 import "./Login.css";
-import { redirect } from "next/navigation";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "@/lib/database.types";
-import { cookies } from "next/headers";
 import { Form } from "./Form";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import Modal from "../Modal/Modal";
+import { useState } from "react";
 
 export default function Login() {
-  const handleSignIn = async (formData: FormData) => {
-    "use server";
-    const supabase = createServerActionClient<Database>({ cookies });
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    console.log(email, password);
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    console.log("LOGIN", data, error);
-    if (!error) {
-      redirect("/");
-    }
-  };
+  const isError = useSearchParams().has("error");
+  const [open, setOpen] = useState(isError);
 
   return (
     <div id="login-main">
       <h1>Login</h1>
       <div id="login-outer">
-        <Form handleSignIn={handleSignIn} />
+        <Form />
       </div>
 
+      <Modal title="" open={open} setOpen={setOpen}>
+        <p className="w-[20ch]">
+          Invalid Login Credentials. Make sure you have entered the correct
+          email and password.
+        </p>
+      </Modal>
+
       <div id="signup-prompt">
-        {"Don't have an account?"}
-        <Link href="/signup"> Sign Up</Link>
+        {"Don't have an account? "}
+        <Link href="/signup">Sign Up</Link>
       </div>
     </div>
   );
